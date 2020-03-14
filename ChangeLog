@@ -1,0 +1,551 @@
+This is where we will report any updates to the code for source Control:
+
+When updating please be sure to include:
+
+Name / Date / Approx Time / List of updates:
+
+/----------------------------------------------------------------------------------------------/
+
+1)
+
+Danny Dalton / 3/13/19 / from 1 PM to 3 PM
+
+Updates:
+Added javascript/accept_reject.js, components/accept_reject.php
+Changed stylesheets/styles.css, professor.php, chair.php, crc.php, dean.php, supervisor.php, javascript/shared.js,
+recreg.php, secretary.php
+
+Description of changes:
+- Added a component such that it makes two "Accept/Reject" buttons.
+- Added styling for the buttons and an animation for reasoning.
+- Reasoning is a required form element.
+- Reasoning now only appears if "Decline" is selected.
+- shared.js now has an insertAfter() function; made to complement the DOM's insertBefore().
+- Form submission now goes to the right spot.
+
+2)
+
+Seraphim Dmitrieff / 3/13/19 / from 8:30 pm to 11 pm
+
+Updates:
+Commented out CheckUserType() function from student.php
+Added admin.php, backend/admin directory, backend/admin/create-user.php, backend/admin/search-user.php
+Changed components/nav.php, new_password.php, backend/submit-new-password.php
+
+Description of changes:
+- Removed javascript function from student.php as it inhibited function, will revisit later
+- Added admin.php and added link in nav bar
+- Added ability to create any type of user in admin.php
+- Added ability to search if user exists, returns data as a Session array
+- Changed session check login for new password forms
+
+Seraphim Dmitrieff / 3/14/19 / from 10:00 am to 12:00 PM
+
+Happy Pi Day
+
+Updates: 
+Changed backend/submit-login.php, backend/submit-new-password.php, admin.php, backend/submit-student.php,
+        student.php, faculty.php
+Added backend/profile.php backend/update-user.php
+
+Description of changes:
+- Added new redirect for admin to Admin tools page
+- Updated reditrects on submit pages based on user types
+- Added display for user search results
+- restored backend functionality from switch in session variable name from id to id_key
+- Cleaned up student form, added session variables in certain elements to reduce errors
+- Updated form for faculty profile information
+
+3) Seraphim Dmitrieff / 3/16/19 / from 4:00 PM to 
+
+Updates:
+Added backend/admin/remove-user.php
+Changed admin.php,
+ 
+Description of Changes:
+
+- Added ability for admin to remove a user
+
+4)
+
+Danny Dalton / 3/17/19 / from 6:00 PM to 7:00 PM, 7:30 PM to 9:50 PM
+
+Changed stylesheets/styles.css, skeleton.head.php, components/blame.php, index.php, backend/util.php,
+    backend/submit-login.php, admin.php
+Added components/message.php, .jshintrc
+
+Description of changes:
+- Removed the couple of white pixels in the bottom right
+        Some explanation deserves to be here.
+        Every <div> should have a 5px border radius (for curved edges) on all corners, EXCEPT for
+        the background and, on PC, the navigation bar. However, CSS3 doesn't support the syntax
+        div :not(.navbar, .background), so the workaround is to use div:not(.navbar):not(.background).
+        When CSS4 rolls around, the former will be supported. That syntax is also supported with jQuery.
+        But, uh, not quite yet for CSS3. I marked where my awkward workaround for it was.
+        Sources:
+        https://stackoverflow.com/questions/12272047/css3-selector-for-not-a-and-not-b
+        http://jsfiddle.net/nottrobin/WFwtP/
+- Added a gradient to the background overlaid from transparent to white
+- Stopped body from calling a() in JavaScript since that function doesn't exist (it was a scrapped idea I had)
+- blame.php's debug code now shows session status as well
+- Added server message support
+        The basis stems from message.php (we could optionally have loops iterate through arrays later),
+        where $_SESSION["msg"] holds the message content and $_SESSION["msg_success"] is
+        True if it is a success; otherwise False.
+
+        In message.php's logic: $_SESSION["msg_success"] can be either a string with just "1" if True, or the
+        empty string if False ("").
+
+        Sources:
+        http://us3.php.net/manual/en/language.types.string.php#language.types.string.casting
+        https://stackoverflow.com/questions/26982016/php-session-false-not-set
+- Added utility function to set a message cross-page.
+- Login backend now sends a cross-page message depending on if it was successful.
+- Login backend simply redirects to login.php if password is incorrect (with that cross-page message).
+- util.php now includes a test() function that returns 1 and prints "Hello world!" if all is well.
+        NOTE:
+        
+        include("someFile.php") DOES NOT WORK.
+        Use:
+        include "someFile.php"
+        Save yourself. ty
+- Login backend now also has a failure message if an unknown user type is detected; however, it doesn't redirect
+  anywhere (where should it go?)
+- Got rid of warning messages from using ECMAScript 6 features (such as const in JavaScript) by initializing a
+  .jshintrc (Particularly annoying in VS Code)
+- CheckUserType() function now sends a message if incorrect user type saying "you need to be X to access this page."
+- Fixed front end admin page for accessibility as well as front-end design
+
+5)
+
+Seraphim Dmitrieff / 3/18/19 / from 10:00 am to 12:00 PM
+
+Changed backend/admin/remove-user.php, components/nav.php, faculty.php
+Added backend/submit-faculty.php
+
+Description of Changes:
+
+- Finished remove user capability
+- Added Faculty.php info page to navbar
+- Commmented out user registration link in navbar
+- Modified form elements for faculty members
+- Added Profile option for faculty members
+
+6)
+
+Danny Dalton / 3/21/19 / from 3:30 PM to 5 PM
+
+Changed stylesheets/styles.css, home.php, index.php, components/nav.php,
+        admin.php, components/blame.php, backend/admin/search-user.php,
+        backend/admin/remove-user.php, backend/admin/create-user.php
+Added   TestCredentials
+Deleted README.md
+
+Description of Changes:
+
+- Changed the success/failure colors very slightly
+- Home page logic now auto-imports based on user type (set in Session)
+- Home page boots to login if user type is incorrect
+- index.php simply imports home.php (since that's all it's meant to be)
+- Nav bar only shows login if $_SESSION["user_type"] isn't set
+- Moved admin message code to blame.php ($_SESSION["admin_message"] can
+  now be deprecated)
+- Search user, remove user, and create user now use util message function
+- Added a file for test credentials (since I don't quite know them and it's
+  best to share stuff like that)
+- Buttons now have a slight white gradient effect to match the rest of the
+  look
+- Moved search container below results container (will eventually
+  compartmentalize that; maybe in a new directory components/admin/ ?)
+
+7)
+
+Danny Dalton / 3/23/19 / from 1:30 PM to 2:10 PM
+
+Changed backend/admin/create-user.php, backend/admin/remove-user.php,
+        backend/admin/search-user.php, chair.php, faculty.php,
+        new_password.php, skeleton.foot.php, stylesheets/styles.css
+Added   images/new-paltz.png
+Deleted images/np-logo.jpg
+
+Description of Changes:
+
+- Admin user creation tool now has the admin check integrated.
+- Admin user removal tool now has the admin check integrated.
+- Admin user search tool now has an admin check integrated.
+- Fixed HTML structure in chair form.
+- Fixed skeleton import in faculty.php.
+- OCD'ed code structure in new_password.php.
+- Found a New Paltz logo (they use it on the my.newpaltz.edu
+  login page) that is white and uses transparency; I flipped
+  it to be black using transparency
+- Added back the image to use in skeleton foot
+- Added alt text to the logo
+
+Danny Dalton / 3/23/19 / from 11:55 PM to 12:10 AM
+
+Changed skeleton.head.php, backend/login.php
+
+- If not debug mode or not logged in; nav bar isn't imported
+- Backend of login now returns back to login page if an error
+  is encountered (specifically: submitting an empty username
+  shouldn't spit a 500 error)
+- Login now does something if nothing is returned from the
+  database instead of a blank page
+- Login now unloads session variables on incorrect password
+  guess (entering a blank username would leave the set:
+  $_SESSION["id_key"] === ""; to be true)
+
+Danny Dalton / 3/24/19 / 1:10 PM
+
+Changed components/nav.php
+
+- If debug mode isn't on and a user isn't logged in yet, "Home"
+  should not be a menu option
+
+Danny Dalton / 3/24/19 / 2 PM
+
+Changed home.php
+
+- If not logged in, simply import login.php instead of redirect
+
+8)
+
+Seraphim Dmitrieff / 3/24/19 / from 4pm to 10:30 pm
+
+Changed: backend/submit-login, TestCredentials.txt, secretary.php, backend/submit-secretary.php
+Added:  backend/search-user.php, backend/loadDepartments.php, backend/loadInstructor.php,
+        backend/create-application.php, backend/create-user.php
+
+Description of Changes:
+
+- Corrected typo for secretary to redirect to correct page after login
+- Add test users in TestCredentials
+- Updated secretary and submit form
+- Added backend search file for secretary form
+- Added dynamic select form element to display all academic departments listed in database
+- Added AJAX request in secretary form to dynamic load all instructors based on department entered
+- Added application creation to secretary form
+- Added new student creation to secretary form
+
+Seraphim Dmitrieff / 3/25/19 / from 9 pm
+
+Added: backend/listApplications.php, student-application.php, backend/update-appInfo.php
+Changed: home.php, student.php
+
+Description of Changes:
+
+- Added php page to list all FW applications assigned to given user as links
+- Updated home to display list of assigned applications for logged in user
+- Added fieldwork application portion for student
+- included backend/util on student.php to enabkle CheckUserType
+
+9)
+
+Danny Dalton / 3/27/19 / from 1:30 PM to 1:45 PM
+
+Changed: backend/create-user.php, backend/util.php
+
+Description of changes:
+
+- Implemented checkUserTypeOfMultiple() to:
+        return true -> if user type is in an array passed as a parameter
+        return false -> if user type not in array OR user not logged in
+- Implemented checkUserTypeOfMultiple() in backend/create-user.php.
+
+10)
+
+Seraphim Dmitrieff / 3/37/19 / from 4 pm to
+
+Added: backend/load-student.php
+Changed: backend/submit-student.php, student.php, backend/listApplications.php, faculty.php,
+        backend/loadDepartments
+
+Description of Changes:
+
+- Added ability to load profile information if it exists
+- Cleaned up student profile page, added more modularity
+- Added ability to update existing student profile information
+- Removed setMessage from backend/listApplications.php
+- Added more modularity to backend/loadDepartments
+
+11)
+
+Danny Dalton / 3/28/2019 / from 11:30 am to 12:00 pm
+
+Changed: util.php, components/accept-reject.php, javascript/accept_reject.js,
+         chair.php, crc.php, dean.php, professor.php, supervisor.php, components/blame.php,
+         skeleton.head.php
+Added:   components/session_debug.php
+
+Description of changes:
+
+- Used phpdoc syntax to document each utility method.
+  phpdoc syntax will automatically be the tooltip in many modern editors, including VS Code.
+  It's also very similar to JavaDoc!
+- Accept/Reject component can now be included multiple times in a page without conflict.
+        From components/accept-reject.php, use includeARComponent().
+- Updated pages to actually use this component.
+- Tested myself - inclusion of multiple accept/reject components works perfectly okay.
+  Buttons don't interfere with each other; though it's recommended they're included in different
+  forms (so backend scripts only process one response.)
+        The naming convention on the elements remains the same - one hidden input that is named "response,"
+        and for javascript, the id is set to "ar-response-" and then a randomly generated UUID.
+- Fixed an issue where spamming the "accept" button would actually toggle between accept and decline
+  instead of doing nothing.
+- Moved session debug code to its own component.
+- components/blame.php is no longer included if you're not logged in as a student (see above bullet)
+
+Danny Dalton / 3/28/2019 / from 11:30 pm to 12:50 am
+
+Changed: util.php, skeleton.head.php, skeleton.foot.php, components/accept_reject.php,
+         components/session_debug.php, create-user.php
+
+Description of changes:
+
+- Changed API_URL and DEBUG to be constants (using define()).
+  Files that implement the new syntax now:
+        skeleton.head.php
+        components/nav.php
+        skeleton.foot.php
+        components/accept_reject.php
+        components/session_debug.php
+
+        That I know of, nothing else uses $DEBUG or $API_URL.
+- Fixed the debug warning to warn to turn off the constant instead.
+- The utility sendMail() function no longer needs to redefine $API_URL (since there's now a constant).
+- The utility sendMail() function now sends RFC1341 compliant multi-part e-mails incorporating both
+  a plaintext part and a pretty HTML part. Some e-mail clients can't handle HTML.
+  Full standard is at https://www.w3.org/Protocols/rfc1341/7_2_Multipart.html .
+  E-mail headers aren't exactly fun.
+- util.php now has a constant defined for where e-mails are coming from.
+- Improved util.php documentation.
+
+12)
+
+Danny Dalton / 3/30/2019 / from 2:30 pm to 4:20 pm
+
+Changed: stylesheets/styles.css, skeleton.head.php, login.php, util.php, backend/submit-login.php,
+         backend/submit-new-password.php, components/message.php
+Added:   forgot.php, backend/reset-password.php
+
+Description of changes:
+
+- Made our project more conformant to the New Paltz style guide in terms of style.
+- Log in is two words.
+- Added explanatory text on the log in page saying the department secretary can create accounts.
+- Added a password reset button.
+- Fixed a bug where e-mails would send from:
+        ">" <0@wyvern.acsl.newpaltz.edu>
+        
+        This was due to me using a hyphen in my constant "MAIL_FROM" rather than an understroke
+        character... d'oh!
+- VS code was throwing an error because checkUserTypeOfMultiple should take in "array",
+  not "array[string]."
+- Anyone who needs a password reset should be treated like it's their first time on the system
+  and be yote to the password reset screen.
+- If people are already verified, don't force them to re-verify.
+- Secretaries, employers, and admins can reset passwords too.
+
+Danny Dalton / 3/30/19 / from 8:30 pm to 9:50 pm
+
+Changed: scripts/shared.js, components/message.php, stylesheets/styles.css,
+         skeleton.head.php, home.php, backend/listApplications.phpa
+
+- Messages are now closeable!
+- Menu is now full-width on mobile.
+- Logo now has appropriate spacing.
+        The style guide states "the logo must have as much clear space as the letter e is tall."
+        That's not the most clear thing I've ever heard; I went with using 5% of the window height
+        (just as all containers do) and, on mobile, this changes to 10% of the window height (to
+        accommodate for a larger logo). That should be enough at least 
+- Home page redirects if logged in as admin (again). The admin shouldn't have applications assigned
+  to them.
+- Tidied up application listings.
+
+13)
+
+Danny Dalton / 3/31/19 / from 10:10 pm until 10:55 pm
+
+Changed: util.php
+Added:   backend/auto-remind.php, autorun-autoreminders.sh
+
+- Added in auto reminders script.
+- Modified HTTPS redirect (very slightly, scripts in command line now work again)
+- Added in a cron script to automatically run that auto-remind script.
+        The cron script just runs backend/auto-remind.php in a command line.
+        auto-remind.php is made to use a command line (NOT A WEB BROWSER).
+
+14)
+
+Danny Dalton / 4/1/19 / from 5:30 pm until 5:40 pm
+
+Changed: util.php
+Added:  email-template/email-top.html, email-template/email-bottom.html
+
+- Modified E-mail function to use the template (reading from the template files).
+- Added e-mail template.
+
+Thank you Beth for getting me that blank e-mail!
+
+- Deleted the entire database. April Fool's!
+
+15)
+
+Danny Dalton / 4/2/19 / from 11:05 am
+
+Changed: skeleton.head.php, components/progress-bar.php, components/blame.php,
+         backend/listApplications.php, secretary.php, backend/util.php, components/message.php
+
+- Removed statement that imports the progress bar and blame components, altogether
+        The only component that skeleton head imports in its top container is now
+        the debug warning.
+- Removed admin message checking altogether (as that is obsolete now).
+- blame.php is now a function that takes a fieldwork ID.
+- progress.php is now a function that takes a fieldwork ID.
+- listApplications.php now tells the user how many applications are assigned to them.
+- If you're a student: listApplications returns THAT STUDENT'S applications.
+- Implemented blame status!
+- Implemented progress bar!
+- Secretary page implements utility CheckUserType function (again).
+- Added a utility clear message function.
+
+COMMENTS:
+
+        We don't have an official user type for the Career Resource Center,
+        nor do we have one for Records and Registration.
+
+        As a rudimentary way to check for CRC, I used the user type "crc".
+
+        We also don't have a way to track if the application is finished.
+        (If it is, the progress bar will fill to 100%.)
+
+        Blame.php will return differently if the user isn't a student;
+        It could also very well be used in Records and Registration's page.
+
+Danny Dalton / 4/2/19 / 1:30 PM
+
+Changed secretary.php, backend/listApplications.php
+
+- Fixed secretary page showing nothing (used include_once instead of include)
+- Fixed typo in listApplications.php
+
+Danny Dalton / 4/2/19 / 4:00 PM to 4:55 PM
+
+Changed student-application2.php
+Added components/drop_down.php
+
+- Added a drop-down combo-box that automatically populates from a specific table column.
+- Added a functionality for conditional drop-down boxes (where conditions are SQL statements.)
+- Drop-down boxes have a unique ID assigned to them.
+        Drop-down boxes don't import the db right and i'm not sure why
+
+Danny Dalton / 4/2/19 / 7:50 PM to 8:45 PM
+
+Changed components/drop_down.php, skeleton.head.php, skeleton.foot.php, student-application2.php,
+        stylesheets/styles.css, home.php, components/session_debug.php
+Added   backend/update-employer.php
+
+- Fixed my error from before! Includes are so screwy in included functions
+        I had to make the path "backend/db_conn2.php" since it was running from the root in all
+        technicality. I figured it would be running from components (making the include go to 
+        "../backend/db_conn2.php"). ...tf?
+- Moved shared JS to skeleton head.
+- Finally finished implementing my autopopulating drop-down.
+- Removed a colon in home.php and fixed html structure.
+- Added a big header in the debug box.
+
+16)
+
+Seraphim Dmitrieff / 4/3/19 / 12 pm to
+
+Changed: backend/create-user.php, faculty.php, backend/load-faculty.php, backend/listApplications.php
+Added: student-application3.php, backend/load-appinfo3.php, student-application1.php, backend/update-appinfo3.php
+Removed: student-application.php
+
+- Updated secretary form to redirect to start application following new user creation
+- Added ability to populate drop downs for faculty department info
+- Added 3rd portion of student application, noticed weird bug with text area and menu bar
+
+17)
+
+Danny Dalton / 4/3/19 / 11:15 am, 12:20 am - 1:00 pm, 2:30 pm - 3:10 pm
+
+Added   components/autofill_box.php, javascript/autofill.js
+Changed student-application2.php, stylesheets/styles.css, update-employer.php, util.php
+
+- Autofill boxes are now correctly implemented... woo-hoo!
+        Source JS adapted from https://www.w3schools.com/howto/howto_js_autocomplete.asp .
+        I also added null-checking ... having "null" be returned from the server shouldn't
+        cause errors in the Console.
+- Employer submission works, along with Employer ID generation.
+
+18)
+
+Danny Dalton / 4/4/19 / 11:25 am - 11:30 am, 11:50 am - 12:00 pm
+
+Changed backend/load-appinfo1.php, student-application3.php, student-application2.php, student-application1.php
+Renamed         backend/update-employer.php => backend/update-appinfo2.php
+
+- Cleaned HTML output of first page of application info.
+        Using single quotes works nicely until some company's name has a single quote in it.
+- Had appinfo2 stick with the naming convention.
+- Booting to home on failure now works.
+- Added back buttons.
+
+Danny Dalton / 4/4/19 / 2:40 pm - 4:45 pm
+
+Changed backend/update-appinfo2.php, student-application2.php, backend/update-appinfo3.php
+Created student-application4.php
+
+- Added more information to page 2 of student application.
+- Started page 4 of student application.
+
+19)
+
+Seraphim / 4/7/19 - 4/8/19 / 7:30 PM - 9:00 PM
+
+Changed: student-application4.php, backend/listApplications.php
+Added: backend/update-appinfo4.php, instructor-review1.php, backend/instructor-appinfo1.php
+
+- Adjusted format of student-application4.php
+- Added submission for student form
+- Began Adding Instructor Forms
+
+20)
+
+Seraphim / 4/23/19 / 11:00 am - 
+
+Changed: backend/listApplications.php, backend/update-appinfo4.php, backend/instructor-appinfo2.php, backend/employer-appinfo1.php,
+         backend/instructor-appinfo5.php, backend/employer-appinfo1.php, backend/dean-appinfo1.php,
+         dean-review1.php, backend/chair-appinfo1.php, components/accept_reject.php, 
+
+- Added Reject Messaging to home.php for application feedback
+- Added query to clear reject message when student/instructor/chair resubmits application
+- Fixed application rejection bug for instructor on backend/instructor-appinfo2.php & backend/employer-appinfo1.php
+- Fixed dean reject to assign to dept chair
+- Fixed Assignment email message to display contents
+- Disabled CheckUserType security on application pages to allow for edit functionality
+- Created Edit and Email Permissions tables in db
+
+
+21)
+22)
+23)
+24)
+25)
+26)
+27)
+28)
+29)
+30)
+31)
+32)
+33)
+34)
+35)
+36)
+37)
+38)
+39)
+40)
