@@ -1,7 +1,9 @@
 <?php
 session_start();
-
-//check if already logged in move to home page
+//redirect on back button when already logged in.
+if(isset($_SESSION['user_type'])){
+  redirect($_SESSION['user_type']);
+}
 
 ?>
 <!doctype html>
@@ -63,12 +65,12 @@ include_once 'backend_new/config.php';
 if (isset($_POST['submit'])) {
 
   if (!isset($_POST['email'])) {
-    header("Location: index.php");  //this shouldnt happen. But if someone tries to pass the front end form
+    header("Location: index.php");  //this shouldnt happen. But if someone tries to bypass the front end form
     exit;
   }
 
   if (!isset($_POST['password'])) {
-    header("Location: index.php"); //this shouldnt happen. But if someone tries to pass the front end form
+    header("Location: index.php"); //this shouldnt happen. But if someone tries to bypass the front end form
     exit;
   }
 
@@ -84,28 +86,29 @@ if (isset($_POST['submit'])) {
     $_SESSION['user_type'] = $result["profile_type"];
     $first_time = $result["first_time"];
     $verified = $result["verified"];
-
-    if ($_SESSION['user_type'] == 'admin') {
-      header("Location: admin.php");
-      exit;
-    } else if ($_SESSION['user_type'] == 'student') {
-      header("Location: student.php");
-      exit();
-    } else if ($_SESSION['user_type'] == "secretary") {
-      header("Location: ../secretary.php");
-      exit();
-    } else if ($_SESSION['user_type'] == "chair") {
-    } else if ($_SESSION['user_type'] == "dean") {
-    } else if ($_SESSION['user_type'] == "instructor") {
-      header("Location: ../faculty.php");
-      exit();
-    } else if ($_SESSION['user_type'] == "employer") {
-    } else {
-      //session error
-    }
-  } else {
-    header("Location: index.php?error=$IncorrectCredentials");
+    redirect($_SESSION['user_type']);
+ 
+}
+function redirect($type){
+  if ($type == 'admin') {
+    header("Location: admin.php");
+    exit;
+  } else if ($type == 'student') {
+    header("Location: student.php");
     exit();
+  } else if ($type == "secretary") {
+    header("Location: ../secretary.php");
+    exit();
+  } else if ($type == "chair") {
+  } else if ($type == "dean") {
+  } else if ($type == "instructor") {
+    header("Location: ../faculty.php");
+    exit();
+  } else if ($type == "employer") {
+
+  }else {
+  header("Location: backend_new/logout.php");
+  exit();
   }
 }
 function checkInvalidCredentials()
