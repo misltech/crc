@@ -1,6 +1,9 @@
 <?php
 include 'util.php';
-session_start();
+   if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 
 // remove all session variables
 session_unset();
@@ -10,7 +13,10 @@ session_destroy();
 
 echo("You have logged out. Redirecting you...");
 
-session_start();
+   if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 setMessage(True, "You have logged out. Goodbye!");
 
 header("Location: ../login.php");

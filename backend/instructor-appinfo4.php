@@ -1,7 +1,10 @@
 <?php
     include('util.php');
     consoleLog('util working');
-    session_start();
+       if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
     
     checkUserType("instructor");
     

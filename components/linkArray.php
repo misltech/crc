@@ -1,5 +1,8 @@
 <?php
-session_start();
+   if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 include('../backend/db_conn2.php');
 /* 
 Before Accessing this file make sure the user_sequence table is updated to allow assigned_to values to be correctly set. If value in that table is set to 0 usr is not designated for application flow

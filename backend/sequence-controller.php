@@ -2,7 +2,10 @@
 
 // resume existing session
 
-	session_start();
+	   if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 	
 // Assign variables from session
 

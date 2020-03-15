@@ -2,7 +2,10 @@
 
 // Resume existing session
 
-session_start();
+   if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 
 include_once('skeleton.head.php');
 include_once('backend/db_conn2.php');

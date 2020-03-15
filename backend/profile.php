@@ -1,5 +1,8 @@
 <?php
-session_start();
+   if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 
 /*
  Check if request is to update user info, if true assign $_POST variables into session

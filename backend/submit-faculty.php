@@ -1,6 +1,9 @@
 <?php
 
-session_start();
+   if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 
 unset($_SESSION['dept_1']);
 unset($_SESSION['dept_2']);

@@ -1,6 +1,9 @@
 <?php 
 
-session_start();
+   if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 include('skeleton.head.php');
 
 echo "<h2> Profile Information </h2><br>";

@@ -2,7 +2,10 @@
 
 // resume session
 
-//session_start();
+//   if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 
 // check user type
 

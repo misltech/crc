@@ -1,7 +1,10 @@
 <?php
 
 // Resume Session
-session_start();
+   if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 include('backend/util.php');
 include('skeleton.head.php');
 

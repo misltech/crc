@@ -1,6 +1,9 @@
 <?php
 
-    session_start();
+       if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 
     include('../util.php');
 // This page updates the page sequence in the database

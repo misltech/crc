@@ -1,7 +1,10 @@
 <?php
 // This is a page to redirect application back to previous user upon rejection
 
-session_start();
+   if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 include('db_conn2.php');
 
 // Assign session variables locally

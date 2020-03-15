@@ -1,6 +1,9 @@
 
 <?php
-session_start();
+   if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 
 include_once('../newback/util.php');
 include_once('components/header.php');
@@ -12,7 +15,7 @@ include_once('components/topnav.php');
 <div class="container-fluid">
 
 <div class="row">
-        <div class="col-md-12 order-md-1">
+        <div class="col-md-8 order-md-1">
           <h4 class="mb-3">Edit My Account</h4>
           <form class="needs-validation" novalidate="" _lpchecked="1">
             <div class="row">

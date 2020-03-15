@@ -2,7 +2,10 @@
 
 // Resume Existing Session
 
-session_start();
+   if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 
 include('skeleton.head.php');
 
