@@ -27,6 +27,19 @@ $IncorrectCredentials = 1;
 $InternalError = 504;
 
 /**
+ * User types based on database
+ * Fill in details if you change them in db
+ */
+$admin_type = 'admin';
+$student_type = 'student';
+$secretary_type = 'secretary';
+$chair_type = 'chair';
+$dean_type = 'dean';
+$instructor_type = 'instructor';
+$employer_type = 'employer';
+
+
+/**
  * Use API_URL (without the dollar sign) instead.
  */
 $API_URL = "https://cs.newpaltz.edu/p/f18-02/s20-v2/";
@@ -93,6 +106,39 @@ if (isset($_SERVER["HTTP_HOST"]) && isset($_SERVER["REQUEST_URI"])) {
         exit;
     }
 }
+
+/**
+ * redirects based on account type. 
+ * This mehtod can also force a redirect to login page.
+ *
+ * @param mixed       account type
+ * @return void              
+ */
+function redirect($type){
+    include_once 'backend_new/config.php';
+    if ($type == $admin_type) {
+      header("Location: admin.php");
+      exit;
+    } else if ($type == $student_type) {
+      header("Location: student.php");
+      exit();
+    } else if ($type == $secretary_type) {
+      header("Location: ../secretary.php");
+      exit();
+    } else if ($type == $chair_type) {
+    } else if ($type == $dean_type) {
+    } else if ($type == $instructor_type) {
+      header("Location: ../faculty.php");
+      exit();
+    } else if ($type == $employer_type) {
+  
+    }else {
+    header("Location: backend_new/logout.php");
+    exit();
+    }
+  }
+
+
 
 /**
  * Generates an alphanumeric password using uppercase and lowercase

@@ -89,28 +89,7 @@ if (isset($_POST['submit'])) {
     redirect($_SESSION['user_type']);
  
 }
-function redirect($type){
-  if ($type == 'admin') {
-    header("Location: admin.php");
-    exit;
-  } else if ($type == 'student') {
-    header("Location: student.php");
-    exit();
-  } else if ($type == "secretary") {
-    header("Location: ../secretary.php");
-    exit();
-  } else if ($type == "chair") {
-  } else if ($type == "dean") {
-  } else if ($type == "instructor") {
-    header("Location: ../faculty.php");
-    exit();
-  } else if ($type == "employer") {
 
-  }else {
-  header("Location: backend_new/logout.php");
-  exit();
-  }
-}
 function checkInvalidCredentials()
 {
   include_once 'backend_new/config.php'; //needs to be done. Apparenly functions are limited to its variables
