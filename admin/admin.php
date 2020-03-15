@@ -5,12 +5,12 @@
 
 session_start();
 
-include_once('../backend_new/config.php');
-include_once('header.php');
-include_once('sidebar.php');
-include_once('topnav.php');
-include_once('footer.php');
-validate();
+include_once('../newback/config.php');
+include_once('components/header.php');
+include_once('components/sidebar.php');
+include_once('components/topnav.php');
+
+//validate();
 ?>
 
 
@@ -24,12 +24,12 @@ validate();
       </div>
 
 <?php
-
+include_once('components/footer.php');
 function validate(){
-  include_once('../backend_new/config.php');
-
+  include_once('../newback/config.php');
+  
   if($_SESSION['user_type'] != 'admin'){
-    redirect(null);
+    header("Location: ../index");
   }
   
 }

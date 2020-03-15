@@ -1,9 +1,17 @@
 <?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 session_start();
 //redirect on back button when already logged in.
-if(isset($_SESSION['user_type'])){
-  redirect($_SESSION['user_type']);
-}
+include_once ('./newback/config.php');
+include_once ('./newback/db_con3.php');
+//console_log($_SESSION['user_type']);
+// if(isset($_SESSION['user_type'])){
+//   redirect($_SESSION['user_type']);
+// }
 
 ?>
 <!doctype html>
@@ -32,15 +40,13 @@ if(isset($_SESSION['user_type'])){
     <img class="mb-4" src="images/newpaltzlogo.png" alt="" width="250" height="auto">
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
     <?php if (checkInvalidCredentials()) { ?>
-      <div class="alert alert-warning alert-dismissible fade show">
+      <div class="alert alert-warning fade show">
         Invalid Credentials!
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
       </div>
     <?php } ?>
     <?php if (checkInternalError()) { ?>
-      <div class="alert alert-danger alert-dismissible fade show">
+      <div class="alert alert-danger fade show">
         Internal Error. Please try again later.
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
       </div>
     <?php } ?>
     <label for="inputEmail" class="sr-only">Email address</label>
@@ -52,7 +58,7 @@ if(isset($_SESSION['user_type'])){
         <input type="checkbox" value="remember-me"> Remember me
       </label>
     </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <button class="btn btn-lg btn-primary btn-block" name="submit" type="submit">Sign in</button>
     <p class="mt-5 mb-3 text-muted">&copy; Career Resource Center 2020</p>
   </form>
 </body>
@@ -61,57 +67,46 @@ if(isset($_SESSION['user_type'])){
 
 
 <?php
-include_once 'backend_new/config.php';
 if (isset($_POST['submit'])) {
 
-  if (!isset($_POST['email'])) {
+  if (!isset($_POST['email'], $_POST['password']) ) {
     header("Location: index.php");  //this shouldnt happen. But if someone tries to bypass the front end form
-    exit;
+    exit("Please fill out form.");
   }
 
-  if (!isset($_POST['password'])) {
-    header("Location: index.php"); //this shouldnt happen. But if someone tries to bypass the front end form
-    exit;
-  }
-
-  $email = mysqli_real_escape_string($conn, $_POST['email']);
-  $password = mysqli_real_escape_string($conn, $_POST['password']);
-
-  $sql = "SELECT * FROM " . $accounts . "WHERE email = '$email'"; //substitute table to global
-  $result = $db_conn->query($sql);
-
-  if ($result == 1) {
-    $result = $result->fetch_assoc();
-    $_SESSION['id_key'] = $email;
-    $_SESSION['user_type'] = $result["profile_type"];
-    $first_time = $result["first_time"];
-    $verified = $result["verified"];
+  $email = mysqli_real_escape_string($db_conn, $_POST['email']);
+  $password = mysqli_real_escape_string($db_conn, $_POST['password']);
+  
+  $sql = "SELECT * FROM `$accounts` WHERE email = '$email' AND passcode = '$password'"; //substitute table to global
+  $result = mysqli_query($db_conn, $sql);
+  $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+  $count = mysqli_num_rows($result);
+  if ($count == 1) {
+    $_SESSION['user_type'] = $row["profile_type"];
     redirect($_SESSION['user_type']);
- 
+  }
+  else{
+    header("Location: ./index.php?error=". $GLOBALS['IncorrectCredentials']);
+    exit();
+  } 
 }
-
 function checkInvalidCredentials()
 {
-  include_once 'backend_new/config.php'; //needs to be done. Apparenly functions are limited to its variables
   if (isset($_GET['error'])) {
     $error_id = $_GET['error'];
-    if ($error_id == $IncorrectCredentials) {
+    if ($error_id == $GLOBALS['IncorrectCredentials']) {
       return true;
     }
   }
 }
 function checkInternalError()
 {
-  include_once 'backend_new/config.php'; //needs to be done. Apparenly functions are limited to its variables
   if (isset($_GET['error'])) {
     $error_id = $_GET['error'];
-    if ($error_id == $InternalError) {
+    if ($error_id == $GLOBALS['InternalError']) {
       return true;
     }
   }
 }
-
-
-
 
 ?>

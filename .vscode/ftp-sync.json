@@ -1,0 +1,27 @@
+{
+    "remotePath": "/home/mitchelt6/WWW/crc",
+    "host": "wyvern.cs.newpaltz.edu",
+    "username": "mitchelt6",
+    "password": "1Hmy5IAy6",
+    "port": 22,
+    "secure": true,
+    "protocol": "sftp",
+    "uploadOnSave": true,
+    "passive": false,
+    "debug": false,
+    "privateKeyPath": null,
+    "passphrase": null,
+    "agent": null,
+    "allow": [],
+    "ignore": [
+        "\\.vscode",
+        "\\.git",
+        "\\.DS_Store"
+    ],
+    "generatedFiles": {
+        "extensionsToInclude": [
+            ""
+        ],
+        "path": ""
+    }
+}

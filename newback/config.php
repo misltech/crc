@@ -1,17 +1,15 @@
 <?php
 session_start();
 
-
-
 /**
  * 
  * Database info
  */
 
 $server = 'localhost';
-$user = 'p_f18_2';
-$pass = 'tt5nyq';
-$db = 'p_f18_2_db';
+$user = 'mitchelt6';
+$pass = 'l2n1l4';
+$db = 'mitchelt6_db';
 
 /**
  * Database Tables
@@ -23,20 +21,20 @@ $accounts = 's20_UserPass';
  * Error codes
  * 
  */
-$IncorrectCredentials = 1;
-$InternalError = 504;
+$GLOBALS['IncorrectCredentials'] = 1;
+$GLOBALS['InternalError'] = 504;
 
 /**
  * User types based on database
  * Fill in details if you change them in db
  */
-$admin_type = 'admin';
-$student_type = 'student';
-$secretary_type = 'secretary';
-$chair_type = 'chair';
-$dean_type = 'dean';
-$instructor_type = 'instructor';
-$employer_type = 'employer';
+$GLOBALS['admin_type'] = 'admin';
+$GLOBALS['student_type'] = 'student';
+$GLOBALS['secretary_type'] = 'secretary';
+$GLOBALS['chair_type'] = 'chair';
+$GLOBALS['dean_type'] = 'dean';
+$GLOBALS['instructor_type'] = 'instructor';
+$GLOBALS['employer_type'] = 'employer';
 
 
 /**
@@ -107,39 +105,50 @@ if (isset($_SERVER["HTTP_HOST"]) && isset($_SERVER["REQUEST_URI"])) {
     }
 }
 
+function alert($msg) {
+    echo "<script type='text/javascript'>alert('$msg');</script>";
+}
+
 /**
  * redirects based on account type. 
  * This mehtod can also force a redirect to login page.
  *
- * @param mixed       account type
+ * @param string       accounttype
  * @return void              
  */
-function redirect($type){
-    include_once 'backend_new/config.php';
-    if ($type == $admin_type) {
-      header("Location: admin.php");
-      exit;
-    } else if ($type == $student_type) {
+function redirect($atype){
+
+    if ($atype == $GLOBALS['admin_type']) {
+      header("Location: ./admin/admin.php");
+      //exit;
+    } else if ($atype == $GLOBALS['student_type']) {
       header("Location: student.php");
       exit();
-    } else if ($type == $secretary_type) {
+    } else if ($atype == $GLOBALS['secretary_type']) {
       header("Location: ../secretary.php");
       exit();
-    } else if ($type == $chair_type) {
-    } else if ($type == $dean_type) {
-    } else if ($type == $instructor_type) {
+    } else if ($atype == $GLOBALS['chair_type']) {
+    } else if ($atype == $GLOBALS['dean_type']) {
+    } else if ($atype == $GLOBALS['instructor_type']) {
       header("Location: ../faculty.php");
       exit();
-    } else if ($type == $employer_type) {
+    } else if ($atype == $GLOBALS['employer_type']) {
   
     }else {
-    header("Location: backend_new/logout.php");
+    header("Location: ./newback/logout.php");
     exit();
     }
   }
-
-
-
+  
+/**
+ * Outputs to console.log
+ */
+function console_log( $data ){
+    echo '<script>';
+    echo 'console.log('. json_encode( $data ) .')';
+    echo '</script>';
+  }
+  
 /**
  * Generates an alphanumeric password using uppercase and lowercase
  * letters of a specified length.
