@@ -5,7 +5,7 @@
 
 session_start();
 
-include_once('../newback/config.php');
+include_once('../newback/util.php');
 include_once('components/header.php');
 include_once('components/sidebar.php');
 include_once('components/topnav.php');
@@ -26,7 +26,7 @@ include_once('components/topnav.php');
 <?php
 include_once('components/footer.php');
 function validate(){
-  include_once('../newback/config.php');
+  include_once('../newback/util.php');
   
   if($_SESSION['user_type'] != 'admin'){
     header("Location: ../index");
