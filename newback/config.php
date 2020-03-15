@@ -122,7 +122,7 @@ function redirect($atype){
       header("Location: ./admin/admin.php");
       //exit;
     } else if ($atype == $GLOBALS['student_type']) {
-      header("Location: student.php");
+      header("Location: ./student/student.php");
       exit();
     } else if ($atype == $GLOBALS['secretary_type']) {
       header("Location: ../secretary.php");
