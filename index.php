@@ -9,9 +9,9 @@ session_start();
 include_once ('./newback/config.php');
 include_once ('./newback/db_con3.php');
 //console_log($_SESSION['user_type']);
-// if(isset($_SESSION['user_type'])){
-//   redirect($_SESSION['user_type']);
-// }
+if(isset($_SESSION['user_type'])){
+ redirect($_SESSION['user_type']);
+}
 
 ?>
 <!doctype html>
@@ -55,7 +55,7 @@ include_once ('./newback/db_con3.php');
     <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
     <div class="checkbox mb-3">
       <label>
-        <input type="checkbox" value="remember-me"> Remember me
+        <input type="checkbox" value="remember-me"> replace with forgot password
       </label>
     </div>
     <button class="btn btn-lg btn-primary btn-block" name="submit" type="submit">Sign in</button>
