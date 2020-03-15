@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 
 session_start();
 //redirect on back button when already logged in.
-include_once ('./newback/config.php');
+include_once ('./newback/util.php');
 include_once ('./newback/db_con3.php');
 //console_log($_SESSION['user_type']);
 if(isset($_SESSION['user_type'])){
