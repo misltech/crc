@@ -1,6 +1,9 @@
 <?php
 include('../skeleton.head.php');
-session_start();
+   if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 
 // Supervisor Review select
 $sID = $_POST["studentID"];

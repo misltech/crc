@@ -3,7 +3,10 @@
 
 <?php
 
-session_start();
+   if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 
 include_once('../newback/util.php');
 include_once('components/header.php');

@@ -2,7 +2,10 @@
 
 // Resume Existing Session
 
-session_start();
+   if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 include('util.php');
 
 if ($_SESSION["user_type"] === 'student') {

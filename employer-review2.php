@@ -1,6 +1,9 @@
 <?php
 
-session_start();
+   if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 
 include_once("skeleton-fluid.head.php");
 include_once("backend/util.php");

@@ -1,7 +1,10 @@
 <?php
 
 // Resume Session
-session_start();
+   if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 include('backend/util.php');
 include('skeleton.head.php');
 include('components/drop_down.php');
@@ -90,7 +93,10 @@ include('components/autofill_box.php');
 
 <?php
 
-session_start();
+   if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 $id = $_SESSION["fw_id"];
 
 $sql = "SELECT employer_email FROM s20_application_info WHERE fw_id = '$id'";

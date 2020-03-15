@@ -1,5 +1,8 @@
 <?php
-session_start();
+   if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 include('skeleton.head.php');
 //include('backend/util.php');
 //consoleLog("util working");

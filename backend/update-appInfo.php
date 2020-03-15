@@ -2,7 +2,10 @@
 
 // Resume existing session
 
-session_start();
+   if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 include('util.php');
 
 // check user type

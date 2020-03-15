@@ -1,6 +1,9 @@
 <?php
 /*
-session_start();
+   if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 include '../util.php';
 unset($_SESSION['search_results']);
 

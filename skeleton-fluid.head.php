@@ -19,7 +19,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <?php
-    session_start();
+       if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 
     if (isset($_SESSION["user_type"]) || DEBUG === true) {
         include('components/nav.php');

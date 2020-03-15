@@ -2,7 +2,10 @@
 
 // Resume exisiting session
 
-session_start();
+   if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 
 $searchKey = $_SESSION['fw_id'];
 

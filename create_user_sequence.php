@@ -5,7 +5,10 @@ include_once('component_template.head.php');
 
 modalHead("setUser");
 */
-session_start();
+   if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 include_once('components/drop_down.php');
 include('skeleton.head.php'); 
 include_once('backend/util.php');

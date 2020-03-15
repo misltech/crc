@@ -2,7 +2,10 @@
 
 // Resume existing session
 
-session_start();
+   if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 include_once('util.php');
 
 // Get fw_id, instructor email from session variable and unset

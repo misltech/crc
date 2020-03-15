@@ -1,7 +1,10 @@
 <?php
 
 // Universal code for checking editing permissions and hiding edit buttons when no auth to edit
-//    session_start();
+//       if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 
 //    include('db_conn2.php');
 

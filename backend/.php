@@ -1,5 +1,8 @@
 <?php
-session_start();
+   if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 /**
  * Use API_URL (without the dollar sign) instead.
  */
@@ -225,7 +228,10 @@ function checkUserTypeOfMultiple($desiredTypes)
  */
 function setMessage($messageSuccess, $message)
 {
-    session_start();
+       if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
     $_SESSION["msg_success"] = $messageSuccess;
     $_SESSION["msg"] = $message;
 }
@@ -235,7 +241,10 @@ function setMessage($messageSuccess, $message)
  */
 function clearMessage()
 {
-    session_start();
+       if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
     unset($_SESSION["msg_success"]);
     unset($_SESSION["msg"]);
 }

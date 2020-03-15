@@ -2,7 +2,10 @@
     include_once('util.php');
     include_once('db_conn2.php');
 
-    session_start();
+       if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
     
     $emp_email = mysqli_escape_string($conn, $_POST["email"]);
     $b_name    = mysqli_escape_string($conn, $_POST["b_name"]);

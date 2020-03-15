@@ -2,7 +2,10 @@
 
 // Resume Existing session
 
-session_start();
+   if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 
 include('util.php');
 include('db_conn2.php');
