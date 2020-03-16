@@ -86,6 +86,7 @@ if (isset($_POST['submit'])) {
   $count = mysqli_num_rows($result);
   if ($count == 1) {
     $_SESSION['user_type'] = $row["profile_type"];
+    $_SESSION['user_email'] = $row['email'];
     redirect($_SESSION['user_type']);
   }
   else{
