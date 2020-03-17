@@ -57,9 +57,7 @@ if(isset($_SESSION['user_type'])){
     <label for="inputPassword" class="sr-only">Password</label>
     <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
     <div class="checkbox mb-3">
-      <label>
-        <input type="checkbox" value="remember-me"> replace with forgot password
-      </label>
+      <a href="">forgot username/password</a>
     </div>
     <button class="btn btn-lg btn-primary btn-block" name="submit" type="submit">Sign in</button>
     <p class="mt-5 mb-3 text-muted">&copy; Career Resource Center 2020</p>

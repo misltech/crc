@@ -15,8 +15,8 @@ include_once('components/topnav.php');
 
 
 <!--Table-->
-<div class="container" style="overflow: auto;">
-    <table id="example" class="table table-striped table-bordered" style="width:100%">
+<div class="container " style="overflow: auto;">
+    <table id="example" class="table table-responsive table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
                 <th>Student Name</th>
