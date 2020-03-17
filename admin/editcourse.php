@@ -10,6 +10,9 @@ include_once('components/sidebar.php');
 include_once('components/topnav.php');
 ?>
 
+<div class="d-flex justify-content-center mt-5">
+    <p>Coming soon!</p>
+</div>
 
 <?php
 include_once('components/footer.php');
