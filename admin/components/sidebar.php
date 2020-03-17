@@ -18,5 +18,3 @@
   </div>
 </div>
 <!-- /#sidebar-wrapper -->
-
-<img
