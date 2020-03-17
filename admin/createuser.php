@@ -11,7 +11,7 @@ include_once('components/topnav.php');
 ?>
 
 <div class="m-3">
-<legend>Lookup a Student</legend>
+<legend>Create a Student</legend>
 </div>
 <div class="d-flex justify-content-center mt-5">
 <form>
