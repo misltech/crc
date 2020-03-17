@@ -9,6 +9,7 @@ include_once('components/header.php');
 include_once('components/sidebar.php');
 include_once('components/topnav.php');
 ?>
+<div class="container">
 <div class="m-3">
 <legend>Lookup a Student</legend>
 </div>
@@ -41,6 +42,7 @@ include_once('components/topnav.php');
     </div>
   </div>
 </form>
+</div>
 </div>
 <?php
 include_once('components/footer.php');

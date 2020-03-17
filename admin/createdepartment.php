@@ -10,6 +10,7 @@ include_once('components/sidebar.php');
 include_once('components/topnav.php');
 ?>
 
+<div class="container">
 <div class="m-3">
 <legend>Create Department</legend>
 </div>
@@ -167,7 +168,7 @@ include_once('components/topnav.php');
   </div>
 </form>
 
-
+</div>
 </div>
 <?php
 include_once('components/footer.php');
