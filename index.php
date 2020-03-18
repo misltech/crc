@@ -88,14 +88,14 @@ if (isset($_POST['submit'])) {
     redirect($_SESSION['user_type']);
   }
   else{
-    header("Location: ./index.php?error=". $GLOBALS['IncorrectCredentials']);
+    header("Location: ./index.php?e=". $GLOBALS['IncorrectCredentials']);
     exit();
   } 
 }
 function checkInvalidCredentials()
 {
-  if (isset($_GET['error'])) {
-    $error_id = $_GET['error'];
+  if (isset($_GET['e'])) {
+    $error_id = $_GET['e'];
     if ($error_id == $GLOBALS['IncorrectCredentials']) {
       return true;
     }
@@ -103,8 +103,8 @@ function checkInvalidCredentials()
 }
 function checkInternalError()
 {
-  if (isset($_GET['error'])) {
-    $error_id = $_GET['error'];
+  if (isset($_GET['e'])) {
+    $error_id = $_GET['e'];
     if ($error_id == $GLOBALS['InternalError']) {
       return true;
     }
