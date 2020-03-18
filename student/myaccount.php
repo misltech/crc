@@ -1,4 +1,3 @@
-
 <?php
    if(!isset($_SESSION)) 
     { 
@@ -15,11 +14,14 @@ function getStates(){
 }
 //validate();
 ?>
-<div class="container-fluid">
+
+<div class="container">
+<div class="m-3">
+<legend>Edit My Account</legend>
+</div>
 
 <div class="row">
         <div class="col-md-8 order-md-1">
-          <h4 class="mb-3">Edit My Account</h4>
           <form class="needs-validation" novalidate="" _lpchecked="1">
             <div class="row">
               <div class="col-md-4 mb-3">
