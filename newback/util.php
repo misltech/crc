@@ -29,7 +29,7 @@ function redirect($atype){
       header("Location: ./student/student.php");
       exit();
     } else if ($atype == $GLOBALS['secretary_type']) {
-      header("Location: ../secretary.php");
+      header("Location: .//secretary.php");
       exit();
     } else if ($atype == $GLOBALS['chair_type']) {
     } else if ($atype == $GLOBALS['dean_type']) {

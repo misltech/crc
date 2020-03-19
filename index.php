@@ -33,13 +33,13 @@ if(isset($_SESSION['user_type'])){
 
   <!-- Bootstrap core CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
-
+  <link href="./css/main.css" rel="stylesheet">
   <!-- Custom styles for this template -->
   <link href="https://getbootstrap.com/docs/4.1/examples/sign-in/signin.css" rel="stylesheet">
 </head>
 
 <body class="text-center">
-  <form class="form-signin" action="index.php" method="POST">
+  <form class="form-signin" action="index" method="POST">
     <img class="mb-4" src="images/newpaltzlogo.png" alt="" width="250" height="auto">
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
     <?php if (checkInvalidCredentials()) { ?>
