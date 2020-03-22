@@ -23,24 +23,29 @@ function alert($msg) {
 function redirect($atype){
 
     if ($atype == $GLOBALS['admin_type']) {
-      header("Location: ./admin/admin.php");
+        header("Location: ./admin/admin.php");
       //exit;
     } else if ($atype == $GLOBALS['student_type']) {
-      header("Location: ./student/student.php");
-      exit();
+        header("Location: ./student/student.php");
+        exit();
     } else if ($atype == $GLOBALS['secretary_type']) {
-      header("Location: .//secretary.php");
-      exit();
+        header("Location: ./secretary/secretary.php");
+        exit();
     } else if ($atype == $GLOBALS['chair_type']) {
+        header("Location: ./chair/chair.php");
+        exit();
     } else if ($atype == $GLOBALS['dean_type']) {
+        header("Location: ./dean/dean.php");
+        exit();
     } else if ($atype == $GLOBALS['instructor_type']) {
-      header("Location: ../faculty.php");
-      exit();
+        header("Location: ./instructor/instructor.php");
+        exit();
     } else if ($atype == $GLOBALS['employer_type']) {
-  
+        header("Location: ./employer/employer.php");
+        exit();
     }else {
-    header("Location: ./newback/logout.php");
-    exit();
+        header("Location: ./newback/logout.php");
+        exit();
     }
   }
   
