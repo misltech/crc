@@ -4,6 +4,7 @@ if (!isset($_SESSION)) {
 }
 
 include_once('../newback/util.php');
+validate($GLOBALS['student_type']);
 include_once('components/header.php');
 include_once('components/sidebar.php');
 include_once('components/topnav.php');
