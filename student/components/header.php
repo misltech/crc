@@ -15,7 +15,7 @@
 
   <!-- Custom styles for this template -->
   <link href="../css/simple-sidebar.css" rel="stylesheet">
-
+  <meta name="csrf-token" content="<?php $_SESSION['csrf_token'] ?>">
 </head>
 
 <body>

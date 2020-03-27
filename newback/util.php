@@ -4,7 +4,7 @@
         session_start(); 
     } 
 
-include_once('util.php');
+include_once('config.php');
 
 /**
 * A function to do a javascript alert 
@@ -49,6 +49,19 @@ function redirect($atype){
     }
   }
   
+
+
+function validate($checktype){
+    if(isset($_SESSION['user_type']) and $_SESSION['user_type'] == $checktype){
+        
+    }
+    else{
+        header('Location: ../newback/logout.php');
+    }
+
+
+}
+
 /**
 * A function for logging a message to the console
 */
