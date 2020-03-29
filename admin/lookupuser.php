@@ -11,7 +11,7 @@ include_once('components/topnav.php');
 <div class="container">
   <div class="jumbotron">
     <h1 class="display-4">Search for a Student</h1>
-    <p class="lead">You can generate a new student here.</p>
+    <p class="lead">You can search for a student here.</p>
     <hr class="my-4">
     <div class="d-flex justify-content-center mt-5">
       <form>
