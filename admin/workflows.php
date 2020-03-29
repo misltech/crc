@@ -12,8 +12,8 @@ include_once('components/topnav.php');
 <!--Table-->
 <div class="container " style="overflow: auto;">
     <div class="jumbotron">
-        <h1 class="display-4">Create a Student</h1>
-        <p class="lead">You can generate a new student here.</p>
+        <h1 class="display-4">View Workflows</h1>
+        <p class="lead">You can view and modify current workflows here.</p>
         <hr class="my-4">
         <table id="example" class="table table-responsive table-striped table-bordered" style="width:100%">
             <thead>

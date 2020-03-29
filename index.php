@@ -25,7 +25,7 @@ if(isset($_SESSION['user_type'])){
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel="icon" href="/docs/4.1/assets/img/favicons/favicon.ico">
+  <link rel="icon" href="https://newpaltz.edu/favicon.ico">
 
   <title>Internship Fieldwork Sign In</title>
 
@@ -78,7 +78,7 @@ if (isset($_POST['submit'])) {
   $email = mysqli_real_escape_string($db_conn, $_POST['email']);
   $password = mysqli_real_escape_string($db_conn, $_POST['password']);
   
-  $sql = "SELECT * FROM `$accounts` WHERE email = '$email' AND passcode = '$password'"; //substitute table to global
+  $sql = "SELECT * FROM '$accounts' WHERE email = '$email' AND passcode = '$password'"; //substitute table to global
   $result = mysqli_query($db_conn, $sql);
   $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
   $count = mysqli_num_rows($result);
