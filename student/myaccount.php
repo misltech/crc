@@ -39,6 +39,9 @@ if (isset($_SESSION['user_email'])) {
     //Student data not found
   }
 }
+else{
+  redirect(null);
+}
 
 function filter(){  //use this to filter the php inputs. If its null do something. Change the php inputs below to run through this filter
   
