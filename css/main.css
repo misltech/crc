@@ -9,3 +9,7 @@ body{
     background: white;
     border-radius: 15px;
 }
+
+.jumbotron{
+    border-radius: 0px 0px 1.3rem 1.3rem;
+}
