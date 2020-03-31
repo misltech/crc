@@ -16,11 +16,21 @@ body{
 
 #sidebar-wrapper > div.sidebar-heading > h4{
     font-family: 'Baloo Thambi 2', cursive;
-    text-align: center;
+    text-align: center; 
 }
 
 .progressB {
-    width: 350px; 
+    width: 64vh; 
     height: 100px;
 }
+
+
+@media (max-width: 1025px){
+    .progressB {
+        width: auto; 
+        height: 100px;
+    }
+
+
+
 
