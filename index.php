@@ -85,7 +85,7 @@ if (isset($_POST['submit'])) {
   if ($count == 1) {
     $_SESSION['user_type'] = $row["profile_type"];
     $_SESSION['user_email'] = $row['email'];
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); 
+    $_SESSION['token'] = bin2hex(random_bytes(32)); 
     
     redirect($_SESSION['user_type']);
   }

@@ -18,9 +18,8 @@ $user_email = $_SESSION['user_email'];
 $sql = "SELECT fw_id, assigned_to, dept_code FROM application_info WHERE student_email = '$user_email'";
 $query = mysqli_query($db_conn, $sql);
 
-if($query){
-    while($row = mysqli_fetch_array($query, MYSQLI_ASSOC)){
-
+if ($query) {
+    while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
     }
 }
 
@@ -39,31 +38,37 @@ if($query){
 
 
 
-        <div class="card text-white bg-success mb-3">
+        <div class="card border-secondary mb-3 mx-auto" style="max-width: 30rem;">
             <div class="card-header">
                 Internship
             </div>
-            <div class="card-body">
-                <h5 class="card-title">CSB 221</h5>
+            <div class="card-body text-secondary">
+                <h5 class="card-title text-center">BUS 221</h5>
+                <h6 class="card-title">Spring 2020</h6>
                 <p class="card-text">Progress bar goes here</p>
-                <a href="#" class="btn btn-primary">Edit Application</a>
+
+                <div id="progressBar"></div>
+        <p>To manipulate the progress bar, click on a step above, or use one of the buttons below. Events logged to the console.</p>
+        <button id="startLoop">Start Loop</button> <button id="stopLoop">Stop Loop</button> <button id="resetVisited">Reset Visited</button>
+                
+                <a href="#" class="btn btn-primary text-center">Edit Application</a>
             </div>
         </div>
 
 
-        <div class="card text-white bg-danger">
+        <div class="card border-danger mb-3">
             <div class="card-header">
                 Internship
             </div>
-            <div class="card-body">
+            <div class="card-body text-danger">
                 <h5 class="card-title">CSB 221</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <p class="card-text">Set to red when application is rejected</p>
+                <a href="#" class="btn btn-primary">See application</a>
             </div>
         </div>
 
 
-       
+
 
 
 

@@ -18,3 +18,8 @@ body{
     font-family: 'Baloo Thambi 2', cursive;
     text-align: center;
 }
+
+div#progressBar {
+    width: 350px; 
+    height: 100px;
+}
