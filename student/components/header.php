@@ -2,7 +2,7 @@
 if (!isset($_SESSION)) {
   session_start();
 }
-$csrf = $_SESSION['csrf_token'];
+$csrf = $_SESSION['token'];
 ?>
 
 <!DOCTYPE html>

@@ -20,7 +20,6 @@ SELECT concat(student_first_name, ' ' , student_last_name) as Name, s20_applicat
     <div class="jumbotron">
         <h1 class="display-4">View Workflows</h1>
         <p class="lead">You can view and modify current workflows here.</p>
-        <p class="lead danger">No data is found if table is empty!</p>
         <hr class="my-4">
         <table id="example" class="table table-responsive table-striped table-bordered" style="width:100%">
             <thead>

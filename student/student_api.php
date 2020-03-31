@@ -6,23 +6,23 @@ if (!isset($_SESSION)) {
   }
 
 if (isset($_SESSION['csrf_token'])) {
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    $_SESSION['token'] = bin2hex(random_bytes(32));
 }
 
 header('Content-Type: application/json');
 
 $headers = apache_request_headers();
-if (true  or isset($headers['CsrfToken'])) {
-    if (false and $headers['CsrfToken'] !== $_SESSION['csrf_token']) {
+if (true  or isset($headers['token'])) {
+    if (false and $headers['token'] !== $_SESSION['csrf_token']) {
         exit(json_encode(['error' => 'Wrong CSRF token.']));
     }
-    // if(!(isset($_SESSION['user_email']))){
-    //     exit(json_encode(['error' => 'No login found']));
-    // }
+    if(!(isset($_SESSION['user_email']))){
+        exit(json_encode(['error' => 'No login found']));
+    }
     if(isset($headers['request'])){
         $req = $headers['request'];
-        //$email = $_SESSION['user_email'];
-        $email = 'student@email.com';
+        $email = $_SESSION['user_email'];
+        //$email = 'student@email.com';
         if($req == "all"){
             
             $sql = "SELECT s20_application_info.dept_code,`semester`,`year`,`class_number`,`progress`,`comments`,`rejected`,s20_application_info.fw_id, workflow
