@@ -23,11 +23,6 @@ if ($query) {
     }
 }
 
-
-
-
-
-
 ?>
 
 <div class="container">
@@ -35,23 +30,19 @@ if ($query) {
         <h1 class="display-4">My Application</h1>
         <p class="lead">You can view the status of your application below</p>
         <hr class="my-4">
-
-
-
+        </div>
+</div>
+<!-- 
         <div class="card border-secondary mb-3 mx-auto" style="max-width: 30rem;">
             <div class="card-header">
                 Internship
             </div>
             <div class="card-body text-secondary">
-                <h5 class="card-title text-center">BUS 221</h5>
-                <h6 class="card-title">Spring 2020</h6>
-                <p class="card-text">Progress bar goes here</p>
-
-                <div id="progressBar"></div>
-        <p>To manipulate the progress bar, click on a step above, or use one of the buttons below. Events logged to the console.</p>
-        <button id="startLoop">Start Loop</button> <button id="stopLoop">Stop Loop</button> <button id="resetVisited">Reset Visited</button>
+                <h4 class="card-title ">BUS 221</h4>
+                <h5 class="card-title">SPRING 2020</h5>
                 
-                <a href="#" class="btn btn-primary text-center">Edit Application</a>
+                <div id="progressBar" class="progressB mx-auto"></div>
+                <a href="#" class="offset-4 mt-2 btn btn-primary text-center">Edit Application</a>
             </div>
         </div>
 
@@ -60,25 +51,20 @@ if ($query) {
             <div class="card-header">
                 Internship
             </div>
-            <div class="card-body text-danger">
+            <div class="card-body text-secondary">
                 <h5 class="card-title">CSB 221</h5>
                 <p class="card-text">Set to red when application is rejected</p>
-                <a href="#" class="btn btn-primary">See application</a>
+                <div id="progressBar2" class="progressB mx-auto"></div>
+                <a href="#" class="offset-4 btn btn-primary">See application</a>
             </div>
-        </div>
-
-
-
-
-
-
-
-
-
-    </div>
-</div>
-
-
+        </div> -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> 
+ <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+ <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+ <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+ <script src="../js/raphael.js"></script>
+ <script src="../js/progressStep.js"></script>
+<script src="../js/student.js"></script>
 <?php
-include_once('components/footer.php');
+
 ?>

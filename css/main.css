@@ -19,7 +19,8 @@ body{
     text-align: center;
 }
 
-div#progressBar {
+.progressB {
     width: 350px; 
     height: 100px;
 }
+
