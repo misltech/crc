@@ -24,18 +24,12 @@ $(document).ready(function () {
             for (let index = 0; index < res.length; index++) {
                 const element = res[index];
 
-                // var htmlElement;
-                // //console.log($.when(checkReject(element[1].rejected)))
-                // $.when(checkReject(element[1].rejected)).done(function(res){
-                //     htmlElement = res;
-                // });
                 htmlElement = getRejectElement(checkReject(element[1].rejected));
                 htmlElement += '<div class="card-header">Internship</div>'
                 htmlElement += '<div class="card-body text-secondary">';
-                htmlElement += '<h4 class="card-title ">' + element[1].dept + '</h4>';
-                htmlElement += '<h5 class="card-title">' + element[1].semester + ' ' + element[1].year + '</h5>';
+                htmlElement += '<h5 class="card-text text-align-center"><span class="float-left">' + element[1].dept + '</span><span class="float-right">'+ element[1].semester + ' ' + element[1].year + '</span></h5>';
                 htmlElement += '<div id="progress' + index + '"' + ' class="progressB mx-auto"></div>';
-                htmlElement += '<a href="#" class="offset-4 mt-2 btn btn-primary text-center">' + applicationModifier(checkReject(element[1].rejected))+'</a>';
+                htmlElement += '<div class="text-center"><a href="' + buildAppRedirect() +'" class="mt-2 btn btn-primary text-center">' + applicationModifier(checkReject(element[1].rejected))+'</a></div>';
                 htmlElement += '</div>';
                 htmlElement += '</div>';
                 console.log(element[0]);
@@ -43,7 +37,7 @@ $(document).ready(function () {
 
                 $('.jumbotron').append(htmlElement);
 
-                if (checkReject(checkReject(element[1].rejected))){
+                if (!checkReject(checkReject(element[1].rejected))){
                     var $progressDiv = $("#progress" + index);
                     var $progressBar = $progressDiv.progressStep();
                 }
@@ -76,6 +70,11 @@ $(document).ready(function () {
 
     }
 
+    function buildAppRedirect(){
+        // var newURL = window.location.protocol + "/" + window.location.host + "/" + window.location.pathname + 'review.php?rej=1?fwid=something';
+        var newURL = "review.php?rej=1?fwid=something";
+        return newURL;
+    }
     // function get                
     function applicationModifier(reject){
         if(reject){
@@ -88,7 +87,7 @@ $(document).ready(function () {
 
     function getRejectElement(reject) {
         if (reject == 0) {
-            return '<div class="card border-secondary mb-3">';
+            return '<div class="card border-light mb-3">';
         }
         else {
             return '<div class="card border-danger mb-3">';
