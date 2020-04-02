@@ -27,7 +27,7 @@ if ($query) {
 
 <div class="container">
     <div class="jumbotron">
-        <h1 class="display-4">My Application</h1>
+        <h1 class="display-4">My Applications</h1>
         <p class="lead">You can view the status of your application below</p>
         <hr class="my-4">
         </div>
