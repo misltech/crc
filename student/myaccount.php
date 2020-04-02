@@ -3,6 +3,9 @@ if (!isset($_SESSION)) {
   session_start();
 }
 
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
+
 include_once('../newback/util.php');
 validate($GLOBALS['student_type']);
 include_once('components/header.php');
@@ -46,7 +49,6 @@ else{
 function filter(){  //use this to filter the php inputs. If its null do something. Change the php inputs below to run through this filter
   
 }
-
 ?>
 
 <div class="container ">
@@ -54,42 +56,36 @@ function filter(){  //use this to filter the php inputs. If its null do somethin
   <h1 class="display-4">My Account</h1>
   <p class="lead">You can modify your account details here.</p>
   <hr class="my-4">
-  
-
-  <!-- <div class="m-3">
-    <legend>Edit My Account</legend>
-  </div> -->
-
   <div class="row">
     <div class="col-md-8 order-md-1">
-      <form class="needs-validation" novalidate="" _lpchecked="1">
+      <form class="needs-validation" method="post" action="myaccount" novalidate="" _lpchecked="1">
         <div class="row">
           <div class="col-md-4 mb-3">
             <label for="firstName">First name</label>
-            <input type="text" class="form-control" name="" id="firstname" placeholder="" value="<?php echo $firstname; ?>" required="" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg==&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
+            <input type="text" class="form-control" name="firstname" id="firstname" placeholder="" value="<?php echo $firstname;?>" required="" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg==&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
             <div class="invalid-feedback">
               Valid first name is required.
             </div>
           </div>
           <div class="col-md-4 mb-3">
             <label for="lastName">Last name</label>
-            <input type="text" class="form-control" name="lastname" id="lastName" placeholder="" value="<?php echo $lastname; ?>" required="">
+            <input type="text" class="form-control" name="lastname" id="lastName" placeholder="" value="<?php echo $lastname;?>" required="">
             <div class="invalid-feedback">
               Valid last name is required.
             </div>
           </div>
           <div class="col-md-4 mb-3">
             <label for="lastName">Middle Initial</label>
-            <input type="text" class="form-control" name="middlename" id="lastName" max="1" placeholder="" value="<?php echo $middlename; ?>" required="">
+            <input type="text" class="form-control" name="middlename" id="middlename" maxlength="1" placeholder="" value="<?php echo $middlename;?>" required="">
             <div class="invalid-feedback">
-              Valid last name is required.
+              Valid middle name is required.
             </div>
           </div>
         </div>
 
         <div class="mb-3">
           <label for="email">Email </label>
-          <input type="email" class="form-control" name="email" id="email" value="<?php echo $em; ?>" placeholder="">
+          <input type="email" class="form-control" name="email" id="email" value="<?php echo $em;?>" placeholder="">
           <div class="invalid-feedback">
             Please enter a valid email address for shipping updates.
           </div>
@@ -97,7 +93,7 @@ function filter(){  //use this to filter the php inputs. If its null do somethin
 
         <div class="mb-3">
           <label for="address">Address</label>
-          <input type="text" class="form-control" name="address" id="address" value="<?php echo $address; ?>" required="">
+          <input type="text" class="form-control" name="address" id="address" value="<?php echo $address;?>" required="">
           <div class="invalid-feedback">
             Please enter your shipping address.
           </div>
@@ -105,13 +101,13 @@ function filter(){  //use this to filter the php inputs. If its null do somethin
 
         <div class="mb-3">
           <label for="address2">Address 2</label>
-          <input type="text" class="form-control" name="aptnumber" id="address2" value="<?php echo $aptnum ?>" placeholder="Apartment or suite">
+          <input type="text" class="form-control" name="aptnumber" id="address2" value="<?php echo $aptnum?>" placeholder="Apartment or suite">
         </div>
 
         <div class="row">
           <div class="col-md-3 mb-3">
             <label for="zip">City</label>
-            <input type="text" class="form-control" name="city" id="zip" value="<?php echo $city; ?>" placeholder="" required="">
+            <input type="text" class="form-control" name="city" id="zip" value="<?php echo $city;?>" placeholder="" required="">
             <div class="invalid-feedback">
               Zip code required.
             </div>
@@ -119,7 +115,7 @@ function filter(){  //use this to filter the php inputs. If its null do somethin
 
           <div class="col-md-4 mb-3">
             <label for="state">State</label>
-            <select class="custom-select d-block w-100" name="" id="state" value="" required="">
+            <select class="custom-select d-block w-100" name="state" id="state" value="<?php echo $state;?>" required="">
               <option selected><?php echo $state; ?></option>
               <option value="AL">Alabama</option>
               <option value="AK">Alaska</option>
@@ -177,7 +173,7 @@ function filter(){  //use this to filter the php inputs. If its null do somethin
           </div>
           <div class="col-md-3 mb-3">
             <label for="zip">Zip</label>
-            <input type="text" name="zipcode" class="form-control" id="zip" value="<?php echo $zip; ?>" placeholder="" required="">
+            <input type="text" name="zipcode" class="form-control" id="zip" value="<?php echo $zip;?>" placeholder="" required="">
             <div class="invalid-feedback">
               Zip code required.
             </div>
@@ -187,11 +183,10 @@ function filter(){  //use this to filter the php inputs. If its null do somethin
 
               <div class="mb-3">
                 <label for="phonenumber">Phone number</label> 
-                <input type="text" id="phonenumber" value="<?php echo $phonenum; ?>" name="phonenumber" type="text" class="form-control">
+                <input type="text" id="phonenumber" value="<?php echo $phonenum;?>" name="phonenumber" type="text" class="form-control">
     
               </div>
-           
-
+          
         <hr class="mb-4">
 
         <button class="btn btn-primary btn-lg" name="modify" type="submit">Modify</button>
@@ -213,19 +208,23 @@ if (isset($_POST['modify'])) {
   $address = mysqli_real_escape_string($db_conn, $_POST['address']);
   $city = mysqli_real_escape_string($db_conn, $_POST['city']);
   $state = mysqli_real_escape_string($db_conn, $_POST['state']);
-  $zip = mysqli_real_escape_string($db_conn, $_POST['zip']);
+  $zip = mysqli_real_escape_string($db_conn, $_POST['zipcode']);
 
-
+  $user_email = $_SESSION['user_email'];
   $sql = "UPDATE s20_student_info SET student_first_name = '$firstname', student_last_name = '$lastname', student_middle_initial = '$middlename', 
                 student_phone = '$phonenum', student_address = '$address', student_apt_num = '$aptnum', student_city = '$city', 
                 student_state = '$state', student_zip = '$zip' WHERE student_email = '$user_email'";
+  console_log($sql);
   $query = mysqli_query($db_conn, $sql);
 
   if ($query) {
     //display success alert box
-    header("Location: ./student/student.php");
+    //header("Location: ./student.php");
+    //return true;
+    alert("success");
   } else {
     //display warning aletr box
+    return false;
   }
 }
 

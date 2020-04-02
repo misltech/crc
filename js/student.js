@@ -28,8 +28,8 @@ $(document).ready(function () {
                 htmlElement += '<div class="card-header">Internship</div>'
                 htmlElement += '<div class="card-body text-secondary">';
                 htmlElement += '<h5 class="card-text text-align-center"><span class="float-left">' + element[1].dept + '</span><span class="float-right">'+ element[1].semester + ' ' + element[1].year + '</span></h5>';
-                htmlElement += '<div id="progress' + index + '"' + ' class="progressB mx-auto"></div>';
-                htmlElement += '<div class="text-center"><a href="' + buildAppRedirect() +'" class="mt-2 btn btn-primary text-center">' + applicationModifier(checkReject(element[1].rejected))+'</a></div>';
+                htmlElement += '<div id="progress' + index + '"' + ' class="progressB mx-auto img-fluid"></div>';
+                htmlElement += '<div class="text-center"><a href="' + buildApplicationRedirect() +'" class="mt-2 btn btn-primary text-center">' + applicationModifier(checkReject(element[1].rejected))+'</a></div>';
                 htmlElement += '</div>';
                 htmlElement += '</div>';
                 console.log(element[0]);
@@ -56,10 +56,12 @@ $(document).ready(function () {
                 if (element[1].progress == null) {
                     $progressBar.setCurrentStep(0);
                     $progressBar.refreshLayout();
+            
                 }
                 else {
                     $progressBar.setCurrentStep(element[1].progress);
                     $progressBar.refreshLayout();
+                  
                 }
 
             }
@@ -70,7 +72,7 @@ $(document).ready(function () {
 
     }
 
-    function buildAppRedirect(){
+    function buildApplicationRedirect(){
         // var newURL = window.location.protocol + "/" + window.location.host + "/" + window.location.pathname + 'review.php?rej=1?fwid=something';
         var newURL = "review.php?rej=1?fwid=something";
         return newURL;
@@ -106,6 +108,19 @@ $(document).ready(function () {
 
 
     }
+    
+    // $(window).resize(function() {  //neeeds to refresh the svg image
+
+    //     setTimeout(rel(), 1000);
+    //    function rel(){
+    //     window.location.reload();
+    //    }
+        
+    //     alert("changed");
+    //     });
+
+
+	
 
 
 

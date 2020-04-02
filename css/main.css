@@ -25,12 +25,12 @@ body{
 }
 
 
-@media (max-width: 1025px){
+@media (max-width: 1270px){
     .progressB {
         width: auto; 
-        height: 100px;
+        height: 50%;
     }
 
 
 
-
+}
