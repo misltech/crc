@@ -9,3 +9,28 @@ body{
     background: white;
     border-radius: 15px;
 }
+
+.jumbotron{
+    border-radius: 0px 0px 1.3rem 1.3rem;
+}
+
+#sidebar-wrapper > div.sidebar-heading > h4{
+    font-family: 'Baloo Thambi 2', cursive;
+    text-align: center; 
+}
+
+.progressB {
+    width: 64vh; 
+    height: 100px;
+}
+
+
+@media (max-width: 1270px){
+    .progressB {
+        width: auto; 
+        height: 50%;
+    }
+
+
+
+}

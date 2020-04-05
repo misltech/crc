@@ -25,7 +25,7 @@ if(isset($_SESSION['user_type'])){
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel="icon" href="/docs/4.1/assets/img/favicons/favicon.ico">
+  <link rel="icon" href="https://newpaltz.edu/favicon.ico">
 
   <title>Internship Fieldwork Sign In</title>
 
@@ -57,7 +57,7 @@ if(isset($_SESSION['user_type'])){
     <label for="inputPassword" class="sr-only">Password</label>
     <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
     <div class="checkbox mb-3">
-      <a href="">forgot username/password</a>
+      <a href="forgot.php">forgot username/password</a>
     </div>
     <button class="btn btn-lg btn-primary btn-block" name="submit" type="submit">Sign in</button>
     <p class="mt-5 mb-3 text-muted">&copy; Career Resource Center 2020</p>
@@ -78,14 +78,14 @@ if (isset($_POST['submit'])) {
   $email = mysqli_real_escape_string($db_conn, $_POST['email']);
   $password = mysqli_real_escape_string($db_conn, $_POST['password']);
   
-  $sql = "SELECT * FROM `$accounts` WHERE email = '$email' AND passcode = '$password'"; //substitute table to global
+  $sql = "SELECT * FROM ". $GLOBALS['accounts']. " WHERE email = '$email' AND passcode = '$password'"; //substitute table to global
   $result = mysqli_query($db_conn, $sql);
   $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
   $count = mysqli_num_rows($result);
   if ($count == 1) {
     $_SESSION['user_type'] = $row["profile_type"];
     $_SESSION['user_email'] = $row['email'];
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); 
+    $_SESSION['token'] = bin2hex(random_bytes(32)); 
     
     redirect($_SESSION['user_type']);
   }

@@ -18,7 +18,7 @@ $db = 'mitchelt6_db';
  * Database Tables
  * 
  */
-$accounts = 's20_UserPass';
+$GLOBALS['accounts'] ='s20_UserPass';
 
 /**
  * Error codes

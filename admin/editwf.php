@@ -10,9 +10,16 @@ include_once('components/sidebar.php');
 include_once('components/topnav.php');
 ?>
 
-<div class="d-flex justify-content-center mt-5">
-    <p>Coming soon!</p>
+<div class="container">
+  <div class="jumbotron">
+    <h1 class="display-4">Create a workflow</h1>
+    <p class="lead">You can generate a new workflow by departments here.</p>
+    <hr class="my-4">
+    <form>
+    </form>
+  </div>
 </div>
+
 
 <?php
 include_once('components/footer.php');

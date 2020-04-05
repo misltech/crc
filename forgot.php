@@ -1,12 +1,34 @@
-<?php include('skeleton.head.php') ?>
-<h2>Forgot your password?</h2>
-<p>Don't worry, it happens to everyone. Type in your banner ID below and we'll reset it for you.</p>
-<form method="post" action="backend/reset-password.php">
-    <label>
-        <p>Enter your banner ID.</p>
-        <input type="text" name="user_bid" placeholder="N..." />
-    </label>
-    <p><input type="submit"></p>
-</form>
-<p>Or, do you think you remember? <a href="login.php">Click here to try logging in again.</a></p>
-<?php include('skeleton.foot.php') ?>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="https://newpaltz.edu/favicon.ico">
+
+    <title>Internship Fieldwork Sign In</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.1/examples/sign-in/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/main.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="https://getbootstrap.com/docs/4.1/examples/sign-in/signin.css" rel="stylesheet">
+</head>
+
+<body>
+    <form class="form-signin" action="forgot" method="POST">
+        <img class="mb-4" src="images/newpaltzlogo.png" alt="" width="250" height="auto">
+        <h1 class="h3 mb-3 font-weight-normal text-center">Please enter your email address</h1>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input name="email" type="email" id="inputEmail" class="form-control mb-3" placeholder="Email address" required autofocus>
+        <button class="btn btn-lg btn-primary btn-block" name="submit" type="submit">Continue</button>
+        <p class="mt-5 mb-3 text-muted">&copy; Career Resource Center 2020</p>
+    <!-- Wrap this around php get statement that hides if submitted and sys  -->
+    
+    </form>
+</body>
+
+</html>
