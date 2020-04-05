@@ -44,23 +44,33 @@ function redirect($atype){
         header("Location: ./employer/employer.php");
         exit();
     }else {
-        header("Location: ./newback/logout.php");
+        header("Location: ../newback/logout.php");
         exit();
     }
   }
   
 
 
-function validate($checktype){
+function validateState($checktype){
     if(isset($_SESSION['user_type']) and $_SESSION['user_type'] == $checktype){
-        
+        return true;
     }
     else{
+       // header('Location: ../newback/logout.php');
+        return false;
+    }
+}
+function validate($checktype){
+    if(!(isset($_SESSION['user_type']) and $_SESSION['user_type'] == $checktype)){
         header('Location: ../newback/logout.php');
     }
-
-
 }
+
+function getDBconn(){
+    return null;
+}
+
+
 
 /**
 * A function for logging a message to the console
@@ -153,106 +163,6 @@ function sendEmail($email, $subject, $message)
     );
 }
 
-/**
- * Checks to see if the logged in user is a desired type.
- * If the user is not logged in, the user will be booted back to login.php.
- * If the user isn't logged in as the desired type of user, the user will be booted
- * back to home.php.
- *
- * IN THE FUTURE: Remove the redirect from this function and implement it in an if statement.
- *
- * @example student.php             student.php is only accessable if the user is a student.
- *
- * @param string    $desiredType    Required type of user.
- * @return bool     True if user is logged in as desired type, false otherwise.
- */
-function checkUserType($desiredType)
-{
-    if ($_SESSION['user_type'] != $desiredType ) {
-        setMessage(false, "You need to be " . $desiredType . " to access this page.");
-        if ($_SESSION['user_type'] == null){
-            $test = "null";
-        } else {
-            $test = $_SESSION['user_type'];
-        }
-        header("Location: " . API_URL . "login.php?" . $test, true, 301);
-        return false;
-    } elseif (!isset($_SESSION['id_key'])) {
-        setMessage(false, "You need to be " . $desiredType . " to access this page.");
-        header("Location: " . API_URL . "login.php", true, 301);
-        return false;
-    }
-    return true;
-}
-
-/**
- * Check if the user is one of the specified types.
- * If they are not, this method returns false.
- * If they are, this method returns true.
- *
- * @example create-user.php     The user must be of a certain type in order to create other users.
- *
- * @param array         $desiredTypes         A list of valid types that the user must be one of.
- * @return boolean                            True if the user is a type specified in the passed in array; false otherwise.
- */
-function checkUserTypeOfMultiple($desiredTypes)
-{
-    $isValidType = in_array($_SESSION["user_type"], $desiredTypes) && isset($_SESSION["id_key"]);
-    if (!$isValidType) {
-        $desiredTypesString = "You need to be logged in as a ";
-        for ($i = 0; $i < count($desiredTypes); $i++) {
-            if ($i == (count($desiredTypes) - 1)) {
-                $desiredTypesString = $desiredTypesString . "or " . $desiredTypes[$i];
-            } else {
-                if (count($desiredTypes) > 2) {
-                    $desiredTypesString = $desiredTypesString . $desiredTypes[$i] . ", ";
-                } else {
-                    $desiredTypesString = $desiredTypesString . $desiredTypes[$i] . " ";
-                }
-            }
-        }
-        $desiredTypesString = $desiredTypesString . " to access this page.";
-        setMessage(false, $desiredTypesString);
-    }
-    return $isValidType;
-}
-
-/**
- * Gives the user a message on a successful/failed action.
- *
- * This function works hand in hand with components/message.php;
- * Ideally, this function should be thrown in a backend script,
- * then when a backend script redirects the user to another page,
- * that page includes the skeleton head (and therefore, the message component).
- *
- * The message component takes care of stylizing and displaying the message;
- * styles for which are located in the shared stylesheet.
- *
- * @param boolean $messageSuccess       Whether or not the action performed was successful.
- * @param string $message               The contents of the message.
- */
-function setMessage($messageSuccess, $message)
-{
-       if(!isset($_SESSION)) 
-    { 
-        session_start(); 
-    } 
-    $_SESSION["msg_success"] = $messageSuccess;
-    $_SESSION["msg"] = $message;
-}
-
-/**
- * Clears the message (if one is set).
- */
-function clearMessage()
-{
-       if(!isset($_SESSION)) 
-    { 
-        session_start(); 
-    } 
-    unset($_SESSION["msg_success"]);
-    unset($_SESSION["msg"]);
-}
 
 /**
  * Generates a banner-like number for an employer.
@@ -281,39 +191,6 @@ function get_index_of_assoc($array, $index)
 {
     return $array[array_keys($array)[$index]];
 }
-
-/**
- * Makes a new textbox with the given text and form name.
- * 
- * @param string $text          The text to be displayed next to the text box.
- * @param string $name          The name to be given with the form control.
- * @param boolean $default      Whether or not the box should initially be checked.
- */
-function checkBox($text, $name, $default) {
-    ?>
-    <label style="text-align: left;">
-        <input type="checkbox" name="<?php echo($name); ?>" <?php 
-            if ($default) {
-                ?>checked<?php 
-            }
-        ?> />
-        <?php echo($text); ?>
-    </label>
-    <?php 
-}
-
-/**
- * A test function that echoes "Hello world!" onto the page and exits.
- * This function should be used to test a successful import of util.php.
- *
- * @return integer test() will always return 1.
- */
-function test()
-{
-    echo "Hello world!";
-    return 1;
-}
-
 
 
 ?>
