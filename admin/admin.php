@@ -28,13 +28,13 @@ include_once('components/topnav.php');
 
 <?php
 include_once('components/footer.php');
-function validate(){
-  include_once('../newback/util.php');
+// function validate(){
+//   include_once('../newback/util.php');
   
-  if($_SESSION['user_type'] != 'admin'){
-    header("Location: ../index");
-  }
+//   if($_SESSION['user_type'] != 'admin'){
+//     header("Location: ../index");
+//   }
   
-}
+// }
 
 ?>
