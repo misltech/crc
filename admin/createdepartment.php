@@ -31,7 +31,7 @@ include_once('components/topnav.php');
           <input id="text2" name="text2" type="text" class="form-control">
         </div>
         <div class="form-group">
-          <label for="text3">Chair Email</label>
+          <label for="text3">Department Secretary Email</label>
           <input id="text3" name="text3" type="text" class="form-control">
         </div>
         <hr>

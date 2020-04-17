@@ -14,7 +14,7 @@ $csrf = $_SESSION['token'];
   <meta name="description" content="">
   <meta name="author" content="hello there">
   <meta name="csrf-token" content="<?php echo $csrf; ?>">
-
+  
   <title>Student Internship Report</title>
 
   <!-- Bootstrap core CSS -->

@@ -22,7 +22,7 @@
 
 
     $(document).ready(function() {
-    $('#example').DataTable();
+    $('#worktbl').DataTable();
       } );
   </script>
 

@@ -34,7 +34,7 @@ if (true  or isset($headers['token'])) {
 
             if($count == 0){
                 $res = (object)[404 => 'No applications found'];
-                exit(json_encode($res));
+                exit(json_encode(''));
             }
             else{
                 $main_arr = [];
