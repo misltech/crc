@@ -17,7 +17,7 @@ $(document).ready(function () {
 
     function filter(res) {
         if (res.length == 0) {
-            $('.jumbotron').append('<div>No applications assigned for you.</div>');
+            $('.jumbotron').append("<div class='alert alert-dark text-center'>No applications assigned for you.</div>");
         }
         if (res.length > 0) {
 

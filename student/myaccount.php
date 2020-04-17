@@ -26,7 +26,6 @@ if (isset($_SESSION['user_email'])) {
   $sql = "SELECT * FROM s20_student_info WHERE student_email='$em'";
 
   $result = mysqli_query($db_conn, $sql);
-
   if ($result) {
     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
     $firstname = $row['student_first_name'];
@@ -196,6 +195,7 @@ function filter(){  //use this to filter the php inputs. If its null do somethin
 </div>
 </div>
 <?php
+
 include_once('components/footer.php');
 
 
@@ -218,18 +218,14 @@ if (isset($_POST['modify'])) {
   $query = mysqli_query($db_conn, $sql);
 
   if ($query) {
-    //display success alert box
-    //header("Location: ./student.php");
-    //return true;
-    alert("success");
+    echo "<meta http-equiv='refresh' content='0'>"; //this refresh the page. 
   } else {
-    //display warning aletr box
     return false;
   }
 }
 
 
-
+$db_conn->close();
 
 
 

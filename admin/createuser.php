@@ -10,7 +10,7 @@ include_once('components/topnav.php');
 ?>
 <div class="container">
   <div class="jumbotron">
-    <h1 class="display-4">Create an User</h1>
+    <h1 class="display-4">Create a User</h1>
     <p class="lead">You can generate a new user here.</p>
     <hr class="my-4">
     <form>

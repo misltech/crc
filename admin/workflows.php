@@ -21,7 +21,7 @@ SELECT concat(student_first_name, ' ' , student_last_name) as Name, s20_applicat
         <h1 class="display-4">View Workflows</h1>
         <p class="lead">You can view and modify current workflows here.</p>
         <hr class="my-4">
-        <table id="example" class="table table-responsive table-striped table-bordered" style="width:100%">
+        <table id="worktbl" class="table table-responsive table-striped table-bordered" style="width:100%">
             <thead>
                 <tr>
                     <th>Student Name</th>
@@ -65,7 +65,7 @@ SELECT concat(student_first_name, ' ' , student_last_name) as Name, s20_applicat
                         <td><?php echo $semester; ?></td>
                         <td><?php echo $facultyemail; ?></td>
                         <td><?php echo $assigned; ?></td>
-                        <td><a class="btn btn-primary btn-block" href="#">Modify</a></button></td>
+                        <td><a class="btn btn-primary btn-block" href="#">View</a></button></td>
                     </tr>
 
 
@@ -75,6 +75,10 @@ SELECT concat(student_first_name, ' ' , student_last_name) as Name, s20_applicat
     </div>
 </div>
 
+
+
+
 <?php
 include_once('components/footer.php');
+
 ?>
