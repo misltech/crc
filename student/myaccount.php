@@ -49,14 +49,18 @@ function filter(){  //use this to filter the php inputs. If its null do somethin
   
 }
 ?>
-
+<style>
+  label{
+    float:start;
+  }
+</style>
 <div class="container ">
 <div class="jumbotron">
   <h1 class="display-4">My Account</h1>
   <p class="lead">You can modify your account details here.</p>
   <hr class="my-4">
   <div class="row">
-    <div class="col-md-8 order-md-1">
+    <div class="col-md-8 order-md-1 mx-auto">
       <form class="needs-validation" method="post" action="myaccount" novalidate="" _lpchecked="1">
         <div class="row">
           <div class="col-md-4 mb-3">
@@ -210,23 +214,60 @@ if (isset($_POST['modify'])) {
   $state = mysqli_real_escape_string($db_conn, $_POST['state']);
   $zip = mysqli_real_escape_string($db_conn, $_POST['zipcode']);
 
-  $user_email = $_SESSION['user_email'];
-  $sql = "UPDATE s20_student_info SET student_first_name = '$firstname', student_last_name = '$lastname', student_middle_initial = '$middlename', 
-                student_phone = '$phonenum', student_address = '$address', student_apt_num = '$aptnum', student_city = '$city', 
-                student_state = '$state', student_zip = '$zip' WHERE student_email = '$user_email'";
-  console_log($sql);
-  $query = mysqli_query($db_conn, $sql);
 
-  if ($query) {
-    echo "<meta http-equiv='refresh' content='0'>"; //this refresh the page. 
-  } else {
-    return false;
+  
+  $checksql = "SELECT student_email FROM s20_student_info  WHERE student_email = " . $_SESSION['user_email'];
+  print_r($checksql);
+  $w  = mysqli_query($db_conn, $checksql);
+  $r = mysqli_num_rows($w);
+  $user_email = $_SESSION['user_email'];
+  $banner_id = $_SESSION['banner'];
+  if($r == 0){  //if records not found
+    
+    $insert = "INSERT INTO s20_student_info (student_first_name, student_last_name, student_middle_initial,student_phone,student_address,student_apt_num,student_city,student_state,
+    student_zip, student_email, banner_id) VALUES ('$firstname', '$lastname','$middlename',$phonenum','$address', '$aptnum', '$city', '$state','$zip', '$user_email', '$banner_id')";
+    print_r($insert);
+    $query = mysqli_query($db_conn, $insert);
+
+    if(mysqli_affected_rows ($db_conn) > 0 ){
+      //show update box
+      alert("success");
+    }
+    else{
+      ///failed
+    }
+
   }
+
+  else{
+
+
+    $user_email = $_SESSION['user_email'];
+    $sql = "UPDATE s20_student_info SET student_first_name = '$firstname', student_last_name = '$lastname', student_middle_initial = '$middlename', 
+                  student_phone = '$phonenum', student_address = '$address', student_apt_num = '$aptnum', student_city = '$city', 
+                  student_state = '$state', student_zip = '$zip' WHERE student_email = '$user_email'";
+    console_log($sql);
+    $query = mysqli_query($db_conn, $sql);
+  
+    if (mysqli_affected_rows ($db_conn) > 0) {
+      //echo "<meta http-equiv='refresh' content='0'>"; //this refresh the page. 
+      alert("success");
+    } else {
+      return alert("Update failed");
+    }
+
+
+
+  }
+  
+
+
+  
+  
 }
 
 
-$db_conn->close();
-
+mysqli_close($db_conn);
 
 
 

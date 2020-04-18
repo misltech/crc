@@ -27,7 +27,7 @@ $(document).ready(function () {
                 htmlElement = getRejectElement(checkReject(element[1].rejected));
                 htmlElement += '<div class="card-header">Internship</div>'
                 htmlElement += '<div class="card-body text-secondary">';
-                htmlElement += '<h5 class="card-text text-align-center"><span class="float-left">' + element[1].dept + '</span><span class="float-right">'+ element[1].semester + ' ' + element[1].year + '</span></h5>';
+                htmlElement += '<h6 class="card-text text-align-center"><span class="float-left">' + element[1].dept + '</span><span class="float-right">'+ element[1].semester + ' ' + element[1].year + '</span></h6>';
                 htmlElement += '<div id="progress' + index + '"' + ' class="progressB mx-auto img-fluid"></div>';
                 htmlElement += '<div class="text-center"><a href="' + buildApplicationRedirect() +'" class="mt-2 btn btn-primary text-center">' + applicationModifier(checkReject(element[1].rejected))+'</a></div>';
                 htmlElement += '</div>';
@@ -35,7 +35,7 @@ $(document).ready(function () {
                 console.log(element[0]);
                 console.log(element[1]);
 
-                $('.jumbotron').append(htmlElement);
+                $('.apps').append(htmlElement);
 
                 if (!checkReject(checkReject(element[1].rejected))){
                     var $progressDiv = $("#progress" + index);
@@ -89,10 +89,10 @@ $(document).ready(function () {
 
     function getRejectElement(reject) {
         if (reject == 0) {
-            return '<div class="card border-light mb-3">';
+            return '<div class="hvr-outline-out card border-light mb-3">';
         }
         else {
-            return '<div class="card border-danger mb-3">';
+            return '<div class="hvr-outline-out card border-danger mb-3">';
         }
 
     }
@@ -120,7 +120,13 @@ $(document).ready(function () {
     //     });
 
 
-	
+	$('.card').hover(function () {
+        $('.card').css('cursor', 'pointer');
+            
+        }, function () {
+            $('.card').css('cursor', 'default');
+        }
+    );
 
 
 

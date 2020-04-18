@@ -4,16 +4,15 @@
 // ini_set('display_startup_errors', 1);
 // error_reporting(E_ALL);
 
-   if(!isset($_SESSION)) 
-    { 
-        session_start(); 
-    } 
+if (!isset($_SESSION)) {
+  session_start();
+}
 //redirect on back button when already logged in.
-include_once ('./newback/util.php');
-include_once ('./newback/db_con3.php');
+include_once('./newback/util.php');
+include_once('./newback/db_con3.php');
 //console_log($_SESSION['user_type']);
-if(isset($_SESSION['user_type'])){
- redirect($_SESSION['user_type']);
+if (isset($_SESSION['user_type'])) {
+  redirect($_SESSION['user_type']);
 }
 
 ?>
@@ -36,6 +35,15 @@ if(isset($_SESSION['user_type'])){
   <link href="./css/main.css" rel="stylesheet">
   <!-- Custom styles for this template -->
   <link href="https://getbootstrap.com/docs/4.1/examples/sign-in/signin.css" rel="stylesheet">
+
+  <style>
+    body {
+      background-image: url(https://login.newpaltz.edu/cas/themes/newpaltz/images/background.jpg);
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center top;
+    }
+  </style>
 </head>
 
 <body class="text-center">
@@ -70,29 +78,29 @@ if(isset($_SESSION['user_type'])){
 <?php
 if (isset($_POST['submit'])) {
 
-  if (!isset($_POST['email'], $_POST['password']) ) {
+  if (!isset($_POST['email'], $_POST['password'])) {
     header("Location: index.php");  //this shouldnt happen. But if someone tries to bypass the front end form
     exit("Please fill out form.");
   }
 
   $email = mysqli_real_escape_string($db_conn, $_POST['email']);
   $password = mysqli_real_escape_string($db_conn, $_POST['password']);
-  
-  $sql = "SELECT * FROM ". $GLOBALS['accounts']. " WHERE email = '$email' AND passcode = '$password'"; //substitute table to global
+
+  $sql = "SELECT * FROM " . $GLOBALS['accounts'] . " WHERE email = '$email' AND passcode = '$password'"; //substitute table to global
   $result = mysqli_query($db_conn, $sql);
   $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
   $count = mysqli_num_rows($result);
   if ($count == 1) {
     $_SESSION['user_type'] = $row["profile_type"];
     $_SESSION['user_email'] = $row['email'];
-    $_SESSION['token'] = bin2hex(random_bytes(32)); 
-    
+    $_SESSION['banner'] = $row['banner_id'];
+    $_SESSION['token'] = bin2hex(random_bytes(32));
+
     redirect($_SESSION['user_type']);
-  }
-  else{
-    header("Location: ./index.php?e=". $GLOBALS['IncorrectCredentials']);
+  } else {
+    header("Location: ./index.php?e=" . $GLOBALS['IncorrectCredentials']);
     exit();
-  } 
+  }
 }
 function checkInvalidCredentials()
 {
