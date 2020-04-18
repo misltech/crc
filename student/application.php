@@ -30,7 +30,13 @@ if ($query) {
         <h1 class="display-4">My Applications</h1>
         <p class="lead">You can view the status of your application below</p>
         <hr class="my-4">
+
+
+        <div class="apps text-center">
+
         </div>
+    </div>
+
 </div>
 <!-- 
         <div class="card border-secondary mb-3 mx-auto" style="max-width: 30rem;">
@@ -58,12 +64,12 @@ if ($query) {
                 <a href="#" class="offset-4 btn btn-primary">See application</a>
             </div>
         </div> -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> 
- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
- <script src="../js/raphael.js"></script>
- <script src="../js/progressStep.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="../js/raphael.js"></script>
+<script src="../js/progressStep.js"></script>
 <script src="../js/student.js"></script>
 <?php
 

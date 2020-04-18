@@ -20,6 +20,7 @@
 
   <link href="../css/simple-sidebar.css" rel="stylesheet">
   <link href="../css/main.css" rel="stylesheet">
+  <!-- <link href="../stylesheets/styles.css" rel="stylesheet"> -->
 </head>
 
 <body>
