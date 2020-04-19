@@ -3,6 +3,15 @@ if (!isset($_SESSION)) {
   session_start();
 }
 $csrf = $_SESSION['token'];
+
+validCSRF($csrf);
+
+function validCSRF($csrf){
+  if($csrf == null or strlen($csrf) < 2){
+    redirect(null);
+  }
+}
+
 ?>
 
 <!DOCTYPE html>

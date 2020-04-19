@@ -43,14 +43,21 @@ function redirect($atype){
     } else if ($atype == $GLOBALS['employer_type']) {
         header("Location: ./employer/employer.php");
         exit();
-    }else {
+    }else if($atype == null){
         header("Location: ../newback/logout.php");
         exit();
     }
+    
   }
   
 
-
+  function showifnotnull($data)
+  {
+    if ($data != null) {
+      echo ($data);
+    }
+  }
+  
 function validateState($checktype){
     if(isset($_SESSION['user_type']) and $_SESSION['user_type'] == $checktype){
         return true;

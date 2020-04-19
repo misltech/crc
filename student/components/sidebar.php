@@ -8,7 +8,8 @@
   <div class="list-group list-group-flush">
     <a href="../student/myaccount.php" class="list-group-item list-group-item-action bg-light">My Account</a>
     <a href="../student/application.php" class="list-group-item list-group-item-action bg-light">My Applications</a>
-    <a href="#" class="list-group-item list-group-item-action bg-light">Export Application</a>
+    <p class="list-group-item list-group-item-action bg-light"></p>
+    <!-- <a href="#" class="list-group-item list-group-item-action bg-light">Export Application</a> -->
   </div>
 </div>
 <!-- /#sidebar-wrapper -->

@@ -43,7 +43,7 @@ if (true  or isset($headers['token'])) {
                     $sub_arr = [];
                     $order = unserialize($row['workflow']);
                     array_push($sub_arr, $order);
-                    array_push($sub_arr, ['fwid' => $row['fw_id'], 'dept' => $row['dept_code'], 'progress' => $row['progress'] ,'semester' => $row['semester'], 'year' => $row['year'], 'rejected' => $row['rejected'], 'comments' => $row['comments']]);
+                    array_push($sub_arr, ['fwid' => $row['fw_id'], 'dept' => $row['dept_code'], 'classnumber' => $row['class_number'], 'progress' => $row['progress'] ,'semester' => $row['semester'], 'year' => $row['year'], 'rejected' => $row['rejected'], 'comments' => $row['comments']]);
                     //validate inputs here
                     array_push($main_arr, $sub_arr);
                 }
