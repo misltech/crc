@@ -13,6 +13,50 @@ validate($GLOBALS['student_type']);
 include_once('components/header.php');
 include_once('components/sidebar.php');
 include_once('components/topnav.php');
+include_once('../newback/db_con3.php');
+
+$firstname = null;
+$lastname = null;
+$company = null;
+$email = null;
+$phone = null;
+$address = null;
+$suite = null;
+$city = null;
+$state = null;
+$zip = null;
+
+if (isset($_GET['fwid'])) {  //check for exising fwid
+  $sql = "SELECT * FROM s20_application_util WHERE fw_id = " . $_GET['fwid']; //checks if its a reject
+  $qsql  = mysqli_query($db_conn, $sql);
+  $r = mysqli_num_rows($qsql);
+  $fwid = $_GET['fwid'];
+  if ($r == 1) {
+    if (isset($_GET['exist']) and $_GET['exist'] == 1) { //if special param is set
+      $sql = "SELECT * FROM s20_application_info LEFT JOIN s20_employer_info ON employer_email) = B.key" . $_GET['fwid'];
+      $qsql  = mysqli_query($db_conn, $sql);
+      $r = mysqli_num_rows($qsql);
+      $result = mysqli_fetch_assoc($qsql);
+      console_log($title);
+      $title = $result['project_name'];
+      $semester = $result['semester'] . " " . $result['year'];
+      $classnumber = $result['class_number'];
+      $grademode = $result['grade_mode'];
+      $credits = $result['credits'];
+    }
+  } else {
+    header('Location: ./application.php');
+  }
+} else {
+  header('Location: ./application.php');
+}
+
+
+
+
+
+
+
 
 
 ?>
@@ -32,16 +76,10 @@ include_once('components/topnav.php');
           <div class="col-md-6 mb-3">
             <label for="firstName">First name</label>
             <input type="text" class="form-control" name="firstname" id="firstname" placeholder="" value="<?php echo $firstname;?>" required="" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg==&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
-            <div class="invalid-feedback">
-              Valid first name is required.
-            </div>
           </div>
           <div class="col-md-6 mb-3">
             <label for="lastName">Last name</label>
             <input type="text" class="form-control" name="lastname" id="lastName" placeholder="" value="<?php echo $lastname;?>" required="">
-            <div class="invalid-feedback">
-              Valid last name is required.
-            </div>
           </div>
          
         </div>
@@ -49,17 +87,11 @@ include_once('components/topnav.php');
         <div class="mb-3">
           <label for="email">Company Name </label>
           <input type="email" class="form-control" name="email" id="email" value="<?php echo $em;?>" placeholder="">
-          <div class="invalid-feedback">
-            Please enter a valid email address for shipping updates.
-          </div>
         </div>
         <div class="row">
         <div class="col-md-8 mb-3">
           <label for="email">Email </label>
           <input type="email" class="form-control" name="email" id="email" value="<?php echo $em;?>" placeholder="">
-          <div class="invalid-feedback">
-            Please enter a valid email address for shipping updates.
-          </div>
         </div>
 
         <div class="col-md-4 mb-3">
@@ -71,9 +103,6 @@ include_once('components/topnav.php');
         <div class="mb-3">
           <label for="address">Site address</label>
           <input type="text" class="form-control" name="address" id="address" value="<?php echo $address;?>" required="">
-          <div class="invalid-feedback">
-            Please enter your shipping address.
-          </div>
         </div>
 
         <div class="mb-3">
@@ -85,9 +114,6 @@ include_once('components/topnav.php');
           <div class="col-md-3 mb-3">
             <label for="zip">City</label>
             <input type="text" class="form-control" name="city" id="zip" value="<?php echo $city;?>" placeholder="" required="">
-            <div class="invalid-feedback">
-              Zip code required.
-            </div>
           </div>
 
           <div class="col-md-4 mb-3">
@@ -151,9 +177,6 @@ include_once('components/topnav.php');
           <div class="col-md-3 mb-3">
             <label for="zip">Zip</label>
             <input type="text" name="zipcode" class="form-control" id="zip" value="<?php echo $zip;?>" placeholder="" required="">
-            <div class="invalid-feedback">
-              Zip code required.
-            </div>
           </div>
 
         </div>

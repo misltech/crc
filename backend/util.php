@@ -314,11 +314,3 @@ function test()
     return 1;
 }
 
-/**
-* A function for logging a message to the console
-*/
-function consoleLog($msg){
-    echo '<script>';
-    echo 'console.log('. json_encode($msg) .')';
-    echo '</script>';
-}

@@ -32,7 +32,7 @@ if ($query) {
         <hr class="my-4">
 
 
-        <div class="apps text-center">
+        <div class="apps col-9 mx-auto">
 
         </div>
     </div>

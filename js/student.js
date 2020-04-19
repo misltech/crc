@@ -27,9 +27,9 @@ $(document).ready(function () {
                 htmlElement = getRejectElement(checkReject(element[1].rejected));
                 htmlElement += '<div class="card-header">Internship</div>'
                 htmlElement += '<div class="card-body text-secondary">';
-                htmlElement += '<h6 class="card-text text-align-center"><span class="float-left">' + element[1].dept + '</span><span class="float-right">'+ element[1].semester + ' ' + element[1].year + '</span></h6>';
+                htmlElement += '<h6 class="card-text text-align-center"><span class="float-left">' + element[1].dept + " " + element[1].classnumber + '</span><span class="float-right">'+ element[1].semester + ' ' + element[1].year + '</span></h6>';
                 htmlElement += '<div id="progress' + index + '"' + ' class="progressB mx-auto img-fluid"></div>';
-                htmlElement += '<div class="text-center"><a href="' + buildApplicationRedirect() +'" class="mt-2 btn btn-primary text-center">' + applicationModifier(checkReject(element[1].rejected))+'</a></div>';
+                htmlElement += '<div class="text-center"><a href="' + buildApplicationRedirect(element[1].rejected, element[1].fwid) +'" class="mt-2 btn btn-primary text-center">' + applicationModifier(checkReject(element[1].rejected))+'</a></div>';
                 htmlElement += '</div>';
                 htmlElement += '</div>';
                 console.log(element[0]);
@@ -37,13 +37,13 @@ $(document).ready(function () {
 
                 $('.apps').append(htmlElement);
 
-                if (!checkReject(checkReject(element[1].rejected))){
+                if (!(checkReject(element[1].rejected))){
                     var $progressDiv = $("#progress" + index);
                     var $progressBar = $progressDiv.progressStep();
                 }
                 else {
                     var $progressDiv = $("#progress" + index);
-                    var $progressBar = $progressDiv.progressStep({ activeColor: "red" });
+                    var $progressBar = $progressDiv.progressStep({ activeColor: "red"});
                 }
 
 
@@ -72,9 +72,14 @@ $(document).ready(function () {
 
     }
 
-    function buildApplicationRedirect(){
-        // var newURL = window.location.protocol + "/" + window.location.host + "/" + window.location.pathname + 'review.php?rej=1?fwid=something';
-        var newURL = "review.php?rej=1?fwid=something";
+    function buildApplicationRedirect(rej, id){
+        var newURL;
+        if(checkReject(rej)){
+            newURL = "review.php?rej=1&fwid="+id;
+        }
+        else{
+            newURL = "review.php?rej=0&fwid="+id;
+        }
         return newURL;
     }
     // function get                
@@ -89,10 +94,10 @@ $(document).ready(function () {
 
     function getRejectElement(reject) {
         if (reject == 0) {
-            return '<div class="hvr-outline-out card border-light mb-3">';
+            return '<div class="hvr-underline-from-center card border-light mb-3">';
         }
         else {
-            return '<div class="hvr-outline-out card border-danger mb-3">';
+            return '<div class="hvr-underline-from-center card border-light mb-3">';
         }
 
     }
@@ -102,7 +107,7 @@ $(document).ready(function () {
         if (rej == 0) {
             return false;
         }
-        else {
+        else if (rej == 1){
             return true;
         }
 
@@ -118,16 +123,5 @@ $(document).ready(function () {
         
     //     alert("changed");
     //     });
-
-
-	$('.card').hover(function () {
-        $('.card').css('cursor', 'pointer');
-            
-        }, function () {
-            $('.card').css('cursor', 'default');
-        }
-    );
-
-
 
 });
