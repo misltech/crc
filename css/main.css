@@ -92,5 +92,8 @@
         height: 50%;
         display: none;
     }
+    .card {
+      width: 100%; 
+    }
     
 }

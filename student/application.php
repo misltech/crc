@@ -28,11 +28,11 @@ if ($query) {
 <div class="container">
     <div class="jumbotron">
         <h1 class="display-4">My Applications</h1>
-        <p class="lead">You can view the status of your application below</p>
+        <p class="lead">You can view the status of your application(s) below</p>
         <hr class="my-4">
 
 
-        <div class="apps col-9 mx-auto">
+        <div class="apps col-md-9 col-xs-12 col-sm-12 mx-auto">
 
         </div>
     </div>
@@ -71,6 +71,12 @@ if ($query) {
 <script src="../js/raphael.js"></script>
 <script src="../js/progressStep.js"></script>
 <script src="../js/student.js"></script>
+<script>
+   $("#menu-toggle").click(function(e) {
+     e.preventDefault();
+     $("#wrapper").toggleClass("toggled");
+   });
+ </script>
 <?php
-
+//we dont include footer here. Special case
 ?>

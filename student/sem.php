@@ -43,12 +43,6 @@ if (isset($_GET['fwid'])) {  //check for exising fwid
 }
 
 
-
-function saveorproceed()
-{
-}
-
-
 ?>
 
 <div class="container">
@@ -107,6 +101,12 @@ function saveorproceed()
           </div>
           <div class="form-group row">
             <label for="ac" class="col-4 col-form-label">Academic credits</label>
+            <div class="col-8">
+              <input id="ac" name="ac" type="text" value="<?php showifnotnull($credits); ?>" class="form-control">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="ac" class="col-4 col-form-label">Number of Hours/Week</label>
             <div class="col-8">
               <input id="ac" name="ac" type="text" value="<?php showifnotnull($credits); ?>" class="form-control">
             </div>
