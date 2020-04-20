@@ -30,8 +30,7 @@ $(document).ready(function () {
                 htmlElement += '<h6 class="card-text text-align-center"><span class="float-left">' + element[1].dept + " " + element[1].classnumber + '</span><span class="float-right">'+ element[1].semester + ' ' + element[1].year + '</span></h6>';
                 htmlElement += '<div id="progress' + index + '"' + ' class="progressB mx-auto img-fluid"></div>';
                 htmlElement += '<div class="text-center"><a href="' + buildApplicationRedirect(element[1].rejected, element[1].fwid) +'" class="mt-2 btn btn-primary text-center">' + applicationModifier(checkReject(element[1].rejected))+'</a></div>';
-                htmlElement += '</div>';
-                htmlElement += '</div>';
+                htmlElement += '</div></div>';
                 console.log(element[0]);
                 console.log(element[1]);
 
@@ -63,7 +62,13 @@ $(document).ready(function () {
                     $progressBar.refreshLayout();
                   
                 }
-
+                
+                $('#progress'+index).attr({
+                    'data-toggle': "tooltip", 
+                    'data-placement': "top", 
+                    'title': "Your application is being reviewed by your " + element[0][element[1].progress]
+                });
+                
             }
 
         }

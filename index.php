@@ -88,7 +88,9 @@ if (isset($_POST['submit'])) {
 
   $sql = "SELECT * FROM " . $GLOBALS['accounts'] . " WHERE email = '$email' AND passcode = '$password'"; //substitute table to global
   $result = mysqli_query($db_conn, $sql);
-  $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+  $row = mysqli_fetch_assoc($result);
+  
+  // mysqli_fetch_array($result, MYSQLI_ASSOC);
   $count = mysqli_num_rows($result);
   if ($count == 1) {
     $_SESSION['user_type'] = $row["profile_type"];

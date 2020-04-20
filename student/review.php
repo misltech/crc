@@ -21,19 +21,18 @@ $rejected = null;
 $comments = null;
 
 if (isset($_GET['fwid'])) {  //check for rejected application
-    $sql = "SELECT * FROM s20_application_util WHERE fw_id = " . $_GET['fwid'];
+    $sql = "SELECT * FROM s20_application_util WHERE fw_id = " . $_GET['fwid'];  //checks to see if they are allowed to see.
     $qsql  = mysqli_query($db_conn, $sql);
     $r = mysqli_num_rows($qsql);
     $fwid = $_GET['fwid'];
-    if ($r == 1) {
+    if ($r == 1) {  //if application is found
         $result = mysqli_fetch_assoc($qsql);
         $rejected = $result['rejected'];
         $comments = $result['comments'];
     } else {
         header('Location: ./application.php');
     }
-}
-else{
+} else {
     header('Location: ./application.php');
 }
 
@@ -45,6 +44,17 @@ else{
     <div class="jumbotron">
         <h1 class="display-4">Review Application</h1>
         <p class="lead">You can review your application here. <span style="color:red; font-weight:600;">Colors Subject to change </span></p>
+        
+        <?php if($rejected == 1) { ?>
+        <div class="card" style="width: auto">
+            <div class="card-body">
+            <h6 class="card-title">Application flagged for revision.</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Reason:</h6>
+                <?php showifnotnull($comments); ?>
+            </div>
+        </div>
+        <?php } ?>
+
         <hr class="my-4">
         <div class="row dropdown">
             <button class="btn btn-secondary dropdown-toggle ml-auto" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -56,6 +66,9 @@ else{
                 <a class="dropdown-item" href="#">Something else here</a>
             </div>
         </div>
+
+        
+
         <div class="row mt-3">
             <div class="col-md-10 order-md-1 mx-auto">
                 <h5>Course Information <?php if ($rejected) { ?><span><a href="./sem.php?fwid=<?php echo $_GET['fwid']; ?>&exist=1" class="btn btn-xs btn-secondary"><span class="fa fa-edit"></span> Edit</a></span></h5><?php } else { ?> </h5> <?php } ?>
@@ -63,7 +76,7 @@ else{
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">Attribute:</th>
-                        <th scope="col">Your Response:</th>
+                        <th scope="col">Your Responses:</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -83,18 +96,22 @@ else{
                         <td scope="row">Credit Hours</td>
                         <td>4</td>
                     </tr>
+                    <tr>
+                        <td scope="row">Number of Hours/Week</td>
+                        <td>43</td>
+                    </tr>
                 </tbody>
             </table>
             </div>
         </div>
         <div class="row mt-3">
             <div class="col-md-10 order-md-1 mx-auto">
-                <h5>Employer Information <?php if ($rejected) { ?><span><a href="./emp.php" class="btn btn-xs btn-secondary"><span class="fa fa-edit"></span> Edit</a></span></h5><?php } else { ?> </h5> <?php } ?>
+                <h5>Employer Information <?php if ($rejected) { ?><span><a href="./emp.php?fwid=<?php echo $_GET['fwid']; ?>&exist=1" class="btn btn-xs btn-secondary"><span class="fa fa-edit"></span> Edit</a></span></h5><?php } else { ?> </h5> <?php } ?>
             <table class="table table-striped table-dark">
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">Attribute:</th>
-                        <th scope="col">Your Response:</th>
+                        <th scope="col">Your Responses:</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -125,7 +142,7 @@ else{
         </div>
         <div class="row mt-3">
             <div class="col-md-10 order-md-1 mx-auto">
-                <h5>Learning Objectives <?php if ($rejected) { ?><span><a href="./lo.php" class="btn btn-xs btn-secondary"><span class="fa fa-edit"></span> Edit</a></span></h5><?php } else { ?> </h5> <?php } ?>
+                <h5>Learning Expectations <?php if ($rejected) { ?><span><a href="./lo.php" class="btn btn-xs btn-secondary"><span class="fa fa-edit"></span> Edit</a></span></h5><?php } else { ?> </h5> <?php } ?>
 
             <table class="table table-striped table-dark">
                 <thead class="thead-dark">
@@ -136,28 +153,20 @@ else{
                 <tbody>
                     <tr>
 
-                        <td scope="row">What are your responsibilities on the site? </td>
+                        <td scope="row">What are your responsibilities on the site? What special project will you be working on? What do you expect to learn? </td>
 
                     </tr>
                     <tr>
-                        <th>Your Response I guessYour Response I guessYour Response I guessYour Response I guessYour Response I guessYour Response I guess</th>
+                        <th>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</th>
 
                     </tr>
                     <tr>
 
-                        <td scope="row">What special project will you be working on?</td>
+                        <td scope="row">How is the proposal related to your major areas of interest? Describe the course work you have completed which provides appropriate background to the project.</td>
 
                     </tr>
                     <tr>
-                        <th>Your Response I guessYour Response I guessYour Response I guessYour Response I guessYour Response I guessYour Response I guess</th>
-
-                    </tr>
-                    <tr>
-                        <td scope="row">What do you expect to learn?</td>
-
-                    </tr>
-                    <tr>
-                        <th>Your Response I guessYour Response I guessYour Response I guessYour Response I guessYour Response I guessYour Response I guess</th>
+                        <th>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</th>
 
                     </tr>
                     <tr>
@@ -165,25 +174,10 @@ else{
 
                     </tr>
                     <tr>
-                        <th>Your Response I guessYour Response I guessYour Response I guessYour Response I guessYour Response I guessYour Response I guess</th>
+                        <th>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</th>
 
                     </tr>
-                    <tr>
-                        <td scope="row">How is the proposal related to your major areas of interest?</td>
 
-                    </tr>
-                    <tr>
-                        <th>Your Response I guessYour Response I guessYour Response I guessYour Response I guessYour Response I guessYour Response I guess</th>
-
-                    </tr>
-                    <tr>
-                        <td scope="row">Describe the course work you have completed which provides appropriate background to the project.</td>
-
-                    </tr>
-                    <tr>
-                        <th>Your Response I guessYour Response I guessYour Response I guessYour Response I guessYour Response I guessYour Response I guess</th>
-
-                    </tr>
 
                 </tbody>
             </table>
@@ -192,9 +186,9 @@ else{
         </div>
 
         <?php if ($rejected) { ?>
-            <div class="mt-5">
+            <div class="mt-5 mt-5 col-8 mx-auto">
                 <form action="" method="post">
-                    <button class="btn btn-block btn-secondary" value="<?php echo $_GET['fwid']; ?>" name="modify" type="submit">Submit Application</button>
+                    <button class="btn btn-block btn-secondary" value="<?php echo $_GET['fwid']; ?>" name="modify" type="submit">Submit Revised Application</button>
                 </form>
             </div>
         <?php } ?>

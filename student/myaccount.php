@@ -192,7 +192,7 @@ function filter(){  //use this to filter the php inputs. If its null do somethin
           
         <hr class="mb-4">
 
-        <button class="btn btn-primary btn-lg" name="modify" type="submit">Modify</button>
+        <button class="btn btn-primary float-right" id="saveaccount" name="modify" type="submit">Save</button>
       </form>
     </div>
   </div>
@@ -217,14 +217,14 @@ if (isset($_POST['modify'])) {
 
   
   $checksql = "SELECT student_email FROM s20_student_info  WHERE student_email = " . $_SESSION['user_email'];
-  print_r($checksql);
+
   $w  = mysqli_query($db_conn, $checksql);
   $r = mysqli_num_rows($w);
   $user_email = $_SESSION['user_email'];
   $banner_id = $_SESSION['banner'];
   if($r == 0){  //if records not found
     
-    $insert = "INSERT INTO s20_student_info (student_first_name, student_last_name, student_middle_initial,student_phone,student_address,student_apt_num,student_city,student_state,
+    $insert_update = "INSERT INTO s20_student_info (student_first_name, student_last_name, student_middle_initial,student_phone,student_address,student_apt_num,student_city,student_state,
     student_zip, student_email, banner_id) VALUES ('$firstname', '$lastname','$middlename',$phonenum','$address', '$aptnum', '$city', '$state','$zip', '$user_email', '$banner_id')";
     print_r($insert);
     $query = mysqli_query($db_conn, $insert);
@@ -251,7 +251,7 @@ if (isset($_POST['modify'])) {
   
     if (mysqli_affected_rows ($db_conn) > 0) {
       //echo "<meta http-equiv='refresh' content='0'>"; //this refresh the page. 
-      alert("success");
+      echo '<script>$("#saveaccount").notify("Success!");</script>';
     } else {
       return alert("Update failed");
     }

@@ -17,45 +17,61 @@ include_once('components/sidebar.php');
 include_once('components/topnav.php');
 
 
-?>
 
+if (isset($_GET['fwid'])) {  //check for exising fwid
+    $sql = "SELECT * FROM s20_application_util WHERE fw_id = " . $_GET['fwid']; //checks if its a reject
+    $qsql  = mysqli_query($db_conn, $sql);
+    $r = mysqli_num_rows($qsql);
+    $fwid = $_GET['fwid'];
+    if ($r == 1) { //if application is found
+        if (isset($_GET['exist']) and $_GET['exist'] == 1) { //if special param is set. Populate vcariable to set on page
+            $sql = "SELECT * FROM s20_company_info WHERE fw_id = " . $_GET['fwid'];
+            $qsql  = mysqli_query($db_conn, $sql);
+            $r = mysqli_num_rows($qsql);
+            $result = mysqli_fetch_assoc($qsql);
+            $project_info = $result['project_info'];
+            $project_info = unserialize($project_info);
+        }
+    } else if (!isset($_GET['exist'])) { //else 
+        //assume a new application. Dont populate
+    }
+} else {
+    //header('Location: ./application.php'); //redirect if no fwid is in url
+}
+
+
+?>
 
 
 <div class="container">
     <div class="jumbotron">
         <h1 class="display-4">Project Information</h1>
-        <p class="lead">You can view the status of your application below</p>
+        <p class="lead">Describe your proposed fieldwork project.</p>
         <hr class="my-4">
 
         <div class="row">
             <div class="col-md-8 order-md-1 mx-auto">
                 <form>
                     <div class="form-group">
-                        <label for="textarea">What are your responsibilities on the site?</label>
-                        <textarea id="textarea" name="textarea" cols="40" rows="5" class="form-control" required="required"></textarea>
+                        <label for="textarea">What are your responsibilities on the site? What special project will you be working on? What do you expect to learn?</label>
+                        <textarea id="textarea" name="textarea" value="<?php showifnotnull($firstname); ?>" cols="40" rows="5" class="form-control" required="required"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="textarea1">What special project will you be working on?</label>
+                        <label for="textarea1">How is the proposal related to your major areas of interest? Describe the course work you have completed which
+                            provides appropriate background to the project.</label>
                         <textarea id="textarea1" name="textarea1" cols="40" rows="5" class="form-control" required="required"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="textarea2">What do you expect to learn?</label>
+                        <label for="textarea2">What is the proposed method of study? Where appropriate, cite readings and practical experience.</label>
                         <textarea id="textarea2" name="textarea2" cols="40" rows="5" class="form-control" required="required"></textarea>
                     </div>
-                    <div class="form-group">
-                        <label for="textarea3">How is the proposal related to your major areas of interest?</label>
-                        <textarea id="textarea3" name="textarea3" cols="40" rows="5" class="form-control" required="required"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="textarea4">Describe the course work you have completed which provides appropriate background to the project.</label>
-                        <textarea id="textarea4" name="textarea4" cols="40" rows="5" class="form-control" required="required"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="textarea5">What is the proposed method of study? Where appropriate, cite readings and practical experience.</label>
-                        <textarea id="textarea5" name="textarea5" cols="40" rows="5" class="form-control" required="required"></textarea>
-                    </div>
+
                     <div class="form-group mt-5">
-                        <button name="submit" type="submit" class="btn btn-primary float-right">Submit</button>
+                        <?php if (isset($_GET['exist']) and $_GET['exist'] == 1) { ?>
+                            <button name="save" type="submit" class="btn btn-primary float-right">Save</button>
+                        <?php } else { ?>
+                            <button name="proceed" type="submit" class="btn btn-primary float-right">Proceed</button>
+                        <?php } ?>
                     </div>
                 </form>
 

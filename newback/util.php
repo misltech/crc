@@ -56,6 +56,7 @@ function redirect($atype){
     if ($data != null) {
       echo ($data);
     }
+
   }
   
 function validateState($checktype){
