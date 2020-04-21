@@ -111,7 +111,7 @@ function filter()
               </div>
 
               <div class="mb-3">
-                <label for="address">Address</label>
+                <label for="address">Street address</label>
                 <input type="text" class="form-control" name="address" id="address" value="<?php echo $address; ?>" required="">
                 <div class="invalid-feedback">
                   Please enter your shipping address.
@@ -119,7 +119,7 @@ function filter()
               </div>
 
               <div class="mb-3">
-                <label for="address2">Address 2</label>
+                <label for="address2">Street address 2 (optional)</label>
                 <input type="text" class="form-control" name="aptnumber" id="address2" value="<?php echo $aptnum ?>" placeholder="Apartment or suite">
               </div>
 
@@ -240,7 +240,7 @@ function filter()
                       </div>
                     </div>
                     <input id="newpass" name="newpass" type="text" required="required" class="form-control">
-                  </div>
+                  </div> 
                 </div>
               </div>
               <div class="form-group row">
@@ -258,20 +258,20 @@ function filter()
               </div>
               <div class="form-group row">
                 <div class="offset-4 col-8">
-                  <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+                  <button name="submit" type="submit" class="btn btn-primary float-right">Submit</button>
                 </div>
               </div>
             </form>
           </div>
         </div>
       </div>
-      <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="delete-tab">...</div>
+      <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="delete-tab">Are you really sure you want to delete all your work lol</div>
     </div>
   </div>
 </div>
 <?php
 
-include_once('components/footer.php');
+include_once('./components/footer.php');
 
 
 if (isset($_POST['modify'])) {

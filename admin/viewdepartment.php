@@ -14,12 +14,11 @@ include_once('components/topnav.php');
         <h1 class="display-4">View Departments <span class="d-inline">
                 <div class="d-inline float-right dropdown">
                     <button class="btn btn-secondary dropdown-toggle ml-auto" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        App Settings
+                        Department Settings
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="./createdepartment.php">Add Department</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        
                     </div>
                 </div>
             </span></h1>
