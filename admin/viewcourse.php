@@ -11,14 +11,14 @@ include_once('components/topnav.php');
 
 <div class="container " style="overflow: auto;">
     <div class="jumbotron">
-    <h1 class="display-4">View Courses <span class="d-inline">
+        <h1 class="display-4">View Courses <span class="d-inline">
                 <div class="d-inline float-right dropdown">
                     <button class="btn btn-secondary dropdown-toggle ml-auto" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Course Settings
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="./addcourse.php">Add a Course</a>
-                        
+
                     </div>
                 </div>
             </span></h1>
@@ -62,6 +62,13 @@ include_once('components/topnav.php');
 
                 <?php  } ?>
             </tbody>
+            <tfoot>
+                <tr>
+                    <th>Department</th>
+                    <th>Course Number</th>
+                    <th>Modify </th>
+                </tr>
+            </tfoot>
         </table>
     </div>
 </div>

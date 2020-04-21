@@ -26,7 +26,10 @@
   $(document).ready(function() {
     $('#worktbl').DataTable();
     $('#departmenttbl').DataTable();
-    $('#coursetbl').DataTable();
+    $('#coursetbl').DataTable({ 
+      "lengthMenu": [[5, 10, 15, 25, 50, 100, -1], [5, 10, 15, 25, 50, 100, "All"]]
+    
+    });
   });
 </script>
 
