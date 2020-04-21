@@ -38,32 +38,7 @@ if ($query) {
     </div>
 
 </div>
-<!-- 
-        <div class="card border-secondary mb-3 mx-auto" style="max-width: 30rem;">
-            <div class="card-header">
-                Internship
-            </div>
-            <div class="card-body text-secondary">
-                <h4 class="card-title ">BUS 221</h4>
-                <h5 class="card-title">SPRING 2020</h5>
-                
-                <div id="progressBar" class="progressB mx-auto"></div>
-                <a href="#" class="offset-4 mt-2 btn btn-primary text-center">Edit Application</a>
-            </div>
-        </div>
 
-
-        <div class="card border-danger mb-3">
-            <div class="card-header">
-                Internship
-            </div>
-            <div class="card-body text-secondary">
-                <h5 class="card-title">CSB 221</h5>
-                <p class="card-text">Set to red when application is rejected</p>
-                <div id="progressBar2" class="progressB mx-auto"></div>
-                <a href="#" class="offset-4 btn btn-primary">See application</a>
-            </div>
-        </div> -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>

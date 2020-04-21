@@ -1,6 +1,6 @@
-<div id="page-content-wrapper" style="background-color: #c9c9ff;">
+<div id="page-content-wrapper">
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background: #f1cbff!important;">
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
   <!-- <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button> -->
 
   <button id="menu-toggle"  class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
