@@ -16,6 +16,7 @@ $semester = null;
 $classnumber = null;
 $grademode = null;
 $credits = null;
+$hours = null;
 
 if (isset($_GET['fwid'])) {  //check for exising fwid
   $sql = "SELECT * FROM s20_application_util WHERE fw_id = " . $_GET['fwid'];
@@ -34,6 +35,8 @@ if (isset($_GET['fwid'])) {  //check for exising fwid
       $classnumber = $result['class_number'];
       $grademode = $result['grade_mode'];
       $credits = $result['credits'];
+      $hours = $result['hours_per_wk'];
+
     }
   } else {
     header('Location: ./application.php');
@@ -57,7 +60,7 @@ if (isset($_GET['fwid'])) {  //check for exising fwid
           <div class="form-group row">
             <label for="tl" class="col-4 col-form-label">Title of Project</label>
             <div class="col-8">
-              <input id="tl" value="<?php showifnotnull($title); ?>" name="tl" placeholder="Project name" type="text" required="required" class="form-control">
+              <input id="tl" value="<?php showifnotnull($title); ?>" name="tl" placeholder="Project name" type="text" required="required" class="form-control" autofocus>
             </div>
           </div>
           <div class="form-group row">
@@ -76,17 +79,29 @@ if (isset($_GET['fwid'])) {  //check for exising fwid
             <label for="cn" class="col-4 col-form-label">Class Number</label>
             <div class="col-8">
               <select id="cn" value="<?php showifnotnull($classnumber); ?>" name="cn" class="custom-select">
-                <option value="324">324</option>
-                <option value="353">353</option>
-                <option value="461">461</option>
-                <option value="480">480</option>
-                <option value="481">481</option>
-                <option value="485">485</option>
-                <option value="490">490</option>
-                <option value="494">494</option>
-                <option value="495">495</option>
-                <option value="594">594</option>
-                <option value="794">794</option>
+              
+              <?php 
+              $sql = "SELECT id, CONCAT(dept_code, ' ', course_num) AS deptnum FROM s20_course_numbers";
+              console_log($sql);
+              $qsql  = mysqli_query($db_conn, $sql);
+              $r = mysqli_num_rows($qsql);
+              console_log($qsql);
+              if($r > 0){
+                while($result = mysqli_fetch_assoc($qsql)) {
+                  // your code
+                  console_log($result);
+                  $id = $result['id'];
+                  $deptnum = $result['deptnum'];
+              ?>  
+
+              <option value="<?php showifnotnull($id);?>"><?php showifnotnull($deptnum);?></option>
+              
+              <?php 
+              }
+              }else{
+                //form error try again later. redirect
+              }
+              ?>
               </select>
             </div>
           </div>
@@ -102,13 +117,13 @@ if (isset($_GET['fwid'])) {  //check for exising fwid
           <div class="form-group row">
             <label for="ac" class="col-4 col-form-label">Academic credits</label>
             <div class="col-8">
-              <input id="ac" name="ac" type="text" value="<?php showifnotnull($credits); ?>" class="form-control">
+              <input id="ac" name="ac" step="1" min="1" type="number" value="<?php showifnotnull($credits); ?>" class="form-control">
             </div>
           </div>
           <div class="form-group row">
             <label for="ac" class="col-4 col-form-label">Number of Hours/Week</label>
             <div class="col-8">
-              <input id="ac" name="ac" type="text" value="<?php showifnotnull($credits); ?>" class="form-control">
+              <input id="ac" name="ac" type="number" min="0" step="1"value="<?php showifnotnull($credits); ?>" class="form-control" >
             </div>
           </div>
 
