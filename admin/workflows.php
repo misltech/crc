@@ -46,7 +46,7 @@ SELECT concat(student_first_name, ' ' , student_last_name) as Name, s20_applicat
                     exit();
                 }
 
-                while ($row = mysqli_fetch_array($run, MYSQLI_ASSOC)) {  //for each email
+                while ($row = mysqli_fetch_assoc($run)) {  //for each email
                     $name = $row['Name'];
                     $email = $row["student_email"];
                     $course = $row['Course'];
@@ -55,7 +55,7 @@ SELECT concat(student_first_name, ' ' , student_last_name) as Name, s20_applicat
                     $assigned = $row['assigned_to'];
                     $fwid = $row['fw_id'];
                     $modify = null;
-                 
+                    console_log($row);
                 ?>
 
                     <tr>
@@ -70,7 +70,7 @@ SELECT concat(student_first_name, ' ' , student_last_name) as Name, s20_applicat
 
 
                 <?php  } ?>
-                </tfoot>
+            </tbody>
         </table>
     </div>
 </div>

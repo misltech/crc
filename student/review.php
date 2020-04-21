@@ -42,32 +42,35 @@ if (isset($_GET['fwid'])) {  //check for rejected application
 
 <div class="container">
     <div class="jumbotron">
-        <h1 class="display-4">Review Application</h1>
+        <h1 class="display-4">View Departments <span class="d-inline">
+                <div class="d-inline float-right dropdown">
+                    <button class="btn btn-secondary dropdown-toggle ml-auto" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        App Settings
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Delete Application</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </div>
+            </span></h1>
         <p class="lead">You can review your application here. <span style="color:red; font-weight:600;">Colors Subject to change </span></p>
-        
-        <?php if($rejected == 1) { ?>
-        <div class="card" style="width: auto">
-            <div class="card-body">
-            <h6 class="card-title">Application flagged for revision.</h6>
-            <h6 class="card-subtitle mb-2 text-muted">Reason:</h6>
-                <?php showifnotnull($comments); ?>
+
+
+
+        <?php if ($rejected == 1) { ?>
+            <div class="card" style="width: auto">
+                <div class="card-body">
+                    <h6 class="card-title">Application flagged for revision.</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Reason:</h6>
+                    <?php showifnotnull($comments); ?>
+                </div>
             </div>
-        </div>
         <?php } ?>
 
         <hr class="my-4">
-        <div class="row dropdown">
-            <button class="btn btn-secondary dropdown-toggle ml-auto" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                App Settings
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Delete Application</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-        </div>
 
-        
+
 
         <div class="row mt-3">
             <div class="col-md-10 order-md-1 mx-auto">

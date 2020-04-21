@@ -90,7 +90,7 @@ if (isset($_GET['fwid'])) {  //check for exising fwid
 
             <div class="col-md-4 mb-3">
               <label for="phonenumber">Phone number</label>
-              <input type="text" id="phonenumber" value="<?php showifnotnull($phone); ?>" name="phonenumber" type="text" class="form-control">
+              <input type="tel" maxlength=10 id="phonenumber" value="<?php showifnotnull($phone); ?>" name="phonenumber" type="text" class="form-control">
 
             </div>
           </div>
@@ -201,7 +201,12 @@ if (isset($_GET['fwid'])) {  //check for exising fwid
 
 
 <?php
-
+/**SQL TRIGGER THAT ONLY WORKS FOR ONE TRIGGER
+ * INSERT INTO s20_faculty_info(banner_id,faculty_email)
+*SELECT NEW.banner_id, NEW.email
+*FROM (SELECT 1 a) dummy
+*WHERE NEW.profile_type="faculty"
+ */
 include_once('components/footer.php');
 //semester form to input into database
 ?>
