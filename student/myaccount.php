@@ -55,7 +55,7 @@ function filter()
   }
 </style>
 <div class="container ">
-  <div class="jumbotron" style="background: #e1f7d5;">
+  <div class="jumbotron">
     <h1 class="display-4">My Account</h1>
     <p class="lead">You can modify your account details here.</p>
     <hr class="my-4">
@@ -284,8 +284,6 @@ if (isset($_POST['modify'])) {
   $city = mysqli_real_escape_string($db_conn, $_POST['city']);
   $state = mysqli_real_escape_string($db_conn, $_POST['state']);
   $zip = mysqli_real_escape_string($db_conn, $_POST['zipcode']);
-
-
 
   $checksql = "SELECT student_email FROM s20_student_info  WHERE student_email = " . $_SESSION['user_email'];
 
