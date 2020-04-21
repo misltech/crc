@@ -73,9 +73,9 @@ if (isset($_GET['fwid'])) {  //check for rejected application
 
 
         <div class="row mt-3">
-            <div class="col-md-10 order-md-1 mx-auto">
+            <div class="col-md-10 order-md-1 mx-auto review-sections">
                 <h5>Course Information <?php if ($rejected) { ?><span><a href="./sem.php?fwid=<?php echo $_GET['fwid']; ?>&exist=1" class="btn btn-xs btn-secondary"><span class="fa fa-edit"></span> Edit</a></span></h5><?php } else { ?> </h5> <?php } ?>
-            <table class="table table-striped table-dark">
+            <table class="table table-striped">
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">Attribute:</th>
@@ -108,9 +108,9 @@ if (isset($_GET['fwid'])) {  //check for rejected application
             </div>
         </div>
         <div class="row mt-3">
-            <div class="col-md-10 order-md-1 mx-auto">
+            <div class="col-md-10 order-md-1 mx-auto review-sections">
                 <h5>Employer Information <?php if ($rejected) { ?><span><a href="./emp.php?fwid=<?php echo $_GET['fwid']; ?>&exist=1" class="btn btn-xs btn-secondary"><span class="fa fa-edit"></span> Edit</a></span></h5><?php } else { ?> </h5> <?php } ?>
-            <table class="table table-striped table-dark">
+            <table class="table table-striped">
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">Attribute:</th>
@@ -144,10 +144,10 @@ if (isset($_GET['fwid'])) {  //check for rejected application
             </div>
         </div>
         <div class="row mt-3">
-            <div class="col-md-10 order-md-1 mx-auto">
+            <div class="col-md-10 order-md-1 mx-auto review-sections">
                 <h5>Learning Expectations <?php if ($rejected) { ?><span><a href="./lo.php" class="btn btn-xs btn-secondary"><span class="fa fa-edit"></span> Edit</a></span></h5><?php } else { ?> </h5> <?php } ?>
 
-            <table class="table table-striped table-dark">
+            <table class="table table-striped">
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">Learning Objectives</th>

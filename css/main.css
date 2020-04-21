@@ -18,8 +18,21 @@
     height: 100px;
 }
 
+#coursetbl_wrapper, #departmenttbl_wrapper, #worktbl_wrapper{
+    background: white;
+    padding: 11px;
+    border-radius: 10px;
+}
 
+.review-sections{
+    background: white;
+    padding: 11px;
+    border-radius: 10px;
+}
 
+#sidebar-wrapper{
+    border-right: none!important;
+}
 
   
 @media (max-width: 1270px){

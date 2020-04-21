@@ -55,11 +55,11 @@ function filter()
   }
 </style>
 <div class="container ">
-  <div class="jumbotron">
+  <div class="jumbotron" style="background: #e1f7d5;">
     <h1 class="display-4">My Account</h1>
     <p class="lead">You can modify your account details here.</p>
     <hr class="my-4">
-    <nav class="mb-5">
+    <nav class="mb-5 ">
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
           <a class="nav-link active" id="student-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true" href="https://cs.newpaltz.edu/~mitchelt6/crc/student/myaccount.php">Student Information</a>
@@ -76,7 +76,7 @@ function filter()
     <div class="tab-content" id="myTabContent">
       <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
         <div class="row">
-          <div class="col-md-8 order-md-1 mx-auto">
+          <div class="col-md-8 order-md-1 mx-auto ">
             <form class="needs-validation" method="post" action="myaccount" novalidate="" _lpchecked="1">
               <div class="row">
                 <div class="col-md-4 mb-3">
