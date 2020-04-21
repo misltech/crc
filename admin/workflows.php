@@ -9,16 +9,19 @@ include_once('components/sidebar.php');
 include_once('components/topnav.php');
 ?>
 
-<!-- 
-SELECT concat(student_first_name, ' ' , student_last_name) as Name, s20_application_info.student_email, semester, concat(s20_application_info.dept_code, ' ', class_number) as Course, s20_application_info.instructor_email,  assigned_to, s20_application_info.fw_id
-            FROM s20_application_info 
-            LEFT JOIN s20_student_info ON s20_application_info.banner_id = s20_student_info.banner_id 
-             -->
-
-<!--Table-->
 <div class="container " style="overflow: auto;">
     <div class="jumbotron">
-        <h1 class="display-4">View Workflows</h1>
+        <h1 class="display-4">View Workflows <span class="d-inline">
+                <div class="d-inline float-right dropdown">
+                    <button class="btn btn-secondary dropdown-toggle ml-auto" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Workflow Settings
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="./createdepartment.php">Add a New Application</a>
+                     
+                    </div>
+                </div>
+            </span></h1>
         <p class="lead">You can view and modify current workflows here.</p>
         <hr class="my-4">
         <table id="worktbl" class="table table-responsive table-striped table-bordered" style="width:100%">
