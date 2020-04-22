@@ -26,6 +26,7 @@ $GLOBALS['accounts'] ='s20_UserPass';
  */
 $GLOBALS['IncorrectCredentials'] = 1;
 $GLOBALS['InternalError'] = 504;
+$GLOBALS['Inactivity']= 1;
 
 /**
  * User types based on database

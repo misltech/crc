@@ -47,6 +47,10 @@ function redirect($atype){
         header("Location: ../newback/logout.php");
         exit();
     }
+    else if($atype == "inactive"){
+        header("Location: ../newback/logout.php?inactive=1");
+        exit();
+    }
     
   }
   
