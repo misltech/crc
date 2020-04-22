@@ -60,6 +60,11 @@ if (isset($_SESSION['user_type'])) {
         Internal Error. Please try again later.
       </div>
     <?php } ?>
+    <?php if (checkInactivity()) { ?>
+      <div class="alert alert-warning fade show">
+        Signed out due to inactivity. Please sign in again.
+      </div>
+    <?php } ?>
     <label for="inputEmail" class="sr-only">Email address</label>
     <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
     <label for="inputPassword" class="sr-only">Password</label>
@@ -96,6 +101,7 @@ if (isset($_POST['submit'])) {
     $_SESSION['user_type'] = $row["profile_type"];
     $_SESSION['user_email'] = $row['email'];
     $_SESSION['banner'] = $row['banner_id'];
+    $_SESSION['timestamp'] = time();
     $_SESSION['token'] = bin2hex(random_bytes(32));
 
     redirect($_SESSION['user_type']);
@@ -118,6 +124,14 @@ function checkInternalError()
   if (isset($_GET['e'])) {
     $error_id = $_GET['e'];
     if ($error_id == $GLOBALS['InternalError']) {
+      return true;
+    }
+  }
+}
+function checkInactivity(){
+  if (isset($_GET['inactive'])) {
+    $id = $_GET['inactive'];
+    if ($id == $GLOBALS['Inactivity']) {
       return true;
     }
   }

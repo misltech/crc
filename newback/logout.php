@@ -9,5 +9,19 @@ session_unset();
 
 // destroy the session 
 session_destroy();
-header("Location: ../index.php");
+
+if (isset($_GET['inactive'])) {
+    $id = $_GET['inactive'];
+    if ($id == $GLOBALS['Inactivity']) {
+        header("Location: ../index.php?inactive=1");
+    }
+  }
+
+else{
+    header("Location: ../index.php");
+}
+
+
+
+
 ?>

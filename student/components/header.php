@@ -32,6 +32,7 @@ function validCSRF($csrf){
   <link rel="icon" href="https://newpaltz.edu/favicon.ico">
   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover-min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/dark-mode.css">
   
 
   <link href="../css/main.css" rel="stylesheet">
@@ -39,5 +40,13 @@ function validCSRF($csrf){
   <!-- Custom styles for this template -->
   <link href="../css/simple-sidebar.css" rel="stylesheet">
 </head>
+
+<?php
+ if(time() - $_SESSION['timestamp'] > 900) { //subtract new timestamp from the old one
+  redirect("inactive");
+} else {
+  $_SESSION['timestamp'] = time(); //set new timestamp
+}
+?>
 
 <body>
