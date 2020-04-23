@@ -9,7 +9,7 @@ session_unset();
 
 // destroy the session 
 session_destroy();
-
+include_once './util.php';
 if (isset($_GET['inactive'])) {
     $id = $_GET['inactive'];
     if ($id == $GLOBALS['Inactivity']) {

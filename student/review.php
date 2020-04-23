@@ -42,7 +42,7 @@ if (isset($_GET['fwid'])) {  //check for rejected application
 
 <div class="container">
     <div class="jumbotron">
-        <h1 class="display-4">View Departments <span class="d-inline">
+        <h1 class="display-4">View Application <span class="d-inline">
                 <div class="d-inline float-right dropdown">
                     <button class="btn btn-secondary dropdown-toggle ml-auto" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         App Settings

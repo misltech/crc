@@ -67,6 +67,10 @@ function filter()
         <li class="nav-item">
           <a class="nav-link" id="password-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false" href="https://cs.newpaltz.edu/~mitchelt6/crc/student/myaccount.php">Change Password</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" id="delete-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false" href="https://cs.newpaltz.edu/~mitchelt6/crc/student/myaccount.php">Delete Account</a>
+        </li>
+
       </ul>
     </nav>
     <div class="tab-content" id="myTabContent">
@@ -261,7 +265,7 @@ function filter()
           </div>
         </div>
       </div>
-      
+      <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="delete-tab">Are you really sure you want to delete all your work lol</div>
     </div>
   </div>
 </div>
