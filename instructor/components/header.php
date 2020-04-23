@@ -24,7 +24,7 @@ function validCSRF($csrf){
   <meta name="author" content="hello there">
   <meta name="csrf-token" content="<?php echo $csrf; ?>">
   
-  <title>Student Internship Report</title>
+  <title>Instructor Fieldwork Panel</title>
 
   <!-- Bootstrap core CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
