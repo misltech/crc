@@ -43,7 +43,11 @@ function redirect($atype){
     } else if ($atype == $GLOBALS['employer_type']) {
         header("Location: ./employer/employer.php");
         exit();
-    }else if($atype == null){
+    } else if ($atype == $GLOBALS['recreg_type']) {
+        header("Location: ./recreg/recreg.php");
+        exit();
+    }
+    else if($atype == null){
         header("Location: ../backend/logout.php");
         exit();
     }

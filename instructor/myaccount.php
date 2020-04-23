@@ -7,7 +7,7 @@ error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
 include_once('../backend/util.php');
-validate($GLOBALS['student_type']);
+validate($GLOBALS['instructor_type']);
 include_once('components/header.php');
 include_once('components/sidebar.php');
 include_once('components/topnav.php');

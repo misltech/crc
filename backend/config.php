@@ -39,6 +39,7 @@ $GLOBALS['chair_type'] = 'chair';
 $GLOBALS['dean_type'] = 'dean';
 $GLOBALS['instructor_type'] = 'instructor';
 $GLOBALS['employer_type'] = 'employer';
+$GLOBALS['recreg_type'] = 'recreg';
 
 
 /**
