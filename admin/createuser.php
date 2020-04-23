@@ -26,7 +26,7 @@ include_once('components/topnav.php');
           <input id="banner" name="banner" type="text" class="form-control" required="required">
         </div>
       </div>
-      <div class="form-group row">
+      <!-- <div class="form-group row">
         <label for="pass" class="col-4 col-form-label">Password</label>
         <div class="col-8">
           <div class="input-group">
@@ -51,7 +51,7 @@ include_once('components/topnav.php');
             <input id="confpass" name="confpass" type="text" required="required" class="form-control">
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="form-group row">
         <label for="type" class="col-4 col-form-label">User Type</label>
         <div class="col-8">

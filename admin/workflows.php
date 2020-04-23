@@ -17,7 +17,7 @@ include_once('components/topnav.php');
                         Workflow Settings
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="./createdepartment.php">Add a New Application</a>
+                        <a class="dropdown-item" href="./createapplication.php">Add a New Application</a>
                      
                     </div>
                 </div>

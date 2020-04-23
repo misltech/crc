@@ -25,7 +25,7 @@ $(document).ready(function () {
                 const element = res[index];
 
                 htmlElement = getRejectElement(checkReject(element[1].rejected));
-                htmlElement += '<div class="card-header">Internship</div>'
+                htmlElement += '<div class="card-header">Internship' + buildReviseNotice(checkReject(element[1].rejected))+'</div>'
                 htmlElement += '<div class="card-body text-secondary">';
                 htmlElement += '<h6 class="card-text text-align-center"><span class="float-left">' + element[1].dept + " " + element[1].classnumber + '</span><span class="float-right">'+ element[1].semester + ' ' + element[1].year + '</span></h6>';
                 htmlElement += '<div id="progress' + index + '"' + ' class="progressB mx-auto img-fluid"></div>';
@@ -76,7 +76,15 @@ $(document).ready(function () {
         // $('.jumbotron').append('<div class="card border-danger mb-3"><div class="card-header">Internship</div><div class="card-body text-secondary"><h5 class="card-title">CSB 221</h5><p class="card-text">Set to red when application is rejected</p><div id="progressBar2" class="progressB mx-auto"></div><a href="#" class="offset-4 btn btn-primary">See application</a></div></div>');
 
     }
-
+    
+    function buildReviseNotice(r){
+        if (r){
+            return "<b>(Please revise your application)</b>";
+        }
+        else{
+            return "";
+        }
+    }
     function buildApplicationRedirect(rej, id){
         var newURL;
         if(checkReject(rej)){
@@ -107,8 +115,6 @@ $(document).ready(function () {
 
     }
     function checkReject(rej) { //promise not needed
-
-
         if (rej == 0) {
             return false;
         }
@@ -118,15 +124,5 @@ $(document).ready(function () {
 
 
     }
-    
-    // $(window).resize(function() {  //neeeds to refresh the svg image
-
-    //     setTimeout(rel(), 1000);
-    //    function rel(){
-    //     window.location.reload();
-    //    }
-        
-    //     alert("changed");
-    //     });
 
 });
