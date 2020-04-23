@@ -8,8 +8,8 @@ if (!isset($_SESSION)) {
   session_start();
 }
 //redirect on back button when already logged in.
-include_once('./newback/util.php');
-include_once('./newback/db_con3.php');
+include_once('./backend/util.php');
+include_once('./backend/db_con3.php');
 //console_log($_SESSION['user_type']);
 if (isset($_SESSION['user_type'])) {
   redirect($_SESSION['user_type']);

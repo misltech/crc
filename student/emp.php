@@ -8,12 +8,12 @@ if (!isset($_SESSION)) {
 }
 
 
-include_once('../newback/util.php');
+include_once('../backend/util.php');
 validate($GLOBALS['student_type']);
 include_once('components/header.php');
 include_once('components/sidebar.php');
 include_once('components/topnav.php');
-include_once('../newback/db_con3.php');
+include_once('../backend/db_con3.php');
 
 $firstname = null;
 $lastname = null;

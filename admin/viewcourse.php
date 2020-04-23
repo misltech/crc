@@ -3,7 +3,7 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
-include_once('../newback/util.php');
+include_once('../backend/util.php');
 include_once('components/header.php');
 include_once('components/sidebar.php');
 include_once('components/topnav.php');
@@ -35,7 +35,7 @@ include_once('components/topnav.php');
             <tbody>
 
                 <?php
-                include_once('../newback/db_con3.php');
+                include_once('../backend/db_con3.php');
 
                 $sql = "SELECT * FROM s20_course_numbers";
                 $run = mysqli_query($db_conn, $sql);
