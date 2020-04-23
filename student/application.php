@@ -3,7 +3,7 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
-include_once('../newback/util.php');
+include_once('../backend/util.php');
 validate($GLOBALS['student_type']);
 include_once('components/header.php');
 include_once('components/sidebar.php');
@@ -12,7 +12,7 @@ include_once('components/topnav.php');
 //validate();
 
 
-include_once('../newback/db_con3.php');
+include_once('../backend/db_con3.php');
 
 $user_email = $_SESSION['user_email'];
 $sql = "SELECT fw_id, assigned_to, dept_code FROM application_info WHERE student_email = '$user_email'";

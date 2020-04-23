@@ -3,7 +3,7 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
-include_once('../newback/util.php');
+include_once('../backend/util.php');
 include_once('components/header.php');
 include_once('components/sidebar.php');
 include_once('components/topnav.php');
@@ -39,7 +39,7 @@ include_once('components/topnav.php');
             <tbody>
 
                 <?php
-                include_once('../newback/db_con3.php');
+                include_once('../backend/db_con3.php');
 
                 $sql = "SELECT concat(student_first_name, ' ' , student_last_name) as Name, s20_application_info.student_email, semester, concat(s20_application_info.dept_code, ' ', class_number) as Course, s20_application_info.instructor_email, assigned_to, s20_application_info.fw_id FROM s20_application_info LEFT JOIN s20_student_info ON s20_application_info.banner_id = s20_student_info.banner_id";
                 $run = mysqli_query($db_conn, $sql);

@@ -44,11 +44,11 @@ function redirect($atype){
         header("Location: ./employer/employer.php");
         exit();
     }else if($atype == null){
-        header("Location: ../newback/logout.php");
+        header("Location: ../backend/logout.php");
         exit();
     }
     else if($atype == "inactive"){
-        header("Location: ../newback/logout.php?inactive=1");
+        header("Location: ../backend/logout.php?inactive=1");
         exit();
     }
     
@@ -68,13 +68,13 @@ function validateState($checktype){
         return true;
     }
     else{
-       // header('Location: ../newback/logout.php');
+       // header('Location: ../backend/logout.php');
         return false;
     }
 }
 function validate($checktype){
     if(!(isset($_SESSION['user_type']) and $_SESSION['user_type'] == $checktype)){
-        header('Location: ../newback/logout.php');
+        header('Location: ../backend/logout.php');
     }
 }
 

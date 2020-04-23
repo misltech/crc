@@ -13,7 +13,7 @@
   <label class="custom-control-label" for="darkSwitch">Dark Mode</label>
 </div> -->
       <li class="nav-item text-nowrap">
-        <a class="nav-link" href="../newback/logout.php">Sign out</a>
+        <a class="nav-link" href="../backend/logout.php">Sign out</a>
       </li>
   </ul>
 
