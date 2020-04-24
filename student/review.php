@@ -36,15 +36,15 @@ if (isset($_GET['fwid'])) {  //check for rejected application
     header('Location: ./application.php');
 }
 
-
-
 ?>
+
+
 
 <div class="container">
     <div class="jumbotron">
         <h1 class="display-4">View Application <span class="d-inline">
                 <div class="d-inline float-right dropdown">
-                    <button class="btn btn-secondary dropdown-toggle ml-auto" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-secondary dropdown-toggle ml-auto" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
                         App Settings
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -55,8 +55,6 @@ if (isset($_GET['fwid'])) {  //check for rejected application
                 </div>
             </span></h1>
         <p class="lead">You can review your application here. <span style="color:red; font-weight:600;">Colors Subject to change </span></p>
-
-
 
         <?php if ($rejected == 1) { ?>
             <div class="card" style="width: auto">
@@ -70,123 +68,190 @@ if (isset($_GET['fwid'])) {  //check for rejected application
 
         <hr class="my-4">
 
+        <nav class="mb-5 nav-pills nav-fill">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="student-tab" data-toggle="tab" href="#info-body" role="tab" aria-controls="info" aria-selected="true">Student Information</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="course-tab" data-toggle="tab" href="#course-body" role="tab" aria-controls="course" aria-selected="false">Course Information</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="employer-tab" data-toggle="tab" href="#employer-body" role="tab" aria-controls="employer" aria-selected="false">Employer Information</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="learning-tab" data-toggle="tab" href="#learning-body" role="tab" aria-controls="learning" aria-selected="false">Learning Expectations</a>
+                </li>
+            </ul>
+        </nav>
 
+        <div class="tab-content" id="myTab">
 
-        <div class="row mt-3">
-            <div class="col-md-10 order-md-1 mx-auto review-sections">
-                <h5>Course Information <?php if ($rejected) { ?><span><a href="./sem.php?fwid=<?php echo $_GET['fwid']; ?>&exist=1" class="btn btn-xs btn-secondary"><span class="fa fa-edit"></span> Edit</a></span></h5><?php } else { ?> </h5> <?php } ?>
-            <table class="table table-striped">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Attribute:</th>
-                        <th scope="col">Your Responses:</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td scope="row">Course Number</td>
-                        <td>485</td>
-                    </tr>
-                    <tr>
-                        <td scope="row">Academic Semester</td>
-                        <td>Spring 2020</td>
-                    </tr>
-                    <tr>
-                        <td scope="row">Grading Type</td>
-                        <td>Pass/Fail</td>
-                    </tr>
-                    <tr>
-                        <td scope="row">Credit Hours</td>
-                        <td>4</td>
-                    </tr>
-                    <tr>
-                        <td scope="row">Number of Hours/Week</td>
-                        <td>43</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="tab-pane  show active" id="info-body" role="tabpanel" aria-labelledby="student-tab">
+                <div class="row mt-3">
+                    <div class="col-md-10 order-md-1 mx-auto review-sections">
+                        <h5>Student Information <?php if ($rejected) { ?><span><a href="./sem.php?fwid=<?php echo $_GET['fwid']; ?>&exist=1" class="btn btn-xs btn-secondary"><span class="fa fa-edit"></span> Edit</a></span></h5><?php } else { ?> </h5> <?php } ?>
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Attribute:</th>
+                                <th scope="col">Your Responses:</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td scope="row">Course Number</td>
+                                <td>485</td>
+                            </tr>
+                            <tr>
+                                <td scope="row">Academic Semester</td>
+                                <td>Spring 2020</td>
+                            </tr>
+                            <tr>
+                                <td scope="row">Grading Type</td>
+                                <td>Pass/Fail</td>
+                            </tr>
+                            <tr>
+                                <td scope="row">Credit Hours</td>
+                                <td>4</td>
+                            </tr>
+                            <tr>
+                                <td scope="row">Number of Hours/Week</td>
+                                <td>43</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-md-10 order-md-1 mx-auto review-sections">
-                <h5>Employer Information <?php if ($rejected) { ?><span><a href="./emp.php?fwid=<?php echo $_GET['fwid']; ?>&exist=1" class="btn btn-xs btn-secondary"><span class="fa fa-edit"></span> Edit</a></span></h5><?php } else { ?> </h5> <?php } ?>
-            <table class="table table-striped">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Attribute:</th>
-                        <th scope="col">Your Responses:</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td scope="row">Name</td>
-                        <td>Andrew Blake</td>
-                    </tr>
 
-                    <tr>
-                        <td scope="row">Company</td>
-                        <td>IBM Poughkeepsie</td>
-                    </tr>
-                    <tr>
-                        <td scope="row">Email</td>
-                        <td>bl@ibm.it</td>
-                    </tr>
-                    <tr>
-                        <td scope="row">Phone number</td>
-                        <td>845-565-2121</td>
-                    </tr>
-                    <tr>
-                        <td scope="row">Site Address</td>
-                        <td>2455 South Rd Building 705, Poughkeepsie, NY 12601</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="tab-pane show" id="course-body" role="tabpanel" aria-labelledby="course-tab">
+                <div class="row mt-3">
+                    <div class="col-md-10 order-md-1 mx-auto review-sections">
+                        <h5>Course Information <?php if ($rejected) { ?><span><a href="./sem.php?fwid=<?php echo $_GET['fwid']; ?>&exist=1" class="btn btn-xs btn-secondary"><span class="fa fa-edit"></span> Edit</a></span></h5><?php } else { ?> </h5> <?php } ?>
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Attribute:</th>
+                                <th scope="col">Your Responses:</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td scope="row">Course Number</td>
+                                <td>485</td>
+                            </tr>
+                            <tr>
+                                <td scope="row">Academic Semester</td>
+                                <td>Spring 2020</td>
+                            </tr>
+                            <tr>
+                                <td scope="row">Grading Type</td>
+                                <td>Pass/Fail</td>
+                            </tr>
+                            <tr>
+                                <td scope="row">Credit Hours</td>
+                                <td>4</td>
+                            </tr>
+                            <tr>
+                                <td scope="row">Number of Hours/Week</td>
+                                <td>43</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-md-10 order-md-1 mx-auto review-sections">
-                <h5>Learning Expectations <?php if ($rejected) { ?><span><a href="./lo.php" class="btn btn-xs btn-secondary"><span class="fa fa-edit"></span> Edit</a></span></h5><?php } else { ?> </h5> <?php } ?>
 
-            <table class="table table-striped">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Learning Objectives</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
+            <div class="tab-pane  show " id="employer-body" role="tabpanel" aria-labelledby="employer-tab">
+                <div class="row mt-3">
+                    <div class="col-md-10 order-md-1 mx-auto review-sections">
+                        <h5>Employer Information <?php if ($rejected) { ?><span><a href="./emp.php?fwid=<?php echo $_GET['fwid']; ?>&exist=1" class="btn btn-xs btn-secondary"><span class="fa fa-edit"></span> Edit</a></span></h5><?php } else { ?> </h5> <?php } ?>
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Attribute:</th>
+                                <th scope="col">Your Responses:</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td scope="row">Name</td>
+                                <td>Andrew Blake</td>
+                            </tr>
 
-                        <td scope="row">What are your responsibilities on the site? What special project will you be working on? What do you expect to learn? </td>
-
-                    </tr>
-                    <tr>
-                        <th>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</th>
-
-                    </tr>
-                    <tr>
-
-                        <td scope="row">How is the proposal related to your major areas of interest? Describe the course work you have completed which provides appropriate background to the project.</td>
-
-                    </tr>
-                    <tr>
-                        <th>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</th>
-
-                    </tr>
-                    <tr>
-                        <td scope="row">What is the proposed method of study? Where appropriate, cite readings and practical experience.</td>
-
-                    </tr>
-                    <tr>
-                        <th>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</th>
-
-                    </tr>
-
-
-                </tbody>
-            </table>
-
+                            <tr>
+                                <td scope="row">Company</td>
+                                <td>IBM Poughkeepsie</td>
+                            </tr>
+                            <tr>
+                                <td scope="row">Email</td>
+                                <td>bl@ibm.it</td>
+                            </tr>
+                            <tr>
+                                <td scope="row">Phone number</td>
+                                <td>845-565-2121</td>
+                            </tr>
+                            <tr>
+                                <td scope="row">Site Address</td>
+                                <td>2455 South Rd Building 705, Poughkeepsie, NY 12601</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
             </div>
+            <div class="tab-pane  show " id="learning-body" role="tabpanel" aria-labelledby="learning-tab">
+                <div class="row mt-3">
+                    <div class="col-md-10 order-md-1 mx-auto review-sections">
+                        <h5>Learning Expectations <?php if ($rejected) { ?><span><a href="./lo.php" class="btn btn-xs btn-secondary"><span class="fa fa-edit"></span> Edit</a></span></h5><?php } else { ?> </h5> <?php } ?>
+
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Learning Objectives</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+
+                                <td scope="row">What are your responsibilities on the site? What special project will you be working on? What do you expect to learn? </td>
+
+                            </tr>
+                            <tr>
+                                <th>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</th>
+
+                            </tr>
+                            <tr>
+
+                                <td scope="row">How is the proposal related to your major areas of interest? Describe the course work you have completed which provides appropriate background to the project.</td>
+
+                            </tr>
+                            <tr>
+                                <th>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</th>
+
+                            </tr>
+                            <tr>
+                                <td scope="row">What is the proposed method of study? Where appropriate, cite readings and practical experience.</td>
+
+                            </tr>
+                            <tr>
+                                <th>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</th>
+
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+
+                    </div>
+                </div>
+            </div>
+
+
         </div>
+
+
 
         <?php if ($rejected) { ?>
             <div class="mt-5 mt-5 col-8 mx-auto">

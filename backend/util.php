@@ -192,6 +192,29 @@ function generateEmployerID()
 }
 
 /**
+ * Generates a banner-like number for an admin.
+ * Starts with A, followed by 8 digits.
+ * 
+ * @return string A banner-like ID number for an admin account. Required for UserPass table where it cannot be empty.
+ */
+function generateAdminID()
+{
+    return "A" . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9);
+}
+
+/**
+ * Generates a banner-like number for an secretary.
+ * Starts with E, followed by 8 digits.
+ * 
+ * @return string A banner-like ID number for an Secretary. Required for UserPass table where it cannot be empty.
+ */
+function generateSecretaryID()
+{
+    return "S" . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9);
+}
+
+
+/**
  * Returns the item at a specified index of an associative array.
  * 
  * For example: Say you have an associative array:
