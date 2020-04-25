@@ -21,10 +21,11 @@ $rejected = null;
 $comments = null;
 
 if (isset($_GET['fwid'])) {  //check for rejected application
-    $sql = "SELECT * FROM s20_application_util WHERE fw_id = " . $_GET['fwid'];  //checks to see if they are allowed to see.
+    $fwid = $_GET['fwid'];
+    $sql = "SELECT * FROM s20_application_util WHERE fw_id = '$fwid'";  //checks to see if they are allowed to see.
     $qsql  = mysqli_query($db_conn, $sql);
     $r = mysqli_num_rows($qsql);
-    $fwid = $_GET['fwid'];
+    
     if ($r == 1) {  //if application is found
         $result = mysqli_fetch_assoc($qsql);
         $rejected = $result['rejected'];
@@ -37,8 +38,6 @@ if (isset($_GET['fwid'])) {  //check for rejected application
 }
 
 ?>
-
-
 
 <div class="container">
     <div class="jumbotron">
@@ -100,24 +99,29 @@ if (isset($_GET['fwid'])) {  //check for rejected application
                         </thead>
                         <tbody>
                             <tr>
-                                <td scope="row">Course Number</td>
-                                <td>485</td>
+                                <td scope="row">N#</td>
+                                <td>N030332198</td>
                             </tr>
                             <tr>
-                                <td scope="row">Academic Semester</td>
-                                <td>Spring 2020</td>
+                                <td scope="row">Name</td>
+                                <td>Nick Jonas</td>
                             </tr>
                             <tr>
-                                <td scope="row">Grading Type</td>
-                                <td>Pass/Fail</td>
+                                <td scope="row">Local Address: Street</td>
+                                <td>1005 Hawk Drive, Ashokan Hall 203A, New Paltz, NY, 12561</td>
+                            </tr>
+
+                            <tr>
+                                <td scope="row">E-mail</td>
+                                <td>student@email.com</td>
                             </tr>
                             <tr>
-                                <td scope="row">Credit Hours</td>
-                                <td>4</td>
+                                <td scope="row">Telephone number</td>
+                                <td>718-868-3231</td>
                             </tr>
                             <tr>
-                                <td scope="row">Number of Hours/Week</td>
-                                <td>43</td>
+                                <td scope="row">Toal credits registered</td>
+                                <td>14</td>
                             </tr>
                         </tbody>
                     </table>
