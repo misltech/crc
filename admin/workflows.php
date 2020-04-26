@@ -27,7 +27,6 @@ include_once('components/topnav.php');
         <table id="worktbl" class="table table-responsive table-striped table-bordered" style="width:100%">
             <thead>
                 <tr>
-                    <th>Student Name</th>
                     <th>Student Email</th>
                     <th>Course #</th>
                     <th>Semester</th>
@@ -41,7 +40,7 @@ include_once('components/topnav.php');
                 <?php
                 include_once('../backend/db_con3.php');
 
-                $sql = "SELECT concat(student_first_name, ' ' , student_last_name) as Name, s20_application_info.student_email, semester, concat(s20_application_info.dept_code, ' ', class_number) as Course, s20_application_info.instructor_email, assigned_to, s20_application_info.fw_id FROM s20_application_info LEFT JOIN s20_student_info ON s20_application_info.banner_id = s20_student_info.banner_id";
+                $sql = "SELECT concat(student_first_name, ' ' , student_last_name) as Name, s20_application_info.student_email, semester, concat(s20_application_info.dept_code, ' ', class_number) as Course, s20_application_info.instructor_email, assigned_to, s20_application_info.fw_id FROM s20_application_info LEFT JOIN s20_student_info ON s20_application_info.fw_id = s20_student_info.fw_id";
                 $run = mysqli_query($db_conn, $sql);
                 //alert($run);
                 if (!$run) { //if failed to reach database
@@ -57,18 +56,17 @@ include_once('components/topnav.php');
                     $facultyemail = $row['instructor_email'];
                     $assigned = $row['assigned_to'];
                     $fwid = $row['fw_id'];
-                    $modify = null;
+                    
                     console_log($row);
                 ?>
 
                     <tr>
-                        <td><?php echo $name; ?></td>
                         <td><?php echo $email; ?></td>
                         <td><?php echo $course; ?></td>
                         <td><?php echo $semester; ?></td>
                         <td><?php echo $facultyemail; ?></td>
                         <td><?php echo $assigned; ?></td>
-                        <td><a class="btn btn-primary btn-block" href="#">View</a></button></td>
+                        <td><a class="btn btn-primary btn-block" href="./viewworkflow.php?fwid=<?php echo $fwid; ?>">View</a></button></td>
                     </tr>
 
 

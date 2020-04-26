@@ -1,13 +1,11 @@
 <?php
-
+ob_start();
 //Get all data from database show to user in a cute way. 
 //When user submits this page ->  check the workflow order and move one place to the right.
 //This page should be jumped to if user completes application but still wants to see their application. However they cant submit again. *Remove Submit button*
 //Get request from url will determine if they can still modify. Will check database for rejection and show functions.
 
-if (!isset($_SESSION)) {
-    session_start();
-}
+session_start();
 
 include_once('../backend/util.php');
 validate($GLOBALS['student_type']);
@@ -41,9 +39,9 @@ if (isset($_GET['fwid'])) {  //check for rejected application
 
 <div class="container">
     <div class="jumbotron">
-        <h1 class="display-4">View Application <span class="d-inline">
+         <h1 class="display-4">Review Application <!--<span class="d-inline">
                 <div class="d-inline float-right dropdown">
-                    <button class="btn btn-secondary dropdown-toggle ml-auto" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
+                    <button class="btn  dropdown-toggle ml-auto" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>
                         App Settings
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -52,13 +50,13 @@ if (isset($_GET['fwid'])) {  //check for rejected application
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div>
                 </div>
-            </span></h1>
-        <p class="lead">You can review your application here. <span style="color:red; font-weight:600;">Colors Subject to change </span></p>
+            </span>--></h1> 
+        <p class="lead">You can review your application here.</p>
 
         <?php if ($rejected == 1) { ?>
             <div class="card" style="width: auto">
                 <div class="card-body">
-                    <h6 class="card-title">Application flagged for revision.</h6>
+                    <h6 class="card-title"><strong>Application flagged for revision.</strong></h6>
                     <h6 class="card-subtitle mb-2 text-muted">Reason:</h6>
                     <?php showifnotnull($comments); ?>
                 </div>
@@ -67,19 +65,19 @@ if (isset($_GET['fwid'])) {  //check for rejected application
 
         <hr class="my-4">
 
-        <nav class="mb-5 nav-pills nav-fill">
+        <nav class="mb-5">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="student-tab" data-toggle="tab" href="#info-body" role="tab" aria-controls="info" aria-selected="true">Student Information</a>
+                    <a class="nav-link active text-dark" id="student-tab" data-toggle="tab" href="#info-body" role="tab" aria-controls="info" aria-selected="true">Student Information</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="course-tab" data-toggle="tab" href="#course-body" role="tab" aria-controls="course" aria-selected="false">Course Information</a>
+                    <a class="nav-link text-dark" id="course-tab" data-toggle="tab" href="#course-body" role="tab" aria-controls="course" aria-selected="false">Course Information</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="employer-tab" data-toggle="tab" href="#employer-body" role="tab" aria-controls="employer" aria-selected="false">Employer Information</a>
+                    <a class="nav-link text-dark" id="employer-tab" data-toggle="tab" href="#employer-body" role="tab" aria-controls="employer" aria-selected="false">Employer Information</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="learning-tab" data-toggle="tab" href="#learning-body" role="tab" aria-controls="learning" aria-selected="false">Learning Expectations</a>
+                    <a class="nav-link text-dark" id="learning-tab" data-toggle="tab" href="#learning-body" role="tab" aria-controls="learning" aria-selected="false">Learning Expectations</a>
                 </li>
             </ul>
         </nav>
@@ -89,14 +87,8 @@ if (isset($_GET['fwid'])) {  //check for rejected application
             <div class="tab-pane  show active" id="info-body" role="tabpanel" aria-labelledby="student-tab">
                 <div class="row mt-3">
                     <div class="col-md-10 order-md-1 mx-auto review-sections">
-                        <h5>Student Information <?php if ($rejected) { ?><span><a href="./sem.php?fwid=<?php echo $_GET['fwid']; ?>&exist=1" class="btn btn-xs btn-secondary"><span class="fa fa-edit"></span> Edit</a></span></h5><?php } else { ?> </h5> <?php } ?>
+                        <h5>Student Information <?php if ($rejected) { ?><span><a href="./stu.php?fwid=<?php echo $_GET['fwid']; ?>&new=true" class="btn btn-xs p-1"><span class="fa fa-edit"></span> Edit</a></span></h5><?php } else { ?> </h5> <?php } ?>
                     <table class="table table-striped">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th scope="col">Attribute:</th>
-                                <th scope="col">Your Responses:</th>
-                            </tr>
-                        </thead>
                         <tbody>
                             <tr>
                                 <td scope="row">N#</td>
@@ -132,14 +124,8 @@ if (isset($_GET['fwid'])) {  //check for rejected application
             <div class="tab-pane show" id="course-body" role="tabpanel" aria-labelledby="course-tab">
                 <div class="row mt-3">
                     <div class="col-md-10 order-md-1 mx-auto review-sections">
-                        <h5>Course Information <?php if ($rejected) { ?><span><a href="./sem.php?fwid=<?php echo $_GET['fwid']; ?>&exist=1" class="btn btn-xs btn-secondary"><span class="fa fa-edit"></span> Edit</a></span></h5><?php } else { ?> </h5> <?php } ?>
+                        <h5>Course Information <?php if ($rejected) { ?><span><a href="./sem.php?fwid=<?php echo $_GET['fwid']; ?>&new=true" class="btn btn-xs  p-1"><span class="fa fa-edit"></span> Edit</a></span></h5><?php } else { ?> </h5> <?php } ?>
                     <table class="table table-striped">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th scope="col">Attribute:</th>
-                                <th scope="col">Your Responses:</th>
-                            </tr>
-                        </thead>
                         <tbody>
                             <tr>
                                 <td scope="row">Course Number</td>
@@ -170,14 +156,8 @@ if (isset($_GET['fwid'])) {  //check for rejected application
             <div class="tab-pane  show " id="employer-body" role="tabpanel" aria-labelledby="employer-tab">
                 <div class="row mt-3">
                     <div class="col-md-10 order-md-1 mx-auto review-sections">
-                        <h5>Employer Information <?php if ($rejected) { ?><span><a href="./emp.php?fwid=<?php echo $_GET['fwid']; ?>&exist=1" class="btn btn-xs btn-secondary"><span class="fa fa-edit"></span> Edit</a></span></h5><?php } else { ?> </h5> <?php } ?>
+                        <h5>Employer Information <?php if ($rejected) { ?><span><a href="./emp.php?fwid=<?php echo $_GET['fwid']; ?>&new=true" class="btn btn-xs  p-1"><span class="fa fa-edit"></span> Edit</a></span></h5><?php } else { ?> </h5> <?php } ?>
                     <table class="table table-striped">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th scope="col">Attribute:</th>
-                                <th scope="col">Your Responses:</th>
-                            </tr>
-                        </thead>
                         <tbody>
                             <tr>
                                 <td scope="row">Name</td>
@@ -208,7 +188,7 @@ if (isset($_GET['fwid'])) {  //check for rejected application
             <div class="tab-pane  show " id="learning-body" role="tabpanel" aria-labelledby="learning-tab">
                 <div class="row mt-3">
                     <div class="col-md-10 order-md-1 mx-auto review-sections">
-                        <h5>Learning Expectations <?php if ($rejected) { ?><span><a href="./lo.php" class="btn btn-xs btn-secondary"><span class="fa fa-edit"></span> Edit</a></span></h5><?php } else { ?> </h5> <?php } ?>
+                        <h5>Learning Expectations <?php if ($rejected) { ?><span><a href="./lo.php" class="btn btn-xs  p-1"><span class="fa fa-edit"></span> Edit</a></span></h5><?php } else { ?> </h5> <?php } ?>
 
                     <table class="table table-striped">
                         <thead class="thead-dark">
