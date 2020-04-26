@@ -230,6 +230,4 @@ function get_index_of_assoc($array, $index)
 {
     return $array[array_keys($array)[$index]];
 }
-
-
 ?>

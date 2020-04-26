@@ -56,7 +56,7 @@ include_once('components/topnav.php');
                     <tr>
                         <td><?php echo $dept; ?></td>
                         <td><?php echo $number; ?></td>
-                        <td><a class="btn btn-primary btn-block" href="#">View</a></button></td>
+                        <td><a class="btn btn-primary btn-block" href="./editcourse.php?">View</a></button></td>
                     </tr>
 
 

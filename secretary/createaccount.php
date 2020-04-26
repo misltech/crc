@@ -51,23 +51,23 @@ include_once '../backend/db_con3.php';
             </div>
           </div>
           <div class="form-group row">
-            <label for="type" class="col-4 col-form-label">Department Class</label>
+            <label for="type" class="col-4 col-form-label">Department</label>
             <div class="col-8">
               <select id="type" name="utype" class="custom-select" value="" required="required">
 
                 <?php
-                $sql = "SELECT id, dept_code, course_num FROM s20_course_numbers ORDER BY dept_code ASC";
+                $sql = "SELECT dept_code, dept_name FROM s20_academic_dept_info ORDER BY dept_code ASC";
                 $qsql  = mysqli_query($db_conn, $sql);
                 $r = mysqli_num_rows($qsql);
 
                 if ($r > 0) {
                   while ($result = mysqli_fetch_assoc($qsql)) {
                     $id = $result['id'];
-                    $deptnum = $result['course_num'];
+                    $deptname = $result['dept_name'];
                     $deptcode = $result['dept_code'];
                 ?>
 
-                    <option value="<?php showifnotnull($deptcode); ?>"><?php showifnotnull($deptcode . " " . $deptnum); ?></option>
+                    <option value="<?php showifnotnull($deptcode); ?>"><?php showifnotnull($deptname); ?></option>
 
                 <?php
                   }
@@ -230,7 +230,7 @@ if (isset($_POST['submit-student'])) { //handles student submit button
     }
   } else if (mysqli_errno($db_conn) == 0) { //if user created and query success
     $fwid = bin2hex(random_bytes(32));  //duplication is unlikely with this one. However should make an method to catch duplication
-    $newappsql = "INSERT INTO s20_application_info(fw_id, banner_id, dept_code, student_email) VALUES ('$fwid','$banner','$type', '$email');"; ///get department code
+    $newappsql = "INSERT INTO s20_application_info(fw_id, banner_id, dept_code, student_email, assigned_to, assigned_when) VALUES ('$fwid','$banner','$type', '$email', 'student', 'CURRENT_TIMESTAMP');"; ///get department code
     $newappsql .= "INSERT INTO s20_application_util(fw_id, progress, rejected) VALUES ('$fwid', '0', '0');"; 
     $insql = mysqli_multi_query($db_conn, $newappsql);
     if(mysqli_errno($db_conn) == 0){

@@ -27,7 +27,7 @@ if (true  or isset($headers['token'])) {
             
             $sql = "SELECT s20_application_info.dept_code,`semester`,`year`,`class_number`,`progress`,`comments`,`rejected`,s20_application_info.fw_id, workflow
             FROM s20_application_info LEFT JOIN s20_application_util ON s20_application_info.fw_id = s20_application_util.fw_id LEFT JOIN s20_workflow_order ON s20_application_info.dept_code = s20_workflow_order.dept_code
-            WHERE student_email = '$email'";
+            WHERE student_email = '$email' ORDER BY s20_application_info.year DESC, s20_application_info.semester";
             
             $query = mysqli_query($db_conn, $sql);
             $count = mysqli_num_rows($query);

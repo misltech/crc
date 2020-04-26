@@ -1,8 +1,5 @@
 <?php
-//Employee data to be inserted here
-//This should also pull data from database if user already submitted data.
-
-
+ob_start();
 if (!isset($_SESSION)) {
   session_start();
 }
@@ -15,6 +12,7 @@ include_once('components/sidebar.php');
 include_once('components/topnav.php');
 include_once('../backend/db_con3.php');
 
+
 $firstname = null;
 $lastname = null;
 $company = null;
@@ -25,36 +23,39 @@ $suite = null;
 $city = null;
 $state = null;
 $zip = null;
+$fwid = null;
 
-if (isset($_GET['fwid'])) {  //check for exising fwid
-  $sql = "SELECT * FROM s20_application_util WHERE fw_id = " . $_GET['fwid']; //checks if its a reject
-  $qsql  = mysqli_query($db_conn, $sql);
-  $r = mysqli_num_rows($qsql);
+if (isset($_GET['fwid'])) { //check for exising fwid and that the parameter isnt new
   $fwid = $_GET['fwid'];
+  $sql  = "SELECT * FROM s20_application_util WHERE fw_id = '$fwid'"; //checks if its a reject
+  $qsql = mysqli_query($db_conn, $sql);
+  $r    = mysqli_num_rows($qsql);
+
   if ($r == 1) {
-    if (isset($_GET['exist']) and $_GET['exist'] == 1) { //if special param is set
-      $sql = "SELECT * FROM s20_company_info WHERE fw_id = " . $_GET['fwid'];
-      $qsql  = mysqli_query($db_conn, $sql);
-      $r = mysqli_num_rows($qsql);
-      $result = mysqli_fetch_assoc($qsql);
+    if (isset($_GET['new']) and $_GET['new'] == false) { //if special param is set
+      $sql       = "SELECT * FROM s20_company_info WHERE fw_id = '$fwid'";
+      $qsql      = mysqli_query($db_conn, $sql);
+      $r         = mysqli_num_rows($qsql);
+      $result    = mysqli_fetch_assoc($qsql);
       $firstname = $result['supervisor_first_name'];
-      $lastname = $result['supervisor_last_name'];
-      $company = $result['company_name'];
-      $email = $result['supervisor_email'];
-      $phone = $result['supervisor_phone'];
-      $address = $result['company_address'];
-      $suite = $result['company_address2'];
-      $city = $result['company_city'];
-      $state = $result['company_state'];
-      $zip = $result['company_zip'];
+      $lastname  = $result['supervisor_last_name'];
+      $company   = $result['company_name'];
+      $email     = $result['supervisor_email'];
+      $phone     = $result['supervisor_phone'];
+      $address   = $result['company_address'];
+      $suite     = $result['company_address2'];
+      $city      = $result['company_city'];
+      $state     = $result['company_state'];
+      $zip       = $result['company_zip'];
+    } else if (isset($_GET['new']) and $_GET['new'] = true) {
+      
     }
   } else {
-    //header('Location: ./application.php');
+    header('Location: ./application.php');
   }
 } else {
-  //header('Location: ./application.php');
+  header('Location: ./application.php');
 }
-
 ?>
 
 <div class="container">
@@ -65,11 +66,11 @@ if (isset($_GET['fwid'])) {  //check for exising fwid
 
     <div class="row">
       <div class="col-md-8 order-md-1 mx-auto">
-        <form class="needs-validation" method="post" action="myaccount" novalidate="" _lpchecked="1">
+        <form class="needs-validation" method="post">
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="firstName">First name</label>
-              <input type="text" class="form-control" name="firstname" id="firstname" placeholder="" value="<?php showifnotnull($firstname); ?>" required="" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg==&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
+              <input type="text" class="form-control" name="firstname" id="firstname" placeholder="" value="<?php showifnotnull($firstname); ?>" required="" >
             </div>
             <div class="col-md-6 mb-3">
               <label for="lastName">Last name</label>
@@ -175,16 +176,13 @@ if (isset($_GET['fwid'])) {  //check for exising fwid
 
           </div>
 
-
-
           <hr class="mb-4">
-
-          <?php if (isset($_GET['exist']) and $_GET['exist'] == 1) { ?>
-
-            <button name="submit" type="submit" class="btn btn-primary float-right">Save</button>
+          <?php if (isset($_GET['new']) and $_GET['new'] == true) { ?>
+            <button name="proceed" type="submit" class="btn btn-primary float-right">Proceed</button>
 
           <?php } else { ?>
-            <button name="submit" type="submit" class="btn btn-primary float-right">Proceed</button>
+            <button name="save" type="submit" class="btn btn-primary float-right">Save</button>
+
           <?php } ?>
 
 
@@ -195,18 +193,51 @@ if (isset($_GET['fwid'])) {  //check for exising fwid
   </div>
 
 </div>
-
-
-
-
-
 <?php
-/**SQL TRIGGER THAT ONLY WORKS FOR ONE TRIGGER
- * INSERT INTO s20_faculty_info(banner_id,faculty_email)
-*SELECT NEW.banner_id, NEW.email
-*FROM (SELECT 1 a) dummy
-*WHERE NEW.profile_type="faculty"
- */
+if (isset($_POST['proceed'])) {
+  $firstname = mysqli_real_escape_string($db_conn, $_POST['firstname']);
+  $lastname  = mysqli_real_escape_string($db_conn, $_POST['lastname']);
+  $organization = mysqli_real_escape_string($db_conn, $_POST['organization']);
+  $email        = mysqli_real_escape_string($db_conn, $_POST['email']);
+  $phonenumber  = mysqli_real_escape_string($db_conn, $_POST['phonenumber']);
+  $address      = mysqli_real_escape_string($db_conn, $_POST['address']);
+  $aptnumber    = mysqli_real_escape_string($db_conn, $_POST['aptnumber']);
+  $city         = mysqli_real_escape_string($db_conn, $_POST['city']);
+  $state        = mysqli_real_escape_string($db_conn, $_POST['state']);
+  $zip          = mysqli_real_escape_string($db_conn, $_POST['zipcode']);
+
+  $insert    = "INSERT INTO s20_company_info(fw_id,company_name,supervisor_email,supervisor_phone, supervisor_first_name, supervisor_last_name, company_address, company_address2, company_city, company_state, company_zip) VALUES('$fwid','$organization','$email','$phonenumber','$firstname', '$lastname', '$address', '$aptnumber', '$city', '$state','$zip')";
+  $insertsql = mysqli_query($db_conn, $insert);
+
+  //mysqli_errno($db_conn) == 0
+  if ($insertsql) {
+    exit(header('Location: ./lo.php?fwid=' . $fwid . "&new=true"));
+  } else {
+    alert("didnt work");
+  }
+} else if (isset($_POST['save'])) {
+  $firstname    = mysqli_real_escape_string($db_conn, $_POST['firstname']);
+  $lastname     = mysqli_real_escape_string($db_conn, $_POST['lastname']);
+  $organization = mysqli_real_escape_string($db_conn, $_POST['organization']);
+  $email        = mysqli_real_escape_string($db_conn, $_POST['email']);
+  $phonenumber  = mysqli_real_escape_string($db_conn, $_POST['phonenumber']);
+  $address      = mysqli_real_escape_string($db_conn, $_POST['address']);
+  $aptnumber    = mysqli_real_escape_string($db_conn, $_POST['aptnumber']);
+  $city         = mysqli_real_escape_string($db_conn, $_POST['city']);
+  $state        = mysqli_real_escape_string($db_conn, $_POST['state']);
+  $zip          = mysqli_real_escape_string($db_conn, $_POST['zipcode']);
+
+  $insert    = "UPDATE s20_company_info SET company_name = '$organization',supervisor_email = '$email',supervisor_phone = '$phonenumber', supervisor_firstname = '$firstname', supervisor_last_name = '$lastname', company_address = '$address', company_address2 = '$aptnumber', company_city = '$city', company_state = '$state', company_zip = '$zip'";
+  $insertsql = mysqli_query($db_conn, $insert);
+
+  if (mysqli_errno($db_conn) == 0) {
+    exit(header('Location: ./review.php?fwid=' . $fwid . "&rej=1"));
+  } else {
+    alert("app failed to submit");
+  }
+}
+
+
 include_once('components/footer.php');
 //semester form to input into database
 ?>
