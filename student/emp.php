@@ -13,29 +13,29 @@ include_once('components/topnav.php');
 include_once('../backend/db_con3.php');
 
 
-$firstname = null;
-$lastname = null;
-$company = null;
-$email = null;
-$phone = null;
-$address = null;
-$suite = null;
-$city = null;
-$state = null;
-$zip = null;
-$fwid = null;
-
+global $firstname;
+global $lastname;
+global $company;
+global $email;
+global $phone;
+global $address;
+global $suite;
+global $city;
+global $state;
+global $zip;
+global $fwid;
+global $existing_app;
 if (isset($_GET['fwid'])) { //check for exising fwid and that the parameter isnt new
   $fwid = $_GET['fwid'];
-  $sql  = "SELECT * FROM s20_application_util WHERE fw_id = '$fwid'"; //checks if its a reject
+  $banner = $_SESSION['banner'];
+  $sql  = "SELECT * FROM s20_application_info WHERE fw_id = '$fwid' AND banner_id = '$banner'"; //checks if they are allowed to view page
   $qsql = mysqli_query($db_conn, $sql);
   $r    = mysqli_num_rows($qsql);
-
-  if ($r == 1) {
-    if (isset($_GET['new']) and $_GET['new'] == false) { //if special param is set
-      $sql       = "SELECT * FROM s20_company_info WHERE fw_id = '$fwid'";
-      $qsql      = mysqli_query($db_conn, $sql);
-      $r         = mysqli_num_rows($qsql);
+  if ($r == 1) {  //no application found
+    $sql       = "SELECT * FROM s20_company_info WHERE fw_id = '$fwid'";
+    $qsql      = mysqli_query($db_conn, $sql);
+    $r         = mysqli_num_rows($qsql);
+    if ($r == 1) {
       $result    = mysqli_fetch_assoc($qsql);
       $firstname = $result['supervisor_first_name'];
       $lastname  = $result['supervisor_last_name'];
@@ -47,8 +47,9 @@ if (isset($_GET['fwid'])) { //check for exising fwid and that the parameter isnt
       $city      = $result['company_city'];
       $state     = $result['company_state'];
       $zip       = $result['company_zip'];
-    } else if (isset($_GET['new']) and $_GET['new'] = true) {
-      
+      $existing_app = true;
+    } else {
+      $existing_app = false;
     }
   } else {
     header('Location: ./application.php');
@@ -70,51 +71,51 @@ if (isset($_GET['fwid'])) { //check for exising fwid and that the parameter isnt
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="firstName">First name</label>
-              <input type="text" class="form-control" name="firstname" id="firstname" placeholder="" value="<?php showifnotnull($firstname); ?>" required="" >
+              <input type="text" class="form-control" name="firstname" id="firstname" placeholder="" value="<?php echo $firstname; ?>" required="">
             </div>
             <div class="col-md-6 mb-3">
               <label for="lastName">Last name</label>
-              <input type="text" class="form-control" name="lastname" id="lastName" placeholder="" value="<?php showifnotnull($lastname); ?>" required="">
+              <input type="text" class="form-control" name="lastname" id="lastName" placeholder="" value="<?php echo $lastname; ?>" required="">
             </div>
 
           </div>
 
           <div class="mb-3">
             <label for="email">Name of Organization: </label>
-            <input type="email" class="form-control" name="email" id="email" value="<?php showifnotnull($company); ?>" placeholder="">
+            <input type="text" class="form-control" name="organization" id="org" value="<?php echo $company; ?>" placeholder="">
           </div>
           <div class="row">
             <div class="col-md-8 mb-3">
               <label for="email">Email </label>
-              <input type="email" class="form-control" name="email" id="email" value="<?php showifnotnull($email); ?>" placeholder="">
+              <input type="email" class="form-control" name="email" id="email" value="<?php echo $email; ?>" placeholder="">
             </div>
 
             <div class="col-md-4 mb-3">
               <label for="phonenumber">Phone number</label>
-              <input type="tel" maxlength=10 id="phonenumber" value="<?php showifnotnull($phone); ?>" name="phonenumber" type="text" class="form-control">
+              <input type="tel" maxlength=10 id="phonenumber" value="<?php echo $phone; ?>" name="phonenumber" type="text" class="form-control">
 
             </div>
           </div>
           <div class="mb-3">
             <label for="address">Site address</label>
-            <input type="text" class="form-control" name="address" id="address" value="<?php showifnotnull($address); ?>" required="">
+            <input type="text" class="form-control" name="address" id="address" value="<?php echo $address; ?>" required="">
           </div>
 
           <div class="mb-3">
             <label for="address2">Building/Suite#</label>
-            <input type="text" class="form-control" name="aptnumber" id="address2" value="<?php showifnotnull($suite); ?>" placeholder="Apartment or suite">
+            <input type="text" class="form-control" name="aptnumber" id="address2" value="<?php echo $suite; ?>" placeholder="Apartment or suite">
           </div>
 
           <div class="row">
             <div class="col-md-3 mb-3">
               <label for="zip">City</label>
-              <input type="text" class="form-control" name="city" id="zip" value="<?php showifnotnull($city); ?>" placeholder="" required="">
+              <input type="text" class="form-control" name="city" id="zip" value="<?php echo $city; ?>" placeholder="" required="">
             </div>
 
             <div class="col-md-4 mb-3">
               <label for="state">State</label>
-              <select class="custom-select d-block w-100" name="state" id="state" value="<?php showifnotnull($state); ?>" required="">
-                <option selected><?php showifnotnull($state); ?></option>
+              <select class="custom-select d-block w-100" name="state" id="state" value="<?php echo $state; ?>" required="">
+                <option selected><?php echo $state; ?></option>
                 <option value="AL">Alabama</option>
                 <option value="AK">Alaska</option>
                 <option value="AZ">Arizona</option>
@@ -171,13 +172,13 @@ if (isset($_GET['fwid'])) { //check for exising fwid and that the parameter isnt
             </div>
             <div class="col-md-3 mb-3">
               <label for="zip">Zip</label>
-              <input type="text" name="zipcode" class="form-control" id="zip" value="<?php showifnotnull($zip); ?>" placeholder="" required="">
+              <input type="text" name="zipcode" class="form-control" id="zip" value="<?php echo $zip; ?>" placeholder="" required="">
             </div>
 
           </div>
 
           <hr class="mb-4">
-          <?php if (isset($_GET['new']) and $_GET['new'] == true) { ?>
+          <?php if (!$existing_app) { ?>
             <button name="proceed" type="submit" class="btn btn-primary float-right">Proceed</button>
 
           <?php } else { ?>
@@ -194,7 +195,7 @@ if (isset($_GET['fwid'])) { //check for exising fwid and that the parameter isnt
 
 </div>
 <?php
-if (isset($_POST['proceed'])) {
+if (isset($_POST['proceed']) or isset($_POST['save'])) {
   $firstname = mysqli_real_escape_string($db_conn, $_POST['firstname']);
   $lastname  = mysqli_real_escape_string($db_conn, $_POST['lastname']);
   $organization = mysqli_real_escape_string($db_conn, $_POST['organization']);
@@ -206,34 +207,28 @@ if (isset($_POST['proceed'])) {
   $state        = mysqli_real_escape_string($db_conn, $_POST['state']);
   $zip          = mysqli_real_escape_string($db_conn, $_POST['zipcode']);
 
-  $insert    = "INSERT INTO s20_company_info(fw_id,company_name,supervisor_email,supervisor_phone, supervisor_first_name, supervisor_last_name, company_address, company_address2, company_city, company_state, company_zip) VALUES('$fwid','$organization','$email','$phonenumber','$firstname', '$lastname', '$address', '$aptnumber', '$city', '$state','$zip')";
-  $insertsql = mysqli_query($db_conn, $insert);
 
-  //mysqli_errno($db_conn) == 0
-  if ($insertsql) {
-    exit(header('Location: ./lo.php?fwid=' . $fwid . "&new=true"));
+  if ($existing_app) {
+    $update    = "UPDATE s20_company_info SET company_name = '$organization', supervisor_email = '$email', supervisor_phone = '$phonenumber', supervisor_first_name = '$firstname', supervisor_last_name = '$lastname', company_address = '$address', company_address2 = '$aptnumber', company_city = '$city', company_state = '$state', company_zip = '$zip'";
+   
+    $updatesql = mysqli_query($db_conn, $update);
+    if (mysqli_errno($db_conn) == 0) {
+      if(isset($_GET['edit']) and $_GET['edit'] == true){
+        exit(header('Location: ./review.php?fwid=' . $fwid .''));
+      }
+      exit(header('Location: ./lo.php?fwid=' . $fwid . "&new=true"));
+    } else {
+      alert("Update failed: " . mysqli_errno($db_conn));
+    }
   } else {
-    alert("didnt work");
-  }
-} else if (isset($_POST['save'])) {
-  $firstname    = mysqli_real_escape_string($db_conn, $_POST['firstname']);
-  $lastname     = mysqli_real_escape_string($db_conn, $_POST['lastname']);
-  $organization = mysqli_real_escape_string($db_conn, $_POST['organization']);
-  $email        = mysqli_real_escape_string($db_conn, $_POST['email']);
-  $phonenumber  = mysqli_real_escape_string($db_conn, $_POST['phonenumber']);
-  $address      = mysqli_real_escape_string($db_conn, $_POST['address']);
-  $aptnumber    = mysqli_real_escape_string($db_conn, $_POST['aptnumber']);
-  $city         = mysqli_real_escape_string($db_conn, $_POST['city']);
-  $state        = mysqli_real_escape_string($db_conn, $_POST['state']);
-  $zip          = mysqli_real_escape_string($db_conn, $_POST['zipcode']);
 
-  $insert    = "UPDATE s20_company_info SET company_name = '$organization',supervisor_email = '$email',supervisor_phone = '$phonenumber', supervisor_firstname = '$firstname', supervisor_last_name = '$lastname', company_address = '$address', company_address2 = '$aptnumber', company_city = '$city', company_state = '$state', company_zip = '$zip'";
-  $insertsql = mysqli_query($db_conn, $insert);
-
-  if (mysqli_errno($db_conn) == 0) {
-    exit(header('Location: ./review.php?fwid=' . $fwid . "&rej=1"));
-  } else {
-    alert("app failed to submit");
+    $insert    = "INSERT INTO s20_company_info(fw_id,company_name,supervisor_email,supervisor_phone, supervisor_first_name, supervisor_last_name, company_address, company_address2, company_city, company_state, company_zip) VALUES('$fwid','$organization','$email','$phonenumber','$firstname', '$lastname', '$address', '$aptnumber', '$city', '$state','$zip')";
+    $insertsql = mysqli_query($db_conn, $insert);
+    if ($insertsql) {
+      exit(header('Location: ./lo.php?fwid=' . $fwid . "&new=true"));
+    } else {
+      alert("Insert failed " . mysqli_errno($db_conn));
+    }
   }
 }
 

@@ -11,34 +11,20 @@ validate($GLOBALS['student_type']);
 include_once('components/header.php');
 include_once('components/sidebar.php');
 include_once('components/topnav.php');
-
-function getStates()
-{
-  include_once('components/state_dropdown.php');
-}
-//validate();
-
-
 include_once('../backend/db_con3.php');
 
+global $pass;
+global $email;
 if (isset($_SESSION['user_email'])) {
   $em = $_SESSION['user_email'];
-  $sql = "SELECT * FROM s20_student_info WHERE student_email='$em'";
-
-  $result = mysqli_query($db_conn, $sql);
-  if ($result) {
-    $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-    $firstname = $row['student_first_name'];
-    $lastname = $row['student_last_name'];
-    $middlename = $row['student_middle_initial'];
-    $aptnum = $row['student_apt_num'];
-    $phonenum = $row['student_phone'];
-    $address = $row['student_address'];
-    $city = $row['student_city'];
-    $state = $row['student_state'];
-    $zip = $row['student_zip'];
+  $sql = "SELECT * FROM s20_UserPass WHERE email='$em'";
+  $query = mysqli_query($db_conn, $sql);
+  if ($query) {
+    $result = mysqli_fetch_assoc($query);
+    $email = $result['email'];
+    $pass = $result['passcode'];
   } else {
-    //Student data not found
+
   }
 } else {
   redirect(null);
@@ -62,39 +48,39 @@ function filter()
     <nav class="mb-5 ">
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
-          <a class="nav-link active" id="student-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Change Email</a>
+          <a class="nav-link active text-dark" id="student-tab" data-toggle="tab"  data-target="#email">Change Email</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="password-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Change Password</a>
+          <a class="nav-link text-dark" id="password-tab" data-toggle="tab" data-target="#password" >Change Password</a>
         </li>
       </ul>
     </nav>
     <div class="tab-content" id="myTabContent">
-      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+      <div class="tab-pane fade show active" id="email" >
         <div class="row">
           <div class="col-md-8 order-md-1 mx-auto">
-            <form>
+            <form method="post">
               <div class="form-group row">
-                <label for="text" class="col-4 col-form-label">Old email address</label>
+                <label for="oem" class="col-4 col-form-label">Old Email address</label>
                 <div class="col-8">
-                  <input id="text" name="text" type="text" class="form-control" disabled>
+                  <input id="oem" name="oldemail" value="<?php echo $email;?>"type="email" class="form-control" disabled>
                 </div>
               </div>
               <div class="form-group row">
-                <label for="text1" class="col-4 col-form-label">New Email</label>
+                <label for="em" class="col-4 col-form-label">New Email address</label>
                 <div class="col-8">
-                  <input id="text1" name="text1" type="text" class="form-control" required="required">
+                  <input id="em" name="newemail" type="email" class="form-control" required="required">
                 </div>
               </div>
               <div class="form-group row">
-                <label for="text2" class="col-4 col-form-label">Confirm Email</label>
+                <label for="nem" class="col-4 col-form-label">Confirm Email address</label>
                 <div class="col-8">
-                  <input id="text2" name="text2" type="text" class="form-control" required="required">
+                  <input id="nem" name="confirmemail" type="email" class="form-control" required="required">
                 </div>
               </div>
               <div class="form-group row">
                 <div class="offset-4 col-8">
-                  <button name="submit" type="submit" class="btn btn-primary float-right mt-5">Save</button>
+                  <button name="SubmitEmail" type="submit" class="btn btn-primary float-right mt-5">Save</button>
                 </div>
               </div>
             </form>
@@ -102,10 +88,10 @@ function filter()
 
         </div>
       </div>
-      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="password-tab">
+      <div class="tab-pane fade" id="password">
         <div class="row">
           <div class="col-md-8 order-md-1 mx-auto">
-            <form>
+            <form method="post">
               <div class="form-group row">
                 <label for="oldpass" class="col-4 col-form-label">Old Password</label>
                 <div class="col-8">
@@ -115,7 +101,7 @@ function filter()
                         <i class="fa fa-lock"></i>
                       </div>
                     </div>
-                    <input id="oldpass" name="oldpass" type="text" required="required" class="form-control">
+                    <input id="oldpass" name="oldpass" type="password" required="required" class="form-control">
                   </div>
                 </div>
               </div>
@@ -128,7 +114,7 @@ function filter()
                         <i class="fa fa-lock"></i>
                       </div>
                     </div>
-                    <input id="newpass" name="newpass" type="text" required="required" class="form-control">
+                    <input id="newpass" name="newpass" type="password" required="required" class="form-control">
                   </div>
                 </div>
               </div>
@@ -141,13 +127,13 @@ function filter()
                         <i class="fa fa-lock"></i>
                       </div>
                     </div>
-                    <input id="confirmpass" name="confirmpass" type="text" required="required" class="form-control">
+                    <input id="confirmpass" name="confirmpass" type="password" required="required" class="form-control">
                   </div>
                 </div>
               </div>
               <div class="form-group row">
                 <div class="offset-4 col-8">
-                  <button name="submit" type="submit" class="btn btn-primary float-right mt-5">Save</button>
+                  <button name="SubmitPass" type="submit" class="btn btn-primary float-right mt-5">Save</button>
                 </div>
               </div>
             </form>
@@ -162,60 +148,46 @@ function filter()
 
 include_once('./components/footer.php');
 
+if (isset($_POST['SubmitPass']) ) {
+  $oldpass = mysqli_real_escape_string($db_conn, $_POST['oldpass']);
+  $newpass = mysqli_real_escape_string($db_conn, $_POST['newpass']);
+  $confirmpass = mysqli_real_escape_string($db_conn, $_POST['confirmpass']);
+  
 
-if (isset($_POST['modify'])) {
-  $firstname = mysqli_real_escape_string($db_conn, $_POST['firstname']);
-  $lastname = mysqli_real_escape_string($db_conn, $_POST['lastname']);
-  $middlename = mysqli_real_escape_string($db_conn, $_POST['middlename']);
-  $aptnum = mysqli_real_escape_string($db_conn, $_POST['aptnumber']);
-  $phonenum = mysqli_real_escape_string($db_conn, $_POST['phonenumber']);
-  $address = mysqli_real_escape_string($db_conn, $_POST['address']);
-  $city = mysqli_real_escape_string($db_conn, $_POST['city']);
-  $state = mysqli_real_escape_string($db_conn, $_POST['state']);
-  $zip = mysqli_real_escape_string($db_conn, $_POST['zipcode']);
-
-  $checksql = "SELECT student_email FROM s20_student_info  WHERE student_email = " . $_SESSION['user_email'];
-
-  $w  = mysqli_query($db_conn, $checksql);
-  $r = mysqli_num_rows($w);
-  $user_email = $_SESSION['user_email'];
-  $banner_id = $_SESSION['banner'];
-  if ($r == 0) {  //if records not found
-
-    $insert_update = "INSERT INTO s20_student_info (student_first_name, student_last_name, student_middle_initial,student_phone,student_address,student_apt_num,student_city,student_state,
-    student_zip, student_email, banner_id) VALUES ('$firstname', '$lastname','$middlename',$phonenum','$address', '$aptnum', '$city', '$state','$zip', '$user_email', '$banner_id')";
-    print_r($insert);
-    $query = mysqli_query($db_conn, $insert);
-
-    if (mysqli_affected_rows($db_conn) > 0) {
-      //show update box
-      alert("success");
-    } else {
-      ///failed
-    }
-  } else {
-
-
-    $user_email = $_SESSION['user_email'];
-    $sql = "UPDATE s20_student_info SET student_first_name = '$firstname', student_last_name = '$lastname', student_middle_initial = '$middlename', 
-                  student_phone = '$phonenum', student_address = '$address', student_apt_num = '$aptnum', student_city = '$city', 
-                  student_state = '$state', student_zip = '$zip' WHERE student_email = '$user_email'";
-    console_log($sql);
-    $query = mysqli_query($db_conn, $sql);
-
-    if (mysqli_affected_rows($db_conn) > 0) {
-      //echo "<meta http-equiv='refresh' content='0'>"; //this refresh the page. 
-      echo '<script>$("#saveaccount").notify("Success!");</script>';
-    } else {
-      return alert("Update failed");
-    }
+  if(empty($newpass) or empty($confirmpass)){
+    exit();
+  }
+  else if($newpass === $confirmpass){
+      $update = "UPDATE s20_UserPass SET passcode='$confirmpass' WHERE email = '$email'";
+      $uquery = mysqli_query($db_conn, $update);
+      if($uquery){
+        alert("Changed password");
+      }
+      else{
+        alert("Update failed " . mysqli_errno($db_conn));
+      }
   }
 }
+else if(isset($_POST['SubmitEmail'])){
+  $newemail = mysqli_real_escape_string($db_conn, $_POST['newemail']);
+  $confirmemail = mysqli_real_escape_string($db_conn, $_POST['confirmemail']);
 
+  if(empty($newemail) or empty($confirmemail)){
+    exit();
+  }
+  else if($newemail === $confirmemail){
+    $update = "UPDATE s20_UserPass SET email='$confirmemail' WHERE email = '$email'";
+    $uquery = mysqli_query($db_conn, $update);
+
+    if($uquery){
+      alert("Changed email");
+    }
+    else{
+      alert("Update failed " . mysqli_errno($db_conn));
+    }
+  }
+  
+}
 
 mysqli_close($db_conn);
-
-
-
-
 ?>
