@@ -17,13 +17,24 @@ $(document).ready(function () {
 
     function filter(res) {
         if (res.length == 0) {
-            $('.jumbotron').append("<div class='alert alert-dark text-center'>No applications assigned for you.</div>");
+            $('.jumbotron').append("<div class='alert alert-dark text-center'>No applications currently assigned to you. Try again later.</div>");
         }
         if (res.length > 0) {
 
             for (let index = 0; index < res.length; index++) {
                 const element = res[index];
 
+                if(element[1].progress == -1){
+                    htmlElement = '<div class="hvr-underline-from-center card border-light mb-3 w-100">';
+                    htmlElement += '<div class="card-header">Internship</div><div class="card-body text-secondary">'
+                    htmlElement += '<h6 class="card-text text-align-center"><span class="float-left">' + element[1].dept + " " + element[1].classnumber + '</span><span class="float-right">' + element[1].semester + ' ' + element[1].year + '</span></h6>';
+                    htmlElement += '<div class="text-center"><a href="stu.php?new=true&fwid=' + element[1].fwid + '"';
+                    htmlElement += 'class="mt-2 btn btn-primary text-center">Start Application</a></div></div></div>';
+                    $('.apps').append(htmlElement);
+                }
+                else{
+
+                
                 htmlElement = getRejectElement(checkReject(element[1].rejected));
                 htmlElement += '<div class="card-header">Internship' + buildReviseNotice(checkReject(element[1].rejected))+'</div>'
                 htmlElement += '<div class="card-body text-secondary">';
@@ -70,6 +81,7 @@ $(document).ready(function () {
                 });
                 
             }
+        }
 
         }
 
@@ -107,10 +119,10 @@ $(document).ready(function () {
 
     function getRejectElement(reject) {
         if (reject == 0) {
-            return '<div class="hvr-underline-from-center card border-light mb-3">';
+            return '<div class="hvr-underline-from-center card border-light mb-3 w-100">';
         }
         else {
-            return '<div class="hvr-underline-from-center card border-light mb-3">';
+            return '<div class="hvr-underline-from-center card border-light mb-3 w-100">';
         }
 
     }

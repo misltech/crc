@@ -157,7 +157,6 @@ function sendEmail($email, $subject, $message)
     // The HTML part of the e-mail (changing \n to a paragraph end tag, \r\n, then a paragraph begin)
     $HTML_PART = file_get_contents("email-template/email-top.html", FILE_USE_INCLUDE_PATH)
         . "<p>" . preg_replace("/\n/", "</p>\r\n<p>", $message) .
-        "</p>\n<p><a href=\"" . API_URL . "\">Click here to go to the fieldwork system.</a></p>" .
         file_get_contents("email-template/email-bottom.html", FILE_USE_INCLUDE_PATH);
 
     // Right now, this is how I incorporate RFC-compliant multipart e-mail.

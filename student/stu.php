@@ -11,30 +11,36 @@ include_once('components/topnav.php');
 include_once('../backend/db_con3.php');
 
 
-$firstname = null;
-$lastname = null;
-$middlename = null;
-$aptnum = null;
-$phonenum = null;
-$address = null;
-$city = null;
-$state = null;
-$zip = null;
-$email = null;
-$credits = null;
+global $firstname;
+global $lastname;
+global $middlename;
+global $aptnum;
+global $phonenum;
+global $address;
+global $city;
+global $state;
+global $zip;
+global $email;
+global $credits;
+global $existing_app;
 if (isset($_GET['fwid'])) { //check for exising fwid and that the parameter isnt new
     $fwid = $_GET['fwid'];
-    $sql  = "SELECT * FROM s20_application_util WHERE fw_id = '$fwid'"; //checks if its a reject
+    $banner = $_SESSION['banner'];
+    $sql  = "SELECT * FROM s20_application_info WHERE fw_id = '$fwid' AND banner_id = '$banner'"; //checks if they are allowed to view page
+    console_log($sql);
     $qsql = mysqli_query($db_conn, $sql);
-    $r    = mysqli_num_rows($qsql);
-
-    if ($r == 1) {
-        if (isset($_GET['new']) and $_GET['new'] == false) { //if special param is set
-            $sql  = "SELECT * FROM s20_student_info WHERE fw_id = '$fwid'";
-            $qsql = mysqli_query($db_conn, $sql);
-            $r  = mysqli_num_rows($qsql);
-            $row = mysqli_fetch_assoc($result);
+    $r = mysqli_num_rows($qsql); //checks if there is records found for this account
+    console_log($r);
+    if ($r == 1) { //record shouldve been found if not redirect to application page
+        $sql  = "SELECT * FROM s20_student_info WHERE fw_id = '$fwid'";
+        console_log($sql);
+        $qsql = mysqli_query($db_conn, $sql);
+        $r  = mysqli_num_rows($qsql);
+        console_log($r);
+        if ($r == 1) {  // we populate the form using data from database
+            $row = mysqli_fetch_assoc($qsql);
             $firstname = $row['student_first_name'];
+            console_log($firstname);
             $lastname = $row['student_last_name'];
             $email = $row['student_email'];
             $middlename = $row['student_middle_initial'];
@@ -45,8 +51,9 @@ if (isset($_GET['fwid'])) { //check for exising fwid and that the parameter isnt
             $state = $row['student_state'];
             $zip = $row['student_zip'];
             $credits = $row['credits_registered'];
-        } else if (isset($_GET['new']) and $_GET['new'] = true) {
-
+            $existing_app = true;
+        } else {
+            $existing_app = false;
         }
     } else {
         header('Location: ./application.php');
@@ -54,8 +61,6 @@ if (isset($_GET['fwid'])) { //check for exising fwid and that the parameter isnt
 } else {
     header('Location: ./application.php');
 }
-
-
 
 ?>
 
@@ -77,7 +82,7 @@ if (isset($_GET['fwid'])) { //check for exising fwid and that the parameter isnt
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="lastName">Middle Initial</label>
-                        <input type="text" class="form-control" name="middlename" id="middlename" maxlength="1" placeholder="" value="<?php echo $middlename; ?>" required>
+                        <input type="text" class="form-control" name="middlename" id="middlename" maxlength="1" placeholder="" value="<?php echo $middlename; ?>">
                     </div>
                 </div>
 
@@ -169,23 +174,23 @@ if (isset($_GET['fwid'])) { //check for exising fwid and that the parameter isnt
 
                 </div>
                 <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label for="phonenumber">Phone number</label>
-                    <input type="tel" id="phonenumber" value="<?php echo $phonenum; ?>" name="phonenumber" type="text" class="form-control">
+                    <div class="col-md-6 mb-3">
+                        <label for="phonenumber">Phone number</label>
+                        <input type="tel" id="phonenumber" value="<?php echo $phonenum; ?>" name="phonenumber" type="text" class="form-control">
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label for="credits registered">Credits registered</label>
+                        <input type="number" id="credits" maxlength="2" value="<?php echo $phonenum; ?>" name="credits" type="text" class="form-control col-md-4">
+                    </div>
+
                 </div>
 
-                <div class="col-md-4 mb-3">
-                    <label for="credits registered">Credits registered</label>
-                    <input type="number" id="credits" maxlength="2" value="<?php echo $phonenum; ?>" name="credits" type="text" class="form-control col-md-4">
-                </div>
-
-                </div>
-                
 
                 <hr class="mb-4">
 
 
-                <?php if (isset($_GET['new']) and $_GET['new'] == true) { ?>
+                <?php if (!$existing_app) { ?>
                     <button name="proceed" type="submit" class="btn btn-primary float-right">Proceed</button>
 
                 <?php } else { ?>
@@ -199,7 +204,7 @@ if (isset($_GET['fwid'])) { //check for exising fwid and that the parameter isnt
     <?php
 
 
-    if (isset($_POST['proceed'])) {
+    if (isset($_POST['proceed']) or isset($_POST['save'])) {
         $firstname = mysqli_real_escape_string($db_conn, $_POST['firstname']);
         $lastname = mysqli_real_escape_string($db_conn, $_POST['lastname']);
         $middlename = mysqli_real_escape_string($db_conn, $_POST['middlename']);
@@ -211,40 +216,36 @@ if (isset($_GET['fwid'])) { //check for exising fwid and that the parameter isnt
         $zip = mysqli_real_escape_string($db_conn, $_POST['zipcode']);
         $credits = mysqli_real_escape_string($db_conn, $_POST['credits']);
 
-    
-        $insert = "INSERT INTO s20_student_info (fw_id, student_first_name, student_last_name, student_middle_initial,student_phone,student_address,student_apt_num,student_city,student_state,
-       student_zip, student_email, credits_registered) VALUES ('$fwid','$firstname', '$lastname','$middlename',$phonenum','$address', '$aptnum', '$city', '$state','$zip', '$user_email', '$credits')";
-        $insertsql = mysqli_query($db_conn, $insert);
-        
-        if ($insertsql) {
-            exit(header('Location: ./sem.php?fwid=' . $fwid . "&new=true"));
-          } else {
-            alert("didnt work");
-          }
-            
-    } else if (isset($_POST['save'])) {
-        $firstname = mysqli_real_escape_string($db_conn, $_POST['firstname']);
-        $lastname = mysqli_real_escape_string($db_conn, $_POST['lastname']);
-        $middlename = mysqli_real_escape_string($db_conn, $_POST['middlename']);
-        $aptnum = mysqli_real_escape_string($db_conn, $_POST['aptnumber']);
-        $phonenum = mysqli_real_escape_string($db_conn, $_POST['phonenumber']);
-        $address = mysqli_real_escape_string($db_conn, $_POST['address']);
-        $city = mysqli_real_escape_string($db_conn, $_POST['city']);
-        $zip = mysqli_real_escape_string($db_conn, $_POST['zipcode']);
-        $state = mysqli_real_escape_string($db_conn, $_POST['state']);
-        $credits = mysqli_real_escape_string($db_conn, $_POST['credits']);
-
+        if($existing_app){
         $update = "UPDATE s20_student_info SET student_first_name = '$firstname', student_last_name = '$lastname', student_middle_initial = '$middlename', 
         student_phone = '$phonenum', student_address = '$address', student_apt_num = '$aptnum', student_city = '$city', 
-        student_state = '$state', student_zip = '$zip' credits_registered = '$credits' WHERE fw_id = '$fwid'";
+        student_state = '$state', student_zip = '$zip', credits_registered = '$credits' WHERE fw_id = '$fwid'";
+        
         $updatesql = mysqli_query($db_conn, $update);
 
         if (mysqli_errno($db_conn) == 0) {
-            exit(header('Location: ./review.php?fwid=' . $fwid . "&rej=1"));
-        } else {
-            alert("app failed to submit");
-          }
+            // exit(header('Location: ./review.php?fwid=' . $fwid . "&rej=1"));
+            if(isset($_GET['edit']) and $_GET['edit'] == true){
+                exit(header('Location: ./review.php?fwid=' . $fwid .''));
+              }
+            exit(header('Location: ./sem.php?fwid=' . $fwid . "&new=true"));
 
+        } else {
+            alert("Update failed: " . mysqli_errno($db_conn));
+        }
+
+        }
+        else{
+            $insert = "INSERT INTO s20_student_info (fw_id, student_first_name, student_last_name, student_middle_initial,student_phone,student_address,student_apt_num,student_city,student_state,
+            student_zip, student_email, credits_registered) VALUES ('$fwid','$firstname', '$lastname','$middlename','$phonenum','$address', '$aptnum', '$city', '$state','$zip', '$email', '$credits')";
+            $insertsql = mysqli_query($db_conn, $insert);
+            if ($insertsql) {
+                exit(header('Location: ./sem.php?fwid=' . $fwid . "&new=true"));
+            } else {
+                alert("Insert failed " . mysqli_errno($db_conn));
+            }
+        }
+       
     }
 
 
