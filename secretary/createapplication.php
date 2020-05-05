@@ -84,7 +84,40 @@ if (isset($_GET['found']) and $_GET['found'] == true) {
                         </div>
                     </form>
 
+                    </div>
                 </div>
+            </span></h1>
+        <p class="lead">You can view and modify current courses here.</p>
+        <hr class="my-4">
+        <div class="d-flex justify-content-center mt-5">
+
+            <form method="POST">
+
+                <div class="form-group">
+                    <label for="uniquesearch">Input a students email address</label>
+                    <input id="uniquesearch" name="uniquesearch" type="text" class="form-control" aria-describedby="uniquesearchHelpBlock" required="required">
+                    <span id="uniquesearchHelpBlock" class="form-text text-muted">xx@newpaltz.edu</span>
+                </div>
+
+                <div class="form-group">
+                <label for="Semester_Input">Select a Semester</label>
+                    <input type="radio" id="Spring" name="semester" value="Spring"> <label for="Spring">Spring</label><br>
+                    <input type="radio" id="Fall"   name="semester" value="Fall">   <label for="Fall">Fall</label><br>
+                    <input type="radio" id="Winter" name="semester" value="Winter"> <label for="Winter">Winter</label><br>
+                </div>
+
+                <!--Need to retrieve classes-->
+
+
+
+
+                    <button name="submit" type="submit" class="btn btn-primary float-right">Submit Application</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
 
             </div>
         </div>
