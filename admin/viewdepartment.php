@@ -66,7 +66,7 @@ include_once('components/topnav.php');
                             <td><?php echo $chair; ?></td>
                             <td><?php echo $dean; ?></td>
                             <td><?php echo $secretary; ?></td>
-                            <td><a class="btn btn-primary btn-block" href="#">View</a></button></td>
+                            <td><a class="btn btn-primary btn-block" href="./editdepartment.php?department=<?php echo $code; ?>">View</a></button></td>
 
                         </tr>
 

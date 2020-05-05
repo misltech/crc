@@ -28,7 +28,7 @@ if (isset($_GET['fwid'])) {  //check for exising fwid
       $result = mysqli_fetch_assoc($qsql);
       $title = $result['project_name'];
       $semester = $result['semester'] . " " . $result['year'];
-      $classnumber = $result['class_number'];
+      $classnumber = $result['course_number'];
       $grademode = $result['grade_mode'];
       $credits = $result['academic_credits'];
       $hours = $result['hours_per_wk'];
@@ -115,7 +115,7 @@ if (isset($_GET['fwid'])) {  //check for exising fwid
 
           <div class="form-group row mt-5">
             <div class="offset-4 col-8">
-              <?php if (!$existing_app) { ?>
+              <?php if ($existing_app) { ?>
                 <button name="proceed" type="submit" class="btn btn-primary float-right">Proceed</button>
               <?php } else { ?>
                 <button name="save" type="submit" class="btn btn-primary float-right">Save</button>
@@ -146,16 +146,17 @@ if (isset($_POST['proceed']) or isset($_POST['save'])) {
   $classnum = $sem[1];
   $classdept = $sem[0];
 
-  $update = "UPDATE s20_application_info SET project_name = '$title', dept_code='$classdept', class_number='$classnum', grade_mode = '$grademode', academic_credits = '$credits', hours_per_wk = '$hours' WHERE fw_id = '$fwid'";
+  $update = "UPDATE s20_application_info SET project_name = '$title', dept_code='$classdept', course_number='$classnum', grade_mode = '$grademode', academic_credits = '$credits', hours_per_wk = '$hours' WHERE fw_id = '$fwid'";
   console_log($update);
   $updatesql = mysqli_query($db_conn, $update);
 
   if ($updatesql) {
-      if($_POST['proceed']){
-        exit(header('Location: ./emp.php?fwid=' . $fwid . "&new=true"));
-      }
+  
       if(isset($_GET['edit']) and $_GET['edit'] == true){
         exit(header('Location: ./review.php?fwid=' . $fwid .''));
+      }
+      else{
+        exit(header('Location: ./emp.php?fwid=' . $fwid . "&new=true"));
       }
   } 
   else  if (mysqli_errno($db_conn) == 1062) { //if duplicates? !?!

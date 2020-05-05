@@ -25,22 +25,17 @@ global $credits;
 global $existing_app;
 if (isset($_GET['fwid'])) { //check for exising fwid and that the parameter isnt new
     $fwid = $_GET['fwid'];
-    $banner = $_SESSION['banner'];
-    $sql  = "SELECT * FROM s20_application_info WHERE fw_id = '$fwid' AND banner_id = '$banner'"; //checks if they are allowed to view page
-    console_log($sql);
+    $stuemail = $_SESSION['user_email'];
+    $sql  = "SELECT * FROM s20_application_info WHERE fw_id = '$fwid' AND student_email = '$stuemail'"; //checks if they are allowed to view page
     $qsql = mysqli_query($db_conn, $sql);
     $r = mysqli_num_rows($qsql); //checks if there is records found for this account
-    console_log($r);
     if ($r == 1) { //record shouldve been found if not redirect to application page
         $sql  = "SELECT * FROM s20_student_info WHERE fw_id = '$fwid'";
-        console_log($sql);
         $qsql = mysqli_query($db_conn, $sql);
         $r  = mysqli_num_rows($qsql);
-        console_log($r);
         if ($r == 1) {  // we populate the form using data from database
             $row = mysqli_fetch_assoc($qsql);
             $firstname = $row['student_first_name'];
-            console_log($firstname);
             $lastname = $row['student_last_name'];
             $email = $row['student_email'];
             $middlename = $row['student_middle_initial'];

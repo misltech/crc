@@ -19,7 +19,6 @@ global $rejected;
 global $comments;
 global $stage;
 global $banner;
-global $appbanner;
 global $title;
 global $semester;
 global $classnumber;
@@ -29,16 +28,15 @@ global $hours;
 global $showedits;
 if (isset($_GET['fwid'])) {  //check for rejected application
     $fwid = $_GET['fwid'];
-    $banner = $_SESSION['banner'];
-    $sql  = "SELECT * FROM s20_application_info WHERE fw_id = '$fwid' AND banner_id = '$banner'"; //checks if they are allowed to view page
+    $stuemail = $_SESSION['user_email'];
+    $sql  = "SELECT * FROM s20_application_info WHERE fw_id = '$fwid' AND student_email = '$stuemail'"; //checks if they are allowed to view page
     $qsql  = mysqli_query($db_conn, $sql);
     $r = mysqli_num_rows($qsql);
     if ($r == 1) {  //if application is found
         $result = mysqli_fetch_assoc($qsql);
-        $appbanner = $result['banner_id'];
         $title = $result['project_name'];
         $semester = $result['semester'] . " " . $result['year'];
-        $classnumber = $result['dept_code'] . " " . $result['class_number'];
+        $classnumber = $result['dept_code'] . " " . $result['course_number'];
         $grademode = $result['grade_mode'];
         $credits = $result['academic_credits'];
         $hours = $result['hours_per_wk'];
@@ -127,10 +125,6 @@ if (isset($_GET['fwid'])) {  //check for rejected application
                     
                     ?>
                     <tbody>
-                            <tr>
-                                <td scope="row">N#</td>
-                                <td><?php echo $appbanner; ?></td>
-                            </tr>
                             <tr>
                                 <td scope="row">Name</td>
                                 <td><?php echo $name; ?></td>
@@ -303,11 +297,11 @@ if (isset($_POST['modify'])) {
     console_log($_POST['modify']);
     //check if all sections are completed. then move application to next stage.
     $sql = "SELECT * FROM s20_application_util WHERE fw_id = '$fwid'";
-        $query = mysqli_query($db_conn, $sql);
-        $result = mysqli_fetch_assoc($qsql);
+    $query = mysqli_query($db_conn, $sql);
+    $result = mysqli_fetch_assoc($query);
 
-        if($result['progress'] == 0 or $result['assigned_to'] == "student" ){
-            $update = "UPDATE s20_application_util SET rejected='0' WHERE fw_id ='$fwid'";
+        if($result['progress'] == 0 and $result['assigned_to'] == "student" ){  //start of a new app
+            $update = "UPDATE s20_application_util SET rejected='0', progress ='1' WHERE fw_id ='$fwid'";
             $up = mysqli_query($db_conn, $update);
             if($up){
                 //confirm then redirect

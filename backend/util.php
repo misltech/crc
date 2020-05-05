@@ -4,7 +4,7 @@
         session_start(); 
     } 
 
-include_once('config.php');
+include_once 'config.php';
 
 /**
 * A function to do a javascript alert 
@@ -13,6 +13,13 @@ function alert($msg) {
     echo "<script type='text/javascript'>alert('$msg');</script>";
 }
 
+/**
+ * Gets api url from config
+ */
+
+function getAPI(){
+    return API_URL;
+}
 /**
  * redirects based on account type. 
  * This mehtod can also force a redirect to login page.

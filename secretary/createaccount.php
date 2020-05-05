@@ -21,9 +21,9 @@ include_once '../backend/db_con3.php';
     <nav class="mb-5">
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
-          <a class="nav-link active text-dark" id="student-tab" data-toggle="tab" href="#student-body" role="tab" aria-controls="info" aria-selected="true">Student</a>
+          <a class="nav-link active text-dark" id="student-tab" data-toggle="tab" href="#student-body" role="tab" aria-controls="info" aria-selected="true">Create Student</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link text-dark" id="course-tab" data-toggle="tab" href="#dean-body" role="tab" aria-controls="course" aria-selected="false">Dean</a>
         </li>
         <li class="nav-item">
@@ -31,10 +31,10 @@ include_once '../backend/db_con3.php';
         </li>
         <li class="nav-item">
           <a class="nav-link text-dark" id="learning-tab" data-toggle="tab" href="#instructor-body" role="tab" aria-controls="learning" aria-selected="false">Instructor</a>
-        </li>
+        </li> -->
       </ul>
     </nav>
-
+    <div class="col-md-8 mx-auto">
     <div class="tab-content" id="createaccounttab">
       <div class="tab-pane  show active" id="student-body" role="tabpanel" aria-labelledby="student-tab">
         <form method="POST">
@@ -45,29 +45,22 @@ include_once '../backend/db_con3.php';
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-4 col-form-label" for="banner">Banner ID</label>
-            <div class="col-8">
-              <input id="banner" name="banner" type="text" class="form-control" required="required">
-            </div>
-          </div>
-          <div class="form-group row">
             <label for="type" class="col-4 col-form-label">Department</label>
             <div class="col-8">
-              <select id="type" name="utype" class="custom-select" value="" required="required">
-
+              <select id="type" name="utype" class="custom-select" size="1" value="" required="required">
                 <?php
-                $sql = "SELECT dept_code, dept_name FROM s20_academic_dept_info ORDER BY dept_code ASC";
+                $sql = "SELECT * FROM s20_course_numbers ORDER BY dept_code ASC";
                 $qsql  = mysqli_query($db_conn, $sql);
                 $r = mysqli_num_rows($qsql);
 
                 if ($r > 0) {
                   while ($result = mysqli_fetch_assoc($qsql)) {
                     $id = $result['id'];
-                    $deptname = $result['dept_name'];
+                    $coursenum = $result['course_num'];
                     $deptcode = $result['dept_code'];
                 ?>
 
-                    <option value="<?php showifnotnull($deptcode); ?>"><?php showifnotnull($deptname); ?></option>
+                    <option value="<?php echo $id; ?>"><?php echo $deptcode ." ". $coursenum; ?></option>
 
                 <?php
                   }
@@ -75,10 +68,12 @@ include_once '../backend/db_con3.php';
                   //form error try again later. redirect
                 }
                 ?>
-
               </select>
             </div>
           </div>
+
+         
+
           <div class="form-group row">
             <label for="type" class="col-4 col-form-label">Semester</label>
             <div class="col-8">
@@ -89,13 +84,15 @@ include_once '../backend/db_con3.php';
           </div>
 
           <div class="form-group row">
-            <label for="type" class="col-4 col-form-label">User Type</label>
+            <label for="gm" class="col-4 col-form-label">Grade Mode</label>
             <div class="col-8">
-              <select id="type" name="utype" class="custom-select" required="required" disabled>
-                <option value="student">Student</option>
+              <select id="gm" value="<?php echo $grademode; ?>" name="gm" required="required" class="custom-select">
+                <option value="Letter Grades">Letter Grades</option>
+                <option value="Pass/Fail">Pass/Fail</option>
               </select>
             </div>
           </div>
+
           <div class="form-group row">
             <div class="offset-4 col-8">
               <button name="submit-student" type="submit float-right" class="btn btn-primary">Create</button>
@@ -104,101 +101,11 @@ include_once '../backend/db_con3.php';
         </form>
 
       </div>
-      <div class="tab-pane  show " id="dean-body" role="tabpanel" aria-labelledby="dean-tab">
-        <form>
-          <div class="form-group row">
-            <label for="email" class="col-4 col-form-label">Email Address</label>
-            <div class="col-8">
-              <input id="email" name="email" placeholder="xxxx@email.com" type="email" class="form-control" required="required">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-4 col-form-label" for="banner">Banner ID</label>
-            <div class="col-8">
-              <input id="banner" name="banner" type="text" class="form-control" required="required">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="type" class="col-4 col-form-label">User Type</label>
-            <div class="col-8">
-              <select id="type" name="utype" class="custom-select" required="required" disabled>
-                <option value="dean">Dean</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="offset-4 col-8">
-              <button name="submit" id="student_create_button" type="submit float-right" class="btn btn-primary">Create</button>
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="tab-pane  show " id="chair-body" role="tabpanel" aria-labelledby="chair-tab">
-        <form>
-          <div class="form-group row">
-            <label for="email" class="col-4 col-form-label">Email Address</label>
-            <div class="col-8">
-              <input id="email" name="email" placeholder="xxxx@email.com" type="email" class="form-control" required="required">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-4 col-form-label" for="banner">Banner ID</label>
-            <div class="col-8">
-              <input id="banner" name="banner" type="text" class="form-control" required="required">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="type" class="col-4 col-form-label">User Type</label>
-            <div class="col-8">
-              <select id="type" name="utype" class="custom-select" required="required" disabled>
-                <option value="chair">Department Chair</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="offset-4 col-8">
-              <button name="submit" type="submit float-right" class="btn btn-primary">Create</button>
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="tab-pane  show " id="instructor-body" role="tabpanel" aria-labelledby="instructor-tab">
-        <form>
-          <div class="form-group row">
-            <label for="email" class="col-4 col-form-label">Email Address</label>
-            <div class="col-8">
-              <input id="email" name="email" placeholder="xxxx@email.com" type="email" class="form-control" required="required">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-4 col-form-label" for="banner">Banner ID</label>
-            <div class="col-8">
-              <input id="banner" name="banner" type="text" class="form-control" required="required">
-            </div>
-          </div>
-          <div class="form-group row">
-            <label for="type" class="col-4 col-form-label">User Type</label>
-            <div class="col-8">
-              <select id="type" name="utype" class="custom-select" required="required" disabled>
-                <option value="instructor">Instructor</option>
-                <option value="employer">Employer</option>
-                <option value="chair">Department Chair</option>
-                <option value="dean">Dean</option>
-                <option value="recreg">Records&Registration</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="offset-4 col-8">
-              <button name="submit" type="submit float-right" class="btn btn-primary">Create</button>
-            </div>
-          </div>
-        </form>
-      </div>
+
 
 
     </div>
-
+              </div>
 
 
 
@@ -218,7 +125,6 @@ include_once('../backend/db_con3.php');
 
 if (isset($_POST['submit-student'])) { //handles student submit button
   $email = mysqli_real_escape_string($db_conn, $_POST['email']);
-  $banner = mysqli_real_escape_string($db_conn, $_POST['banner']);
   $type = mysqli_real_escape_string($db_conn, $_POST['utype']);
   $sem = mysqli_real_escape_string($db_conn, $_POST['sem']);
   $banner = strtoupper($banner);
@@ -227,7 +133,7 @@ if (isset($_POST['submit-student'])) { //handles student submit button
   $year = $sem[1];
   //check if exists
   $pass = generatePassword(8);
-  $insert = "INSERT INTO s20_UserPass (banner_id, email, profile_type, passcode) VALUES('$banner', '$email', 'student', '$pass')";
+  $insert = "INSERT INTO s20_UserPass (email, profile_type, passcode) VALUES('$email', 'student', '$pass')";
   $insertsql  = mysqli_query($db_conn, $insert);
 
 
@@ -250,7 +156,8 @@ if (isset($_POST['submit-student'])) { //handles student submit button
       if (mysqli_errno($db_conn) == 0) {
         alert("success");
         $t = bin2hex(random_bytes(24));
-        $link = "https://" . $_SERVER['SERVER_NAME'] . "/~mitchelt6/crc/student/newstudent.php?token=$t";
+        $link = getAPI()."student/newstudent.php?token=$t";
+        //$link = "https://" . $_SERVER['SERVER_NAME'] . "/~mitchelt6/crc/student/newstudent.php?token=$t";
         $newsql = "INSERT INTO s20_user_validation (email, token) VALUES ('$email', '$t')";
         $newtoken = mysqli_query($db_conn, $newsql);
 
@@ -271,9 +178,5 @@ if (isset($_POST['submit-student'])) { //handles student submit button
   }
 }
 
-//include_once('components/footer.php');
+include_once('components/footer.php');
 ?>
-
-</body>
-
-</html>

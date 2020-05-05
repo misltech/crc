@@ -48,18 +48,18 @@ function filter()
     <nav class="mb-5 ">
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
-          <a class="nav-link active text-dark" id="student-tab" data-toggle="tab"  data-target="#email">Change Email</a>
+          <a class="nav-link active text-dark" id="student-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Change Email</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark" id="password-tab" data-toggle="tab" data-target="#password" >Change Password</a>
+          <a class="nav-link text-dark" id="password-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Change Password</a>
         </li>
       </ul>
     </nav>
     <div class="tab-content" id="myTabContent">
-      <div class="tab-pane fade show active" id="email" >
+      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
         <div class="row">
           <div class="col-md-8 order-md-1 mx-auto">
-            <form method="post">
+            <form>
               <div class="form-group row">
                 <label for="oem" class="col-4 col-form-label">Old Email address</label>
                 <div class="col-8">
@@ -88,10 +88,10 @@ function filter()
 
         </div>
       </div>
-      <div class="tab-pane fade" id="password">
+      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="password-tab">
         <div class="row">
           <div class="col-md-8 order-md-1 mx-auto">
-            <form method="post">
+            <form>
               <div class="form-group row">
                 <label for="oldpass" class="col-4 col-form-label">Old Password</label>
                 <div class="col-8">
