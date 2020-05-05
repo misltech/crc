@@ -28,5 +28,7 @@ include_once('components/topnav.php');
   </div>
 </div>
 <?php
+
+//get all student info and applications currently
 include_once('components/footer.php');
 ?>

@@ -47,7 +47,7 @@ include_once('components/topnav.php');
 
                 while ($row = mysqli_fetch_assoc($run)) {  //for each email
                     $dept = $row['dept_code'];
-                    $number = $row["course_num"];
+                    $number = $row["course_number"];
                     $id = $row['id'];
                     $modify = null;
                     console_log($row);
@@ -56,7 +56,7 @@ include_once('components/topnav.php');
                     <tr>
                         <td><?php echo $dept; ?></td>
                         <td><?php echo $number; ?></td>
-                        <td><a class="btn btn-primary btn-block" href="./editcourse.php?">View</a></button></td>
+                        <td><a class="btn btn-primary btn-block" href="./editcourse.php?department=<?php echo $dept;?>&course=<?php echo $number;?>">View</a></button></td>
                     </tr>
 
 

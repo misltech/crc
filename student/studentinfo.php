@@ -32,17 +32,17 @@ if (isset($_GET['fwid'])) {  //check for exising fwid
       console_log($title);
       $title = $result['project_name'];
       $semester = $result['semester'] . " " . $result['year'];
-      $classnumber = $result['class_number'];
+      $classnumber = $result['course_number'];
       $grademode = $result['grade_mode'];
       $credits = $result['credits'];
       $hours = $result['hours_per_wk'];
 
     }
   } else {
-    header('Location: ./application.php');
+   // header('Location: ./application.php');
   }
 } else {
-  header('Location: ./application.php');
+ // header('Location: ./application.php');
 }
 
 

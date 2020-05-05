@@ -22,8 +22,8 @@ global $thirdresponse;
 global $existing_app;
 if (isset($_GET['fwid'])) {  //check for exising fwid
     $fwid = $_GET['fwid'];
-    $banner = $_SESSION['banner'];
-    $sql  = "SELECT * FROM s20_application_info WHERE fw_id = '$fwid' AND banner_id = '$banner'"; //checks if they are allowed to view page
+    $stuemail = $_SESSION['user_email'];
+    $sql  = "SELECT * FROM s20_application_info WHERE fw_id = '$fwid' AND student_email = '$stuemail'"; //checks if they are allowed to view page
     $qsql  = mysqli_query($db_conn, $sql);
     $r = mysqli_num_rows($qsql);
     if ($r == 1) { //if application is found
