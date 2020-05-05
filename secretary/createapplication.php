@@ -48,7 +48,7 @@ if (isset($_GET['found']) and $_GET['found'] == true) {
                                     if ($r > 0) {
                                         while ($result = mysqli_fetch_assoc($qsql)) {
                                             $id = $result['id'];
-                                            $coursenum = $result['course_num'];
+                                            $coursenum = $result['course_number'];
                                             $deptcode = $result['dept_code'];
                                     ?>
                                             <option value="<?php echo $id; ?>"><?php echo $deptcode . " " . $coursenum; ?></option>
