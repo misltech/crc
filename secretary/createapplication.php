@@ -97,17 +97,14 @@ if (isset($_GET['found']) and $_GET['found'] == true) {
                     <label for="uniquesearch">Input a students email address</label>
                     <input id="uniquesearch" name="uniquesearch" type="text" class="form-control" aria-describedby="uniquesearchHelpBlock" required="required">
                     <span id="uniquesearchHelpBlock" class="form-text text-muted">xx@newpaltz.edu</span>
-                </div>
 
-                <div class="form-group">
-                <label for="Semester_Input">Select a Semester</label>
+
+                <label for="Semester_Input">Select a Semester</label><br>
                     <input type="radio" id="Spring" name="semester" value="Spring"> <label for="Spring">Spring</label><br>
                     <input type="radio" id="Fall"   name="semester" value="Fall">   <label for="Fall">Fall</label><br>
                     <input type="radio" id="Winter" name="semester" value="Winter"> <label for="Winter">Winter</label><br>
+
                 </div>
-
-                <!--Need to retrieve classes-->
-
 
 
 
