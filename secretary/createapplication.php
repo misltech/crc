@@ -36,14 +36,22 @@ if (isset($_GET['found']) and $_GET['found'] and isset($_GET['uniquesearch']) ==
                     <form method="POST">
 
                         <div class="form-group row">
-                            <label for="type" class="col-4 col-form-label">Student email</label>
-                            <div class="col-8">
-                                <label for="type" class="col-4 col-form-label"> <?php echo $_GET['uniquesearch']?> </label>
-                            </div>
+                            <label for="uniquesearch">Student Name</label>
+                            <input id="stuName" name="stuName" type="text" class="form-control" aria-describedby="uniquesearchHelpBlock" required="required">
                         </div>
 
                         <div class="form-group row">
-                            <label for="type" class="col-4 col-form-label">Department</label>
+                            <label for="type" >Student email</label>
+                            <label for="type"> <br> <?php echo $_GET['uniquesearch']?> </label>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="uniquesearch">Student Password</label>
+                            <input id="stuPass" name="stuPass" type="text" class="form-control" aria-describedby="uniquesearchHelpBlock" required="required">
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="type" class="col-4 col-form-label">Course</label>
                             <div class="col-8">
                                 <select id="type" name="utype" class="custom-select" size="1" value="" required="required">
                                     <?php
@@ -79,7 +87,7 @@ if (isset($_GET['found']) and $_GET['found'] and isset($_GET['uniquesearch']) ==
                         </div>
 
                         <div class="form-group row">
-                            <label for="gm" class="col-4 col-form-label">Grade Mode</label>
+                            <label for="gm" class="col-4 col-form-label">Grade Type</label>
                             <div class="col-8">
                                 <select id="gm" value="<?php echo $grademode; ?>" name="gm" required="required" class="custom-select">
                                     <option value="Letter Grades">Letter Grades</option>
@@ -90,7 +98,7 @@ if (isset($_GET['found']) and $_GET['found'] and isset($_GET['uniquesearch']) ==
 
                         <br>
                         <br>
-                            <button name="submitApp" type="submit" class="btn btn-primary float-right">Submit Application</button>
+                            <button name="submitApp" type="submit" class="btn btn-primary float-right">Submit Workflow</button>
                     </form>
              </div>
          </div>
@@ -102,21 +110,20 @@ if (isset($_GET['found']) and $_GET['found'] and isset($_GET['uniquesearch']) ==
 
         <div class="container " style="overflow: auto;">
             <div class="jumbotron">
-                <h1 class="display-4">New Application <span class="d-inline">
+                <h1 class="display-4">New Workflow<span class="d-inline">
 
                     </span></h1>
-                <p class="lead">Submit a students hawkmail address</p>
                 <hr class="my-4">
                 <div class="d-flex justify-content-center mt-5">
                     <form method="POST">
                         <div class="form-group">
-                            <label for="uniquesearch">Search for a student</label>
+                            <label for="uniquesearch">Enter a students hawkmail </label>
                             <input id="uniquesearch" name="uniquesearch" type="text" class="form-control" aria-describedby="uniquesearchHelpBlock" required="required">
-                            <span id="uniquesearchHelpBlock" class="form-text text-muted">xx@newpaltz.edu</span>
+                            <span id="uniquesearchHelpBlock" class="form-text text-muted">xx@newpaltz.edu</span> <!--If invalid email must return error-->
                         </div>
                         
                         <div class="form-group">
-                            <button name="search" type="submit" class="btn btn-primary float-right">Search</button>
+                            <button name="search" type="submit" class="btn btn-primary float-right">Create</button>
                         </div>
                     </form>
                 </div>
@@ -136,37 +143,12 @@ if (isset($_GET['found']) and $_GET['found'] and isset($_GET['uniquesearch']) ==
             if (mysqli_num_rows($query) == 1) {
                 header('Location: ./createapplication.php?found=true&uniquesearch=' . $email ); //if true then redirect to application form with value of email 
             } else {
-                //redirect to create account with get parameters and do it there.
-
+                //return error if not a valid email
             }
         }
     }
          if (isset($_POST['submitApp'])) { //handles Application submit button
          }
-/*
-            $getuser = "SELECT * FROM s20_UserPass WHERE email = '$email'";
-            $getuserquery = mysqli_query($db_conn, $getuser);
-            $getuserresult = mysqli_fetch_assoc($getuserquery);
-            $banner = $result['banner_id'];
-            $semester = document.getElementById('sem');
 
-            $fwid = bin2hex(random_bytes(32));  //duplication is unlikely with this one. However should make an method to catch duplication
-            $newappsql = "INSERT INTO s20_application_info(fw_id, banner_id, dept_code, student_email, semester, year) VALUES ('$fwid','$banner','$type', '$email', '$semester', '$year');"; ///get department code
-            $newutilsql = "INSERT INTO s20_application_util(fw_id, progress, rejected, assigned_to, assigned_when) VALUES ('$fwid', '-1', '0', 'student', 'CURRENT_TIMESTAMP');";
-
-            
-  
-
-
-                            } 
-                            else {
-                                console_log(mysqli_error($db_conn));
-                            }
-                        }
-                }
-
-
-
-    // } */
     include_once('components/footer.php');
 ?>
