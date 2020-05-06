@@ -14,8 +14,7 @@ include_once '../backend/db_con3.php';
 global $CreateAPP;
 
 
-if (isset($_GET['found']) and $_GET['found'] == true) {
-    //checks database for user then output user profile.
+if (isset($_GET['found']) and $_GET['found'] and isset($_GET['uniquesearch']) == true) {
     $CreateAPP = true;
 } else {
     $CreateAPP = false;
@@ -34,15 +33,16 @@ if (isset($_GET['found']) and $_GET['found'] == true) {
             <p class="lead">You can create an application here. Search by email address.</p>
             <hr class="my-4">
             <div class="d-flex justify-content-center mt-5">
+                
+                    <form method="POST">
 
                         <div class="form-group row">
                             <label for="type" class="col-4 col-form-label">Student email</label>
                             <div class="col-8">
-                                <label for="type" class="col-4 col-form-label"> "<?php echo $_POST["uniquesearch"] ?>" </label>
+                                <label for="type" class="col-4 col-form-label"> <?php echo $_GET['uniquesearch']?> </label>
                             </div>
                         </div>
-                
-                    <form method="POST">
+
                         <div class="form-group row">
                             <label for="type" class="col-4 col-form-label">Department</label>
                             <div class="col-8">
@@ -133,7 +133,7 @@ if (isset($_GET['found']) and $_GET['found'] == true) {
 
         if ($query) {
             if (mysqli_num_rows($query) == 1) {
-                header('Location: ./createapplication.php?found=true'); //if true then redirect to application form
+                header('Location: ./createapplication.php?found=true&uniquesearch=' . $email ); //if true then redirect to application form
             } else {
                 //redirect to create account with get parameters and do it there.
 
