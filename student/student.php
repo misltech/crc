@@ -18,8 +18,8 @@ include_once('components/topnav.php');
 <!-- Page Content -->
 
 <div class="container ">
-      <h1 class="mt-4">Hi, $Name</h1>
-      <p>Welcome to your internship fieldwork application website? LOL See instructioons below </p>
+      <h1 class="mt-4">Hi, there!</h1>
+      <p>Welcome to your internship fieldwork application website? LOL See instructions below </p>
 
     </div>
   </div>

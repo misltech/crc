@@ -50,7 +50,7 @@ $API_URL = "https://cs.newpaltz.edu/~mitchelt6/crc/";
 /**
  * The root of the web server (as an absolute URL).
  */
-//define("API_URL", "https://cs.newpaltz.edu/p/f18-02/s20-v2/");
+define("API_URL", "https://cs.newpaltz.edu/~mitchelt6/crc/");
 
 /**
  * Use DEBUG (without the dollar sign) instead.

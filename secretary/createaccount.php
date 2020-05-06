@@ -41,7 +41,7 @@ include_once '../backend/db_con3.php';
           <div class="form-group row">
             <label for="email" class="col-4 col-form-label">Email Address</label>
             <div class="col-8">
-              <input id="email" name="email" placeholder="xxxx@email.com" type="email" class="form-control" required="required">
+              <input id="email" name="email" placeholder="student@email.com" type="email" class="form-control" required="required">
             </div>
           </div>
           <div class="form-group row">
@@ -56,11 +56,11 @@ include_once '../backend/db_con3.php';
                 if ($r > 0) {
                   while ($result = mysqli_fetch_assoc($qsql)) {
                     $id = $result['id'];
-                    $coursenum = $result['course_num'];
+                    $coursenum = $result['course_number'];
                     $deptcode = $result['dept_code'];
                 ?>
 
-                    <option value="<?php echo $id; ?>"><?php echo $deptcode ." ". $coursenum; ?></option>
+                    <option value="<?php echo $deptcode ." ". $coursenum; ?>"><?php echo $deptcode ." ". $coursenum; ?></option>
 
                 <?php
                   }
@@ -95,7 +95,7 @@ include_once '../backend/db_con3.php';
 
           <div class="form-group row">
             <div class="offset-4 col-8">
-              <button name="submit-student" type="submit float-right" class="btn btn-primary">Create</button>
+              <button name="submit-student" type="submit" class="btn btn-primary float-right">Create</button>
             </div>
           </div>
         </form>
@@ -127,12 +127,14 @@ if (isset($_POST['submit-student'])) { //handles student submit button
   $email = mysqli_real_escape_string($db_conn, $_POST['email']);
   $type = mysqli_real_escape_string($db_conn, $_POST['utype']);
   $sem = mysqli_real_escape_string($db_conn, $_POST['sem']);
-  $banner = strtoupper($banner);
   $sem = explode(" ", $sem);
+  $type = explode(" ", $type);
   $semester = $sem[0];
   $year = $sem[1];
-  //check if exists
-  $pass = generatePassword(8);
+  $dept = $type[0];
+  $course = $type[1];
+  //$pass = generatePassword(8);
+  $pass = "1234";
   $insert = "INSERT INTO s20_UserPass (email, profile_type, passcode) VALUES('$email', 'student', '$pass')";
   $insertsql  = mysqli_query($db_conn, $insert);
 
@@ -148,7 +150,7 @@ if (isset($_POST['submit-student'])) { //handles student submit button
     }
   } else if (mysqli_errno($db_conn) == 0) { //if user created and query success
     $fwid = bin2hex(random_bytes(32));  //duplication is unlikely with this one. However should make an method to catch duplication
-    $newappsql = "INSERT INTO s20_application_info(fw_id, banner_id, dept_code, student_email, semester, year) VALUES ('$fwid','$banner','$type', '$email', '$semester', '$year');"; ///get department code
+    $newappsql = "INSERT INTO s20_application_info(fw_id, dept_code, course_number, student_email, semester, year) VALUES ('$fwid','$dept', '$course','$email', '$semester', '$year');"; ///get department code
     $newutilsql = "INSERT INTO s20_application_util(fw_id, progress, rejected, assigned_to, assigned_when) VALUES ('$fwid', '-1', '0', 'student', 'CURRENT_TIMESTAMP');";
     $insql = mysqli_multi_query($db_conn, $newappsql);
     if (mysqli_errno($db_conn) == 0) {
