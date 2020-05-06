@@ -87,15 +87,8 @@ if (isset($_GET['found']) and $_GET['found'] == true) {
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <div class="offset-4 col-8">
-                                <button name="submit-student" type="submit float-right" class="btn btn-primary">Create</button>
-                            </div>
-                        </div>
-
                         <br>
                         <br>
-                        <div class=""
                             <button name="submit" type="submit" class="btn btn-primary float-right">Submit Application</button>
                     </form>
              </div>
