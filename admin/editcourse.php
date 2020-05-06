@@ -36,7 +36,7 @@ if (isset($_GET['course']) and isset($_GET['department']) and $_SESSION['user_ty
 
         <div class="container">
             <h6 class="lead m-3">Assigned Faculty</h6>
-            <div class="row m-4">
+            <div class="m-4">
                 <?php
                 $fac_email = $course_result['faculty_email'];
                 $sql  = "SELECT * FROM s20_faculty_info WHERE faculty_email = '$fac_email'";
@@ -52,11 +52,9 @@ if (isset($_GET['course']) and isset($_GET['department']) and $_SESSION['user_ty
                     alert("Failed to get course info");
                 }
                 ?>
-                <h6><?php echo $fn; ?></h6>
-                <h6><?php echo $ln; ?></h6>
-                <h6><?php echo $mi; ?></h6>
-                <h6><?php echo $pn; ?></h6>
-                <h6><?php echo $oh; ?></h6>
+                <p><?php echo $fn . " " . $ln. " " . $mi; ?></p>
+                <p><?php echo $pn; ?></p>
+                <p><?php echo $oh; ?></p>
             </div>
         </div>
 
@@ -64,38 +62,38 @@ if (isset($_GET['course']) and isset($_GET['department']) and $_SESSION['user_ty
         <div class="container">
             <hr class="my-4">
             <h6 class="lead text-center m-3">Edit Assigned Faculty</h6>
+            
             <div class="row m-4">
                 <form class="col-md-10" method="POST">
                     <div class="form-group row">
                         <label for="text" class="col-4 col-form-label">Enter new faculty email</label>
-                        <div class="col-8">
+                        <div class="col-6">
                             <input id="newfac" name="newfac" type="email" class="form-control" required="required">
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="offset-4 col-8">
-                            <button name="submit" type="submit" class="btn btn-secondary float-right">Assign</button>
+                        <div>
+                            <button name="assign-new" type="submit" class="btn btn-secondary float-right">Assign</button>
                         </div>
                     </div>
+                    
                 </form>
             </div>
         </div>
 
         <div class="container">
             <hr class="my-4">
-            <h6 class="lead text-center m-3">Edit Course Number</h6>
-            <form method="POST">
-            <div class="form-row">
-                <div class="form-group col-md-2">
+            <h6 class="lead text-center m-3">Edit Course Attributes</h6>
+            <form class="col-md-12" method="POST">
+            <div class="row">
+                <div class="col-md-4">
                     <label for="dpp">Department</label>
                     <input id="dpp" name="dpp" type="text" class="form-control" required="required">
                 </div>
-                <div class="form-group col-md-2">
+                <div class="col-md-4">
                     <label for="cnn">Course Number</label>
                     <input id="cnn" name="cnn" type="text" class="form-control" required="required">
                 </div>
-                <div class="form-group col-md-2 align-bottom">
-                    <button name="submit" type="submit" style="margin-top: 33px;" class="btn btn-secondary">Save</button>
+                <div class="col-md-4">
+                    <button name="update-course" type="submit" style="margin-top: 33px;" class="btn btn-secondary">Save</button>
                 </div>
             </div>
                 
