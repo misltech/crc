@@ -24,13 +24,12 @@ if (isset($_GET['found']) and $_GET['found'] and isset($_GET['uniquesearch']) ==
 ?>
 
 
-<!-- Show form or not -->
 <?php if ($CreateAPP) { ?>
 
     <div class="container " style="overflow: auto;">
         <div class="jumbotron">
-            <h1 class="display-4">Create Application</h1>
-            <p class="lead">You can create an application here. Search by email address.</p>
+            <h1 class="display-4">New application</h1>
+            <p class="lead">Select the required information, then hit Submit Application</p>
             <hr class="my-4">
             <div class="d-flex justify-content-center mt-5">
                 
@@ -48,17 +47,19 @@ if (isset($_GET['found']) and $_GET['found'] and isset($_GET['uniquesearch']) ==
                             <div class="col-8">
                                 <select id="type" name="utype" class="custom-select" size="1" value="" required="required">
                                     <?php
-                                    $sql = "SELECT * FROM s20_course_numbers ORDER BY dept_code ASC";
+                                    $sql = "SELECT * FROM s20_course_numbers ORDER BY dept_code ASC"; //table of courses
                                     $qsql  = mysqli_query($db_conn, $sql);
                                     $r = mysqli_num_rows($qsql);
 
-                                    if ($r > 0) {
-                                        while ($result = mysqli_fetch_assoc($qsql)) {
-                                            $id = $result['id'];
-                                            $coursenum = $result['course_number'];
-                                            $deptcode = $result['dept_code'];
+                                    if ($r > 0) { //if there are courses in the table
+                                        while ($result = mysqli_fetch_assoc($qsql)) { //itterate through each row  
+                                            $id = $result['id']; //returns ID of course
+                                            $deptcode = $result['dept_code']; //gets dept code: CPS
+                                            $coursenum = $result['course_number']; //gets course number: 100
+                                            $course = $deptcode . " " . $coursenum; //concat: CPS 100
+
                                     ?>
-                                            <option value="<?php echo $id; ?>"><?php echo $deptcode . " " . $coursenum; ?></option>
+                                            <option value="<?php echo $id; ?>"><?php echo $course ?></option>
                                     <?php
                                         }
                                     } else {
@@ -89,7 +90,7 @@ if (isset($_GET['found']) and $_GET['found'] and isset($_GET['uniquesearch']) ==
 
                         <br>
                         <br>
-                            <button name="submit" type="submit" class="btn btn-primary float-right">Submit Application</button>
+                            <button name="submitApp" type="submit" class="btn btn-primary float-right">Submit Application</button>
                     </form>
              </div>
          </div>
@@ -101,10 +102,10 @@ if (isset($_GET['found']) and $_GET['found'] and isset($_GET['uniquesearch']) ==
 
         <div class="container " style="overflow: auto;">
             <div class="jumbotron">
-                <h1 class="display-4">Create Application <span class="d-inline">
+                <h1 class="display-4">New Application <span class="d-inline">
 
                     </span></h1>
-                <p class="lead">You can view and modify current courses here.</p>
+                <p class="lead">Submit a students hawkmail address</p>
                 <hr class="my-4">
                 <div class="d-flex justify-content-center mt-5">
                     <form method="POST">
@@ -133,69 +134,39 @@ if (isset($_GET['found']) and $_GET['found'] and isset($_GET['uniquesearch']) ==
 
         if ($query) {
             if (mysqli_num_rows($query) == 1) {
-                header('Location: ./createapplication.php?found=true&uniquesearch=' . $email ); //if true then redirect to application form
+                header('Location: ./createapplication.php?found=true&uniquesearch=' . $email ); //if true then redirect to application form with value of email 
             } else {
                 //redirect to create account with get parameters and do it there.
 
             }
         }
     }
-    //     if (isset($_POST['submit-student'])) { //handles student submit button
-    //         $email = mysqli_real_escape_string($db_conn, $_POST['email']);
-    //         $type = mysqli_real_escape_string($db_conn, $_POST['utype']);
-    //         $sem = mysqli_real_escape_string($db_conn, $_POST['sem']);
-    //         $banner = strtoupper($banner);
-    //         $sem = explode(" ", $sem);
-    //         $semester = $sem[0];
-    //         $year = $sem[1];
-    //         //check if exists
-    //         $pass = generatePassword(8);
-    //         $insert = "INSERT INTO s20_UserPass (email, profile_type, passcode) VALUES('$email', 'student', '$pass')";
-    //         $insertsql  = mysqli_query($db_conn, $insert);
+         if (isset($_POST['submitApp'])) { //handles Application submit button
+         }
+/*
+            $getuser = "SELECT * FROM s20_UserPass WHERE email = '$email'";
+            $getuserquery = mysqli_query($db_conn, $getuser);
+            $getuserresult = mysqli_fetch_assoc($getuserquery);
+            $banner = $result['banner_id'];
+            $semester = document.getElementById('sem');
+
+            $fwid = bin2hex(random_bytes(32));  //duplication is unlikely with this one. However should make an method to catch duplication
+            $newappsql = "INSERT INTO s20_application_info(fw_id, banner_id, dept_code, student_email, semester, year) VALUES ('$fwid','$banner','$type', '$email', '$semester', '$year');"; ///get department code
+            $newutilsql = "INSERT INTO s20_application_util(fw_id, progress, rejected, assigned_to, assigned_when) VALUES ('$fwid', '-1', '0', 'student', 'CURRENT_TIMESTAMP');";
+
+            
+  
 
 
-    //         if (mysqli_errno($db_conn) == 1062) { //mean sduplicate entry
-    //           if (strpos(mysqli_error($db_conn), 'PRIMARY')) { //checks if its in the error line
-    //             //alert that banner id exits
-    //             alert("banner id exist");
-    //           } else if (strpos(mysqli_error($db_conn), 'email')) { //means duplicated email address. But different banner number
-    //             alert("email exits");
-    //             //alert that email exist.
-    //             //bring up modal. ask to send a forgot email
-    //           }
-    //         } else if (mysqli_errno($db_conn) == 0) { //if user created and query success
-    //           $fwid = bin2hex(random_bytes(32));  //duplication is unlikely with this one. However should make an method to catch duplication
-    //           $newappsql = "INSERT INTO s20_application_info(fw_id, banner_id, dept_code, student_email, semester, year) VALUES ('$fwid','$banner','$type', '$email', '$semester', '$year');"; ///get department code
-    //           $newutilsql = "INSERT INTO s20_application_util(fw_id, progress, rejected, assigned_to, assigned_when) VALUES ('$fwid', '-1', '0', 'student', 'CURRENT_TIMESTAMP');";
-    //           $insql = mysqli_multi_query($db_conn, $newappsql);
-    //           if (mysqli_errno($db_conn) == 0) {
-    //             $insql = mysqli_multi_query($db_conn, $newutilsql);
-    //             if (mysqli_errno($db_conn) == 0) {
-    //               alert("success");
-    //               $t = bin2hex(random_bytes(24));
-    //               $link = "https://" . $_SERVER['SERVER_NAME'] . "/~mitchelt6/crc/student/newstudent.php?token=$t";
-    //               $newsql = "INSERT INTO s20_user_validation (email, token) VALUES ('$email', '$t')";
-    //               $newtoken = mysqli_query($db_conn, $newsql);
-
-    //               if ($newtoken) {
-    //                 $message = "Please click on the link below and change your password immediately. This link only works once. You can reset your password on the website.\n$link";
-    //                 sendEmail($email, "Welcome to your Fieldwork Application!", $message);
-    //                 alert("Sent email");
-    //               } else {
-    //                 console_log(mysqli_error($db_conn));
-    //               }
-    //             }
-    //           } else {
-    //             //alert(mysqli_error($db_conn));
-    //           }
-
-    //           //echo "<meta http-equiv='refresh' content='0'>";
-    //           //alert success
-    //         }
-    //       }
+                            } 
+                            else {
+                                console_log(mysqli_error($db_conn));
+                            }
+                        }
+                }
 
 
 
-    // }
+    // } */
     include_once('components/footer.php');
 ?>
