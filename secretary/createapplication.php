@@ -1,4 +1,5 @@
 <?php
+ob_start();
 if (!isset($_SESSION)) {
     session_start();
 }
@@ -33,10 +34,15 @@ if (isset($_GET['found']) and $_GET['found'] == true) {
             <p class="lead">You can create an application here. Search by email address.</p>
             <hr class="my-4">
             <div class="d-flex justify-content-center mt-5">
-                <div class="col-md-8 mx-auto">
-                <h6 class="row mb-3">Creating application for: <?php echo "emailhere";?></h6> 
-                    <form method="POST">
+
+                        <div class="form-group row">
+                            <label for="type" class="col-4 col-form-label">Student email</label>
+                            <div class="col-8">
+                                <label for="type" class="col-4 col-form-label"> "<?php echo $_POST["uniquesearch"] ?>" </label>
+                            </div>
+                        </div>
                 
+                    <form method="POST">
                         <div class="form-group row">
                             <label for="type" class="col-4 col-form-label">Department</label>
                             <div class="col-8">
@@ -61,6 +67,7 @@ if (isset($_GET['found']) and $_GET['found'] == true) {
                                 </select>
                             </div>
                         </div>
+
                         <div class="form-group row">
                             <label for="type" class="col-4 col-form-label">Semester</label>
                             <div class="col-8">
@@ -69,6 +76,7 @@ if (isset($_GET['found']) and $_GET['found'] == true) {
                                 </select>
                             </div>
                         </div>
+
                         <div class="form-group row">
                             <label for="gm" class="col-4 col-form-label">Grade Mode</label>
                             <div class="col-8">
@@ -78,39 +86,23 @@ if (isset($_GET['found']) and $_GET['found'] == true) {
                                 </select>
                             </div>
                         </div>
+
                         <div class="form-group row">
                             <div class="offset-4 col-8">
                                 <button name="submit-student" type="submit float-right" class="btn btn-primary">Create</button>
                             </div>
                         </div>
+
+                        <br>
+                        <br>
+                        <div class=""
+                            <button name="submit" type="submit" class="btn btn-primary float-right">Submit Application</button>
                     </form>
-
-                    </div>
-                </div>
-            </span></h1>
-        <p class="lead">You can view and modify current courses here.</p>
-        <hr class="my-4">
-        <div class="d-flex justify-content-center mt-5">
-
-            <form method="POST">
-
-                <div class="form-group">
-                    <label for="uniquesearch">Input a students email address</label>
-                    <input id="uniquesearch" name="uniquesearch" type="text" class="form-control" aria-describedby="uniquesearchHelpBlock" required="required">
-                    <span id="uniquesearchHelpBlock" class="form-text text-muted">xx@newpaltz.edu</span>
-                </div>
-
-                
-                    <button name="submit" type="submit" class="btn btn-primary float-right">Submit Application</button>
-                </div>
-            </form>
-
-        </div>
+             </div>
+         </div>
     </div>
-</div>
+</span></h1>
 
-            </div>
-        </div>
 
     <?php } else { ?>
 
@@ -148,7 +140,7 @@ if (isset($_GET['found']) and $_GET['found'] == true) {
 
         if ($query) {
             if (mysqli_num_rows($query) == 1) {
-                header('Location: ./createapplication.php?found=true'); //if true then redirect to 
+                header('Location: ./createapplication.php?found=true'); //if true then redirect to application form
             } else {
                 //redirect to create account with get parameters and do it there.
 
