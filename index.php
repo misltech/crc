@@ -41,7 +41,7 @@ if (isset($_SESSION['user_type'])) {
 
   <style>
     body {
-      background-image: url(https://www.newpaltz.edu/media/stock-images/slides/newpaltz-main.jpg);
+      background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Crater_Lake_winter_pano2.jpg/1920px-Crater_Lake_winter_pano2.jpg);
       background-size: cover;
       background-attachment: fixed;
       background-position: center top;

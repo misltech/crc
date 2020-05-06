@@ -40,7 +40,8 @@ include_once('components/topnav.php');
                 <?php
                 include_once('../backend/db_con3.php');
 
-                $sql = "SELECT concat(student_first_name, ' ' , student_last_name) as Name, s20_application_info.student_email, semester, concat(s20_application_info.dept_code, ' ', course_number) as Course, s20_application_info.instructor_email, assigned_to, s20_application_info.fw_id FROM s20_application_info LEFT JOIN s20_student_info ON s20_application_info.fw_id = s20_student_info.fw_id";
+                $sql = "SELECT DISTINCT s20_application_info.student_email, concat(s20_application_info.semester, ' ', s20_application_info.year) AS semyear, concat(s20_application_info.dept_code, ' ', course_number) AS Course, 
+                s20_application_info.instructor_email, assigned_to, s20_application_info.fw_id FROM s20_application_info, s20_application_util";
                 $run = mysqli_query($db_conn, $sql);
                 //alert($run);
                 if (!$run) { //if failed to reach database
@@ -49,14 +50,12 @@ include_once('components/topnav.php');
                 }
 
                 while ($row = mysqli_fetch_assoc($run)) {  //for each email
-                    $name = $row['Name'];
                     $email = $row["student_email"];
                     $course = $row['Course'];
-                    $semester = $row['semester'];
+                    $semester = $row['semyear'];
                     $facultyemail = $row['instructor_email'];
                     $assigned = $row['assigned_to'];
-                    $fwid = $row['fw_id'];
-                    
+                    $fwid = $row['fw_id'];  
                     console_log($row);
                 ?>
 
