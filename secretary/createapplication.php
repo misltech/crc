@@ -11,9 +11,10 @@ include_once '../backend/db_con3.php';
 
 
 global $CreateAPP;
-if (isset($_GET['found']) and $_GET['found'] == true) {
-    //checks database for user then output user profile. Option to add 
 
+
+if (isset($_GET['found']) and $_GET['found'] == true) {
+    //checks database for user then output user profile.
     $CreateAPP = true;
 } else {
     $CreateAPP = false;
@@ -125,7 +126,7 @@ if (isset($_GET['found']) and $_GET['found'] == true) {
                         <div class="form-group">
                             <label for="uniquesearch">Search for a student</label>
                             <input id="uniquesearch" name="uniquesearch" type="text" class="form-control" aria-describedby="uniquesearchHelpBlock" required="required">
-                            <span id="uniquesearchHelpBlock" class="form-text text-muted">N0365XXXX or xx@newpaltz.edu</span>
+                            <span id="uniquesearchHelpBlock" class="form-text text-muted">xx@newpaltz.edu</span>
                         </div>
                         
                         <div class="form-group">
@@ -139,7 +140,7 @@ if (isset($_GET['found']) and $_GET['found'] == true) {
     <?php } ?>
     <?php
 
-    if (isset($_POST['search'])) { //handles student submit button
+    if (isset($_POST['search'])) { //handles student search button
         $email = mysqli_real_escape_string($db_conn, $_POST['uniquesearch']);
 
         $sql = "SELECT * FROM s20_UserPass WHERE email = '$email'";
@@ -147,7 +148,7 @@ if (isset($_GET['found']) and $_GET['found'] == true) {
 
         if ($query) {
             if (mysqli_num_rows($query) == 1) {
-                header('Location: ./createapplication.php?found=true');
+                header('Location: ./createapplication.php?found=true'); //if true then redirect to 
             } else {
                 //redirect to create account with get parameters and do it there.
 
@@ -211,20 +212,5 @@ if (isset($_GET['found']) and $_GET['found'] == true) {
 
 
     // }
-
-
-
-
-
-
-
-
-
     include_once('components/footer.php');
-
-
-
-
-
-
-    ?>
+?>
