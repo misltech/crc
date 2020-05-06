@@ -20,84 +20,71 @@ include_once '../backend/db_con3.php';
         <div class="container">
             <!--This will keep the order list --->
             <h6 class="lead text-center m-3">Edit Workflow</h6>
+            <?php
 
-            <form class="row" method="POST">
-
-                <?php
-
-                if (isset($_GET['department']) and $_SESSION['user_type'] == "admin") {
-                    $dept = $_GET['department'];
-                    $sql  = "SELECT * FROM s20_academic_dept_info WHERE dept_code = '$dept'";
+            if (isset($_GET['department']) and $_SESSION['user_type'] == "admin") {
+                $dept = $_GET['department'];
+                $sql  = "SELECT * FROM s20_academic_dept_info WHERE dept_code = '$dept'";
+                $qsql  = mysqli_query($db_conn, $sql);
+                $r = mysqli_num_rows($qsql);
+                if ($r == 1) {   //if department is found
+                    $sql  = "SELECT * FROM s20_workflow_order WHERE dept_code = '$dept'";
                     $qsql  = mysqli_query($db_conn, $sql);
-                    $r = mysqli_num_rows($qsql);
-                    if ($r == 1) {   //if department is found
-                        $sql  = "SELECT * FROM s20_workflow_order WHERE dept_code = '$dept'";
-                        $qsql  = mysqli_query($db_conn, $sql);
-                        $r2 = mysqli_num_rows($qsql);
-                        $result = mysqli_fetch_assoc($qsql);
-                        if ($r2 == 1) {
-                            $order = $result['workflow'];
-                            $order = unserialize($order);
-                            console_log($order);
-                            showExisting($order);
-                        } else if ($r2 == 0) {
-                            //create a new workflow form
-                            showNoneExisting();
-                        }
-                    } else {
-                        header('Location: ./viewdepartment.php');
+                    $r2 = mysqli_num_rows($qsql);
+                    $result = mysqli_fetch_assoc($qsql);
+                    if ($r2 == 1) {
+                        $order = $result['workflow'];
+                        $order = unserialize($order);
+                        showExisting($order);
                     }
                 } else {
                     header('Location: ./viewdepartment.php');
                 }
+            } else {
+                header('Location: ./viewdepartment.php');
+            }
 
-                ?>
+            ?>
 
-                <?php function showExisting($order)
-                {  ?>
-                    <div class="col-6">
+            <?php function showExisting($order)
+            {  ?>
+                <div class="row">
+
+                    <div id="sortableleft" class="list-group col">
                         <h6> Available Workflows</h6>
-                        <ul class="list-group sortable1 connected wflowstyle">
-                            <?php
-                            $defaultcode = array('Student', 'Instructor', 'Employer', 'Chair', 'Dean', 'Recreg');
-                            $ad = array_values(array_diff($defaultcode, $order));
-                            console_log($ad);
-                            for ($k = 0; $k < count($ad); $k++) {
-                                $adval = $ad[$k];
 
-                            ?>
-                                <li class="list-group-item"><input type="hidden" name="<?php echo $adval ?>"><?php echo $adval ?></input></li>
+                        <?php
+                        $defaultorder = array('Student', 'Instructor', 'Employer', 'Chair', 'Dean', 'Records and Registration');
+                        $array_difference = array_values(array_diff($defaultorder, $order));
+                        for ($k = 0; $k < count($array_difference); $k++) {
+                            $differenceval = $array_difference[$k];
 
-                            <?php } ?>
+                        ?>
+                            <div class="list-group-item"><?php echo $differenceval ?></div>
+
+                        <?php } ?>
                         </ul>
                     </div>
-                    <div class="col-6">
+                    <div id="sortableright" class="list-group col">
                         <h6> Current Workflow</h6>
-                        <ul class="list-group sortable2 connected">
-                            <?php
-                            for ($i = 0; $i < count($order); $i++) {
-                                $temporder = $order[$i];
-                            ?>
-                                <li class="list-group-item"><input type="hidden" name="<?php echo $temporder ?>"><?php echo $temporder ?></input></li>
-                        <?php   }
-                        } ?>
-
-
-                        <?php function showNoneExisting()
-                        {
-                        }
+                        <!-- <ul class="list-group"> -->
+                        <?php
+                        for ($i = 0; $i < count($order); $i++) {
+                            $temporder = $order[$i];
                         ?>
-                        </ul>
+                            <div class="list-group-item"><?php echo $temporder ?></div>
+                    <?php   }
+                    } ?>
+
+                    <!-- </ul> -->
                     </div>
                     <div class="col-12">
                         <div class="offset-4 col-8">
-                            <button class="btn btn-secondary m-3 float-right" name="modify" type="submit">Save Workflow</button>
+                            <button id="submit-workflow" class="btn btn-secondary m-3 float-right" >Save Workflow</button>
                         </div>
                     </div>
+                </div>
         </div>
-
-
-        </form>
 
         <hr class="my-4">
         <h6 class="lead text-center m-3">Edit Assigned Emails</h6>
@@ -142,10 +129,17 @@ include_once '../backend/db_con3.php';
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-<script src="../js/jquery.sortable.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.10.1/Sortable.min.js"></script>
+<script src="../js/admin.js"></script>
 <script>
-    $('.sortable1, .sortable2').sortable({
-        connectWith: '.connected'
+    new Sortable(sortableleft, {
+        group: 'shared', // set both lists to same group
+        animation: 150
+    });
+
+    new Sortable(sortableright, {
+        group: 'shared',
+        animation: 150
     });
 </script>
 

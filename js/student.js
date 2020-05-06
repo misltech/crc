@@ -6,7 +6,7 @@ $(document).ready(function () {
             'token': $('meta[name="token"]').attr('content'),
             'request': 'all'
         },
-        url: "student_api"
+        url: "../api/student_appplication_api"
     }).done(function (result) {
         console.log(result);
         console.log(result.length);
