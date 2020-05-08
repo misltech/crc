@@ -24,7 +24,7 @@ function getAPI(){
  * redirects based on account type. 
  * This mehtod can also force a redirect to login page.
  *
- * @param string       accounttype
+ * @param string       account type to check for
  * @return void              
  */
 function redirect($atype){
@@ -74,18 +74,14 @@ function redirect($atype){
 
   }
   
-function validateState($checktype){
-    if(isset($_SESSION['user_type']) and $_SESSION['user_type'] == $checktype){
-        return true;
-    }
-    else{
-       // header('Location: ../backend/logout.php');
-        return false;
-    }
-}
+/** A validating function that prevents unauthorized users from viewing other pages. ex: student cant 
+ * view instructor pages. This is log you out and show you an unauthorized notice.
+ * @param string the type to check for
+ * @return void returns nothing.
+*/
 function validate($checktype){
     if(!(isset($_SESSION['user_type']) and $_SESSION['user_type'] == $checktype)){
-        header('Location: ../backend/logout.php');
+        header('Location: ../backend/logout.php?authorized=false');
     }
 }
 

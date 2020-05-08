@@ -33,6 +33,8 @@ if (time() - $_SESSION['timestamp'] > 900) { //subtract new timestamp from the o
 } else {
   $_SESSION['timestamp'] = time(); //set new timestamp
 }
+
+validate('admin');
 ?>
 
 <body>
