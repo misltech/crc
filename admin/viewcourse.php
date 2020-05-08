@@ -13,13 +13,7 @@ include_once('components/topnav.php');
     <div class="jumbotron">
         <h1 class="display-4">View Courses <span class="d-inline">
                 <div class="d-inline float-right dropdown">
-                    <button class="btn btn-secondary dropdown-toggle ml-auto" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Course Settings
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="./addcourse.php">Add a Course</a>
-
-                    </div>
+                    <button class="btn btn-secondary  ml-auto" type="button" onclick="window.location.href='./createcourse.php'">Add Course</button>
                 </div>
             </span></h1>
         <p class="lead">You can view and modify current courses here.</p>
@@ -29,7 +23,15 @@ include_once('components/topnav.php');
                 <tr>
                     <th>Department</th>
                     <th>Course Number</th>
-                    <th>Modify </th>
+                    <th>Actions </th>
+                    <!-- Two button view or edit 
+                        Add a course as one button  
+
+                        Change workflow to available participants and current particpants in modify departments
+                        add instructors to drag workflow in order and stuff. 
+                        Change modify department. editing/view course
+                        Custom workflow for courses and department. Coursses have more power here.
+                    -->
                 </tr>
             </thead>
             <tbody>
@@ -56,7 +58,7 @@ include_once('components/topnav.php');
                     <tr>
                         <td><?php echo $dept; ?></td>
                         <td><?php echo $number; ?></td>
-                        <td><a class="btn btn-primary btn-block" href="./editcourse.php?department=<?php echo $dept;?>&course=<?php echo $number;?>">View</a></button></td>
+                        <td><a class="btn btn-primary btn-block" href="./editcourse.php?department=<?php echo $dept; ?>&course=<?php echo $number; ?>">View</a></button></td>
                     </tr>
 
 

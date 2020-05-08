@@ -11,14 +11,10 @@ include_once('components/topnav.php');
 
 <div class="container " style="overflow: auto;">
     <div class="jumbotron">
-        <h1 class="display-4">View Workflows <span class="d-inline">
+        <h1 class="display-4">View Applications <span class="d-inline">
                 <div class="d-inline float-right dropdown">
-                    <button class="btn btn-secondary dropdown-toggle ml-auto" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Workflow Settings
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="./createapplication.php">Add a New Application</a>
-                     
+                    <div class="d-inline float-right dropdown">
+                        <button class="btn btn-secondary  ml-auto" type="button" onclick="window.location.href='#'">Add Application</button>
                     </div>
                 </div>
             </span></h1>
@@ -30,7 +26,6 @@ include_once('components/topnav.php');
                     <th>Student Email</th>
                     <th>Course #</th>
                     <th>Semester</th>
-                    <th>Faculty Email</th>
                     <th>Assigned to: </th>
                     <th>Modify </th>
                 </tr>
@@ -40,8 +35,10 @@ include_once('components/topnav.php');
                 <?php
                 include_once('../backend/db_con3.php');
 
-                $sql = "SELECT DISTINCT s20_application_info.student_email, concat(s20_application_info.semester, ' ', s20_application_info.year) AS semyear, concat(s20_application_info.dept_code, ' ', course_number) AS Course, 
-                s20_application_info.instructor_email, assigned_to, s20_application_info.fw_id FROM s20_application_info, s20_application_util";
+                $sql = "SELECT s20_application_info.student_email, concat(s20_application_info.semester, ' ', s20_application_info.year) 
+                        AS semyear, concat(s20_application_info.dept_code, ' ', course_number) 
+                        AS Course, s20_application_info.instructor_email, assigned_to, s20_application_info.fw_id 
+                        FROM s20_application_info INNER JOIN s20_application_util ON s20_application_info.fw_id = s20_application_util.fw_id";
                 $run = mysqli_query($db_conn, $sql);
                 //alert($run);
                 if (!$run) { //if failed to reach database
@@ -53,9 +50,8 @@ include_once('components/topnav.php');
                     $email = $row["student_email"];
                     $course = $row['Course'];
                     $semester = $row['semyear'];
-                    $facultyemail = $row['instructor_email'];
                     $assigned = $row['assigned_to'];
-                    $fwid = $row['fw_id'];  
+                    $fwid = $row['fw_id'];
                     console_log($row);
                 ?>
 
@@ -63,9 +59,8 @@ include_once('components/topnav.php');
                         <td><?php echo $email; ?></td>
                         <td><?php echo $course; ?></td>
                         <td><?php echo $semester; ?></td>
-                        <td><?php echo $facultyemail; ?></td>
                         <td><?php echo $assigned; ?></td>
-                        <td><a class="btn btn-primary btn-block" href="./viewworkflow.php?fwid=<?php echo $fwid; ?>">View</a></button></td>
+                        <td><a class="btn btn-primary btn-block" href="./viewapplicationdetail.php?fwid=<?php echo $fwid; ?>">View</a></button></td>
                     </tr>
 
 

@@ -178,12 +178,10 @@ if (isset($_GET['fwid'])) { //check for exising fwid and that the parameter isnt
           </div>
 
           <hr class="mb-4">
-          <?php if (!$existing_app) { ?>
-            <button name="proceed" type="submit" class="btn btn-primary float-right">Proceed</button>
-
-          <?php } else { ?>
+          <?php if ($existing_app) { ?>
             <button name="save" type="submit" class="btn btn-primary float-right">Save</button>
-
+          <?php } else { ?>
+            <button name="proceed" type="submit" class="btn btn-primary float-right">Proceed</button>
           <?php } ?>
 
 
@@ -207,25 +205,23 @@ if (isset($_POST['proceed']) or isset($_POST['save'])) {
   $state        = mysqli_real_escape_string($db_conn, $_POST['state']);
   $zip          = mysqli_real_escape_string($db_conn, $_POST['zipcode']);
 
-
   if ($existing_app) {
     $update    = "UPDATE s20_company_info SET company_name = '$organization', supervisor_email = '$email', supervisor_phone = '$phonenumber', supervisor_first_name = '$firstname', supervisor_last_name = '$lastname', company_address = '$address', company_address2 = '$aptnumber', company_city = '$city', company_state = '$state', company_zip = '$zip'";
    
     $updatesql = mysqli_query($db_conn, $update);
     if (mysqli_errno($db_conn) == 0) {
       if(isset($_GET['edit']) and $_GET['edit'] == true){
-        exit(header('Location: ./review.php?fwid=' . $fwid .''));
+        exit(header('Location: ./review.php?fwid=' . $fwid));
       }
-      exit(header('Location: ./lo.php?fwid=' . $fwid . "&new=true"));
+      exit(header('Location: ./lo.php?fwid=' . $fwid));
     } else {
       alert("Update failed: " . mysqli_errno($db_conn));
     }
   } else {
-
     $insert    = "INSERT INTO s20_company_info(fw_id,company_name,supervisor_email,supervisor_phone, supervisor_first_name, supervisor_last_name, company_address, company_address2, company_city, company_state, company_zip) VALUES('$fwid','$organization','$email','$phonenumber','$firstname', '$lastname', '$address', '$aptnumber', '$city', '$state','$zip')";
     $insertsql = mysqli_query($db_conn, $insert);
     if ($insertsql) {
-      exit(header('Location: ./lo.php?fwid=' . $fwid . "&new=true"));
+      exit(header('Location: ./lo.php?fwid=' . $fwid));
     } else {
       alert("Insert failed " . mysqli_errno($db_conn));
     }

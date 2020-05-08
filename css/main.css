@@ -38,6 +38,18 @@
 #sidebar-wrapper > img{
     display: none;
 }
+.partipants_drag_drop{
+    background: white;
+    border-radius: 20px;
+    margin: 12px;
+    padding: 10px;
+}
+.assigned_fac_head{
+    background: white;
+    border-radius: 20px;
+    margin: 12px;
+    padding: 10px; 
+}
 .wflowstyle{
     background: white;
      border-radius: 10px;

@@ -11,7 +11,7 @@ include_once('components/topnav.php');
 <div class="container">
   <div class="jumbotron">
     <h1 class="display-4">Create a User</h1>
-    <p class="lead">You can generate a single new user here.</p>
+    <p class="lead">You can generate a single new user here. (Not implemented)</p>
     <hr class="my-4">
     <form>
       <div class="form-group row">
