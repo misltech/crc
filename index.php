@@ -68,6 +68,11 @@ if (isset($_SESSION['user_type'])) {
         Signed out due to inactivity. Please sign in again.
       </div>
     <?php } ?>
+    <?php if (checkUnauthorizedRedirect()) { ?>
+      <div class="alert alert-danger fade show">
+        You are not allowed to view this page.
+      </div>
+    <?php } ?>
     <label for="inputEmail" class="sr-only">Email address</label>
     <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
     <label for="inputPassword" class="sr-only">Password</label>
@@ -135,6 +140,13 @@ function checkInactivity()
   if (isset($_GET['inactive'])) {
     $id = $_GET['inactive'];
     if ($id == $GLOBALS['Inactivity']) {
+      return true;
+    }
+  }
+}
+function checkUnauthorizedRedirect(){
+  if(isset($_GET['unauthorized']) and isset($_GET['redirect'])){
+    if($_GET['unauthorized'] and $_GET['redirect']){
       return true;
     }
   }

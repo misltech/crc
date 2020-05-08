@@ -16,12 +16,13 @@ if (isset($_GET['inactive'])) {
         header("Location: ../index.php?inactive=1");
     }
   }
+else if(isset($_GET['authorized'])){
+    $a = $_GET['authorized'];
+    if($a == 'false'){
+    header("Location: ../index.php?unauthorized=true&redirect=true");
+    }
+}
 
 else{
     header("Location: ../index.php");
 }
-
-
-
-
-?>

@@ -44,11 +44,8 @@ function validCSRF($csrf){
 </head>
 
 <?php
- if(time() - $_SESSION['timestamp'] > 900) { //subtract new timestamp from the old one
-  redirect("inactive");
-} else {
-  $_SESSION['timestamp'] = time(); //set new timestamp
-}
+include '../backend/timeout.php';
+validate('instructor');
 ?>
 
 <body>
