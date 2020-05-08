@@ -20,8 +20,8 @@ global $fwid;
 global $existing_app;
 if (isset($_GET['fwid'])) {  //check for exising fwid
   $fwid = $_GET['fwid'];
-  $banner = $_SESSION['banner'];
-  $sql  = "SELECT * FROM s20_application_info WHERE fw_id = '$fwid' AND banner_id = '$banner'"; //checks if they are allowed to view page
+  $stu = $_SESSION['user_email'];
+  $sql  = "SELECT * FROM s20_application_info WHERE fw_id = '$fwid' AND student_email='$stu'"; //checks if they are allowed to view page
   $qsql  = mysqli_query($db_conn, $sql);
   $r = mysqli_num_rows($qsql);
   if ($r == 1) {  //if application exists.
@@ -52,16 +52,19 @@ if (isset($_GET['fwid'])) {  //check for exising fwid
           <div class="form-group row">
             <label for="tl" class="col-4 col-form-label">Title of Project</label>
             <div class="col-8">
-              <input id="tl" value="<?php echo $title; ?>" name="project_name" placeholder="Project name" type="text" required="required" class="form-control" autofocus>
+              <!-- <input id="tl" value="<?php echo $title; ?>" name="project_name" placeholder="Project name" type="text" required="required" class="form-control" autofocus> -->
+              <select id="type" name="apptype" required="required" class="custom-select">
+                <option value="Internship">Internship</option>
+                <option value="Independent Study">Independent Study</option>
+              </select>
+              <!-- Make this a drop down for internship or Independent study -->
             </div>
           </div>
           <div class="form-group row">
             <label for="sem" class="col-4 col-form-label">Semester</label>
             <div class="col-8">
-              <select id="sem" name="sem" required="required" value="Summer 2020" class="custom-select" disabled>
-                <option selected value="Summer 2020">Summer 2020</option>
-                <option value="<?php echo $semester; ?>"><?php $semester; ?></option>
-                <option value="Fall 2020">Fall 2020</option>
+              <select id="sem" name="sem" required="required" value="<?php echo $semester; ?>" class="custom-select" disabled>
+                  <option value="<?php echo $semester; ?>"><?php echo $semester; ?></option>
               </select>
             </div>
           </div>
@@ -71,14 +74,14 @@ if (isset($_GET['fwid'])) {  //check for exising fwid
               <select id="cn" value="<?php echo $classnumber; ?>" name="cn" class="custom-select">
 
                 <?php
-                $sql = "SELECT s20_application_info.dept_code, s20_course_numbers.course_num FROM s20_application_info INNER JOIN s20_course_numbers ON s20_application_info.dept_code = s20_course_numbers.dept_code WHERE fw_id = '$fwid'";
+                $sql = "SELECT s20_application_info.dept_code, s20_course_numbers.course_number FROM s20_application_info INNER JOIN s20_course_numbers ON s20_application_info.dept_code = s20_course_numbers.dept_code WHERE fw_id = '$fwid'";
                 $query = mysqli_query($db_conn, $sql);
                 if ($query) {
                   $r = mysqli_num_rows($query);
                   if ($r > 0) {
                     while ($result = mysqli_fetch_assoc($query)) {
                       $deptcode = $result['dept_code'];
-                      $coursenum = $result['course_num'];
+                      $coursenum = $result['course_number'];
                 ?>
                       <option value="<?php echo $deptcode . " " . $coursenum; ?>"><?php echo $deptcode . " " . $coursenum; ?></option>
                 <?php
@@ -115,10 +118,11 @@ if (isset($_GET['fwid'])) {  //check for exising fwid
 
           <div class="form-group row mt-5">
             <div class="offset-4 col-8">
-              <?php if ($existing_app) { ?>
-                <button name="proceed" type="submit" class="btn btn-primary float-right">Proceed</button>
-              <?php } else { ?>
+              <?php if (isset($_GET['edit']) and $_GET['edit'] == 'true') { ?>
                 <button name="save" type="submit" class="btn btn-primary float-right">Save</button>
+                
+              <?php } else { ?>
+                <button name="proceed" type="submit" class="btn btn-primary float-right">Proceed</button>
               <?php } ?>
             </div>
           </div>
@@ -136,7 +140,7 @@ if (isset($_GET['fwid'])) {  //check for exising fwid
 include_once('components/footer.php');
 
 if (isset($_POST['proceed']) or isset($_POST['save'])) {
-  $title = mysqli_real_escape_string($db_conn, $_POST['project_name']);
+  $type = mysqli_real_escape_string($db_conn, $_POST['apptype']);
   $classnumber = mysqli_real_escape_string($db_conn, $_POST['cn']);
   $grademode = mysqli_real_escape_string($db_conn, $_POST['gm']);
   $credits = mysqli_real_escape_string($db_conn, $_POST['ac']);
@@ -146,21 +150,21 @@ if (isset($_POST['proceed']) or isset($_POST['save'])) {
   $classnum = $sem[1];
   $classdept = $sem[0];
 
-  $update = "UPDATE s20_application_info SET project_name = '$title', dept_code='$classdept', course_number='$classnum', grade_mode = '$grademode', academic_credits = '$credits', hours_per_wk = '$hours' WHERE fw_id = '$fwid'";
+  $update = "UPDATE s20_application_info SET project_name = '$type', dept_code='$classdept', course_number='$classnum', grade_mode = '$grademode', academic_credits = '$credits', hours_per_wk = '$hours' WHERE fw_id = '$fwid'";
   console_log($update);
   $updatesql = mysqli_query($db_conn, $update);
 
-  if ($updatesql) {
+  if (mysqli_errno($db_conn) == 0) {
   
-      if(isset($_GET['edit']) and $_GET['edit'] == true){
-        exit(header('Location: ./review.php?fwid=' . $fwid .''));
+      if(isset($_GET['edit']) and $_GET['edit'] == 'true'){
+        exit(header('Location: ./review.php?fwid=' . $fwid));
       }
       else{
-        exit(header('Location: ./emp.php?fwid=' . $fwid . "&new=true"));
+        exit(header('Location: ./emp.php?fwid=' . $fwid));
       }
   } 
   else  if (mysqli_errno($db_conn) == 1062) { //if duplicates? !?!
-    exit(header('Location: ./lo.php?fwid=' . $fwid . "&new=false"));
+    exit(header('Location: ./lo.php?fwid=' . $fwid));
   }
   else{
     alert("Update failed: " . mysqli_errno($db_conn));

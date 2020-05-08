@@ -45,31 +45,31 @@ if (isset($_GET['fwid'])) {
                     </tr>
                     <tr>
                         <td scope="row">Student Email</td>
-                        <td><?php echo $appinfo['student_email'];?></td>
+                        <td><?php echo $appinfo['student_email']; ?></td>
                     </tr>
                     <tr>
                         <td scope="row">Instructor Email</td>
-                        <td><?php echo $appinfo['instructor_email'];?></td>
+                        <td><?php echo $appinfo['instructor_email']; ?></td>
                     </tr>
                     <tr>
                         <td scope="row">Employer Email</td>
-                        <td><?php echo $appinfo['employer_email'];?></td>
+                        <td><?php echo $appinfo['employer_email']; ?></td>
                     </tr>
                     <tr>
                         <td scope="row">Academic Credits</td>
-                        <td><?php echo $appinfo['academic_credits'];?></td>
+                        <td><?php echo $appinfo['academic_credits']; ?></td>
                     </tr>
                     <tr>
                         <td scope="row">Excess Credits</td>
-                        <td><?php echo $appinfo['excess_credit'];?></td>
+                        <td><?php echo $appinfo['excess_credit']; ?></td>
                     </tr>
                     <tr>
                         <td scope="row">Grade Mode</td>
-                        <td><?php echo $appinfo['grade_mode'];?></td>
+                        <td><?php echo $appinfo['grade_mode']; ?></td>
                     </tr>
                     <tr>
                         <td scope="row">Hours Weekly</td>
-                        <td><?php echo $appinfo['hours_per_wk'];?></td>
+                        <td><?php echo $appinfo['hours_per_wk']; ?></td>
                     </tr>
 
                 </tbody>
@@ -173,44 +173,44 @@ if (isset($_GET['fwid'])) {
             global $fn;
             global $fp;
             global $foh;
-            $getfacemail = "SELECT * FROM s20_course_numbers WHERE dept_code = '$d' AND course_number = '$c'";
-            $getfacemailsql = mysqli_query($db_conn, $getfacemail);
-            if ($getfacemailsql) {
-                $getfacemail = mysqli_fetch_assoc($getfacemailsql);
-                $getfacemailval = $getfacemail['faculty_email'];
-                $facsql = "SELECT * FROM s20_faculty_info WHERE faculty_email = '$getfacemailval'";
-                $facquery = mysqli_query($db_conn, $facsql);
-                if ($facquery) {
-                    $facresult = mysqli_fetch_assoc($facquery);
-                    $fn = $facresult['faculty_first_name'] . " " . $facresult['faculty_last_name'];
-                    $fp = $facresult['faculty_phone_number'];
-                    $foh = $facresult['office_hours'];
-                }
-            }
-
+            $getfaculty = "SELECT * FROM s20_faculty_info WHERE s20_faculty_info.classes IN (SELECT id FROM s20_course_numbers WHERE dept_code='$d' AND course_number = '$c')";
+            
+            $getfacultyquery = mysqli_query($db_conn, $getfaculty);
+            console_log(mysqli_errno($db_conn));
+            if (mysqli_errno($db_conn) == 0) {
+                while ($facultyresult = mysqli_fetch_assoc($getfacultyquery)) {
+                    console_log($facultyresult);
+                    $fn = $facultyresult['faculty_first_name'] . " " . $facultyresult['faculty_last_name'];
+                    $fp = $facultyresult['faculty_phone_number'];
+                    $foh = $facultyresult['office_hours'];
             ?>
 
-            <table class="table review-sections table-hover">
-                <thead><tr>Assigned faculty</tr></thead>
-                <tbody>
-                    <tr>
-                        <td scope="row">Instructor</td>
-                        <td><?php echo $fn; ?></td>
-                    </tr>
-                    <tr>
-                        <td scope="row">Phone</td>
-                        <td><?php echo $fp; ?></td>
-                    </tr>
-                    <tr>
-                        <td scope="row">Office Hours</td>
-                        <td><?php echo $foh;?> </td>
-                    </tr>
+                    <table class="table review-sections table-hover">
+                        <thead>
+                            <tr>Assigned faculty</tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td scope="row">Instructor</td>
+                                <td><?php echo $fn; ?></td>
+                            </tr>
+                            <tr>
+                                <td scope="row">Phone</td>
+                                <td><?php echo $fp; ?></td>
+                            </tr>
+                            <tr>
+                                <td scope="row">Office Hours</td>
+                                <td><?php echo $foh; ?> </td>
+                            </tr>
 
-                </tbody>
-            </table>
+                        </tbody>
+                    </table>
+                    <?php }
+            } ?>
         </div>
-      </div>
+    </div>
 </div>
+
 
 <?php
 include_once('components/footer.php');

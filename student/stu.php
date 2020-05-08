@@ -37,7 +37,6 @@ if (isset($_GET['fwid'])) { //check for exising fwid and that the parameter isnt
             $row = mysqli_fetch_assoc($qsql);
             $firstname = $row['student_first_name'];
             $lastname = $row['student_last_name'];
-            $email = $row['student_email'];
             $middlename = $row['student_middle_initial'];
             $aptnum = $row['student_apt_num'];
             $phonenum = $row['student_phone'];
@@ -79,11 +78,6 @@ if (isset($_GET['fwid'])) { //check for exising fwid and that the parameter isnt
                         <label for="lastName">Middle Initial</label>
                         <input type="text" class="form-control" name="middlename" id="middlename" maxlength="1" placeholder="" value="<?php echo $middlename; ?>">
                     </div>
-                </div>
-
-                <div class="mb-3">
-                    <label for="email">Email </label>
-                    <input type="email" class="form-control col-md-6" name="email" id="email" value="<?php echo $email; ?>" placeholder="">
                 </div>
 
                 <div class="mb-3">
@@ -176,7 +170,7 @@ if (isset($_GET['fwid'])) { //check for exising fwid and that the parameter isnt
 
                     <div class="col-md-4 mb-3">
                         <label for="credits registered">Credits registered</label>
-                        <input type="number" id="credits" maxlength="2" value="<?php echo $phonenum; ?>" name="credits" type="text" class="form-control col-md-4">
+                        <input type="number" id="credits" maxlength="2" value="<?php echo $phonenum; ?>" name="credits" type="text" class="form-control col-md-4" required>
                     </div>
 
                 </div>
@@ -185,11 +179,11 @@ if (isset($_GET['fwid'])) { //check for exising fwid and that the parameter isnt
                 <hr class="mb-4">
 
 
-                <?php if (!$existing_app) { ?>
-                    <button name="proceed" type="submit" class="btn btn-primary float-right">Proceed</button>
-
-                <?php } else { ?>
+                <?php if (isset($_GET['edit']) and $_GET['edit'] == 'true') { ?>
                     <button name="save" type="submit" class="btn btn-primary float-right">Save</button>
+
+                <?php } else if (!$existing_app){ ?>
+                    <button name="proceed" type="submit" class="btn btn-primary float-right">Proceed</button>
 
                 <?php } ?>
             </form>
@@ -218,12 +212,11 @@ if (isset($_GET['fwid'])) { //check for exising fwid and that the parameter isnt
         
         $updatesql = mysqli_query($db_conn, $update);
 
-        if (mysqli_errno($db_conn) == 0) {
-            // exit(header('Location: ./review.php?fwid=' . $fwid . "&rej=1"));
-            if(isset($_GET['edit']) and $_GET['edit'] == true){
-                exit(header('Location: ./review.php?fwid=' . $fwid .''));
+        if (mysqli_errno($db_conn) == 0) {   //redirect based on edit flagged from student review.
+            if(isset($_GET['edit']) and $_GET['edit'] == 'true'){
+                exit(header('Location: ./review.php?fwid=' . $fwid));
               }
-            exit(header('Location: ./sem.php?fwid=' . $fwid . "&new=true"));
+            exit(header('Location: ./sem.php?fwid=' . $fwid ));
 
         } else {
             alert("Update failed: " . mysqli_errno($db_conn));
@@ -232,10 +225,10 @@ if (isset($_GET['fwid'])) { //check for exising fwid and that the parameter isnt
         }
         else{
             $insert = "INSERT INTO s20_student_info (fw_id, student_first_name, student_last_name, student_middle_initial,student_phone,student_address,student_apt_num,student_city,student_state,
-            student_zip, student_email, credits_registered) VALUES ('$fwid','$firstname', '$lastname','$middlename','$phonenum','$address', '$aptnum', '$city', '$state','$zip', '$email', '$credits')";
+            student_zip, credits_registered) VALUES ('$fwid','$firstname', '$lastname','$middlename','$phonenum','$address', '$aptnum', '$city', '$state','$zip', '$credits')";
             $insertsql = mysqli_query($db_conn, $insert);
             if ($insertsql) {
-                exit(header('Location: ./sem.php?fwid=' . $fwid . "&new=true"));
+                exit(header('Location: ./sem.php?fwid=' . $fwid));
             } else {
                 alert("Insert failed " . mysqli_errno($db_conn));
             }

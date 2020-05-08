@@ -16,7 +16,8 @@ $(document).ready(function () {
         url: "../api/setworkflow_api"
     }).done(function (result) {
         if(result.status == 'success'){
-          location.reload();
+          window.location.href = window.location.href + "&success=true&workflow=true";
+          //location.reload();
         }
     });
 
