@@ -21,7 +21,7 @@ function validCSRF($csrf){
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
-  <meta name="author" content="hello there">
+  <meta name="author" content="">
   <meta name="csrf-token" content="<?php echo $csrf; ?>">
   
   <title>Instructor Fieldwork Panel</title>

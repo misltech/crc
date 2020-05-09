@@ -34,10 +34,8 @@
             <div class="alert alert-success fade show">
                 Success! Password reset sent!
             </div>
-            
-        <?php } 
-        exit(header("refresh:5;url=index.php"));
-        ?>
+            <?php exit(header("refresh:5;url=index.php")); ?>
+        <?php } ?>
         <h1 class="h3 mb-3 font-weight-normal text-center">Please enter your email address</h1>
         <label for="inputEmail" class="sr-only">Email address</label>
         <input name="email" type="email" id="inputEmail" class="form-control mb-3" placeholder="Email address" required autofocus>

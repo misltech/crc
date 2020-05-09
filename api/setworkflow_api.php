@@ -1,19 +1,27 @@
 <?php 
 
+/**
+ * This page sets department workflow from the ajax call from admin.js. It has to be serialized and because its being sent from the front end we
+ * added Cross Site Request Forgery token to prevent unauthorized users from sending request to this api.
+ * 
+ */
+
+
+
 include_once '../backend/db_con3.php';
 if (!isset($_SESSION)) {
     session_start();
   }
 
-if (isset($_SESSION['csrf_token'])) {
-    $_SESSION['token'] = bin2hex(random_bytes(32));
+if (!isset($_SESSION['token'])) {  
+    exit();
 }
 
 header('Content-Type: application/json');
 
 $headers = apache_request_headers();
-if (true  or isset($headers['token'])) {
-    if (false and $headers['token'] !== $_SESSION['csrf_token']) {
+if (isset($headers['token'])) {
+    if ($headers['token'] !== $_SESSION['token']) {
         exit(json_encode(['error' => 'Wrong CSRF token.']));
     }
     if(!(isset($_SESSION['user_email']))){

@@ -1,4 +1,11 @@
 <?php
+
+
+
+
+/**
+ * This page stores all necessary data. It works in hand with util.php
+ */
    if(!isset($_SESSION)) 
     { 
         session_start(); 
