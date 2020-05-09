@@ -7,7 +7,7 @@
 include_once 'config.php';
 
 /**
-* A function to do a javascript alert 
+* A function that does a javascript alert 
 */
 function alert($msg) {
     echo "<script type='text/javascript'>alert('$msg');</script>";
@@ -65,14 +65,6 @@ function redirect($atype){
     
   }
   
-
-  function showifnotnull($data)
-  {
-    if ($data != null) {
-      echo ($data);
-    }
-
-  }
   
 /** A validating function that prevents unauthorized users from viewing other pages. ex: student cant 
  * view instructor pages. This is log you out and show you an unauthorized notice.
@@ -85,14 +77,10 @@ function validate($checktype){
     }
 }
 
-function getDBconn(){
-    return null;
-}
-
-
 
 /**
-* A function for logging a message to the console
+* A function for logging a message to the console under web browser inspect
+* @param string message to output. This pretty much can take anything displayable
 */
 function console_log( $data ){
     echo '<script>';
@@ -214,22 +202,3 @@ function generateSecretaryID()
 {
     return "S" . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9);
 }
-
-
-/**
- * Returns the item at a specified index of an associative array.
- * 
- * For example: Say you have an associative array:
- * array("Peter"=>"35", "Ben"=>"37", "Joe"=>"43");
- * 
- * Getting index "0" will yield "35."
- * 
- * @param array $array       The associative array to search.
- * @param integer $index     The index to get.
- * @return object            The object at the specified index.
- */
-function get_index_of_assoc($array, $index)
-{
-    return $array[array_keys($array)[$index]];
-}
-?>

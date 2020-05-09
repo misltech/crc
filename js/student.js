@@ -3,7 +3,7 @@ $(document).ready(function () {
 
     $.ajax({
         headers: {
-            'token': $('meta[name="token"]').attr('content'),
+            'token': $('meta[name="csrf-token"]').attr('content'),
             'request': 'all'
         },
         url: "../api/student_appplication_api"

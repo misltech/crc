@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * This logout page clears all data from session and redirects to login page. 
+ * Under special circumstance it can be given request for special log out messages
+ * such as unauthorized or inactivity.
+ */
    if(!isset($_SESSION)) 
     { 
         session_start(); 

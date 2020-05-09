@@ -1,18 +1,19 @@
 <?php
+
 ob_start();
+
+/**
+ * This page is the my account page where users can change their email and password. This is the same for all pages.
+ */
 if (!isset($_SESSION)) {
   session_start();
 }
 
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
-
-include_once('../backend/util.php');
-//validate($GLOBALS['student_type']);
-include_once('components/header.php');
-include_once('components/sidebar.php');
-include_once('components/topnav.php');
-include_once('../backend/db_con3.php');
+include_once '../backend/util.php';
+include_once 'components/header.php';
+include_once 'components/sidebar.php';
+include_once 'components/topnav.php';
+include_once '../backend/db_con3.php';
 
 global $pass;
 global $email;
