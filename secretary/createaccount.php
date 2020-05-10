@@ -102,29 +102,13 @@ include_once '../backend/db_con3.php';
               </div>
             </div>
           </form>
-
         </div>
-
-
-
       </div>
     </div>
-
-
-
-
-
   </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
-
 <?php
-
-include_once('../backend/db_con3.php');
 
 if (isset($_POST['submit-student'])) { //handles student submit button
   $email = mysqli_real_escape_string($db_conn, $_POST['email']);
@@ -181,6 +165,5 @@ if (isset($_POST['submit-student'])) { //handles student submit button
     //alert success
   }
 }
-
-include_once('components/footer.php');
+include_once './components/footer.php';
 ?>
