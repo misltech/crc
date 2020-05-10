@@ -12,7 +12,7 @@ if (!isset($_SESSION)) {
   }
 
 if (!isset($_SESSION['token'])) {
-    exit();
+    exit(json_encode('failed'));
 }
 
 header('Content-Type: application/json');
