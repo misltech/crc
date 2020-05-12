@@ -73,7 +73,18 @@ function redirect($atype){
 */
 function validate($checktype){
     if(!(isset($_SESSION['user_type']) and $_SESSION['user_type'] == $checktype)){
-        header('Location: ../backend/logout.php?authorized=false');
+        exit(header('Location: ../backend/logout.php?authorized=false'));
+    }
+}
+/***
+ * A validating function that prevents unauthorized users form viewing other pages. 
+ * @param array array of multiple user type to validate.
+ */
+function multivalidate(array $multipletype){
+    for ($i=0; $i < count($multipletype); $i++) { 
+        if(!(isset($_SESSION['user_type']) and $_SESSION['user_type'] == $multipletype[$i])){
+            exit(header('Location: ../backend/logout.php?authorized=false'));
+        }
     }
 }
 

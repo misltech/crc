@@ -27,7 +27,7 @@ include_once('components/topnav.php');
                     <th>Course #</th>
                     <th>Semester</th>
                     <th>Assigned to: </th>
-                    <th>Modify </th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>

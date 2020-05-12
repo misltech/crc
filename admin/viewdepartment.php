@@ -28,7 +28,7 @@ include_once('components/topnav.php');
                     <th>Chair Email</th>
                     <th>Dean Email</th>
                     <th>Secretary Email</th>
-                    <th>Edit </th>
+                    <th>Actions</th>
 
                 </tr>
             </thead>
@@ -60,7 +60,7 @@ include_once('components/topnav.php');
                             <td><?php echo $chair; ?></td>
                             <td><?php echo $dean; ?></td>
                             <td><?php echo $secretary; ?></td>
-                            <td><a class="btn btn-primary btn-block" href="./editdepartment.php?department=<?php echo $code; ?>">View</a></button></td>
+                            <td><a class="btn btn-primary btn-block" href="./editdepartment.php?department=<?php echo $code; ?>">Edit</a></button></td>
 
                         </tr>
 

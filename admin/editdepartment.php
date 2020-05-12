@@ -69,7 +69,7 @@ include_once '../backend/db_con3.php';
                         <h6> Available Participants</h6>
 
                         <?php
-                        $defaultorder = array('Student', 'Instructor', 'Employer', 'Chair', 'Dean', 'Records&Registration');
+                        $defaultorder = array('student', 'instructor', 'employer', 'chair', 'dean', 'recreg');
                         $array_difference = array_values(array_diff($defaultorder, $order));
                         for ($k = 0; $k < count($array_difference); $k++) {
                             $differenceval = $array_difference[$k];
@@ -85,7 +85,8 @@ include_once '../backend/db_con3.php';
                         <!-- <ul class="list-group"> -->
                         <?php
                         for ($i = 0; $i < count($order); $i++) {
-                            $temporder = $order[$i];
+                            $temporder = ucfirst($order[$i]);
+
                         ?>
                             <div class="list-group-item"><?php echo $temporder ?></div>
                     <?php   }

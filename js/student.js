@@ -6,7 +6,7 @@ $(document).ready(function () {
             'token': $('meta[name="csrf-token"]').attr('content'),
             'request': 'all'
         },
-        url: "../api/student_appplication_api"
+        url: "../api/student_application_api"
     }).done(function (result) {
         console.log(result);
         console.log(result.length);

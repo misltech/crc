@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="https://newpaltz.edu/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+
 
     <title>Internship Fieldwork Sign In</title>
 
@@ -29,7 +33,7 @@
 <body>
 
     <form class="form-signin text-center" method="POST">
-        <img class="mb-4" src="favicon/android-chrome-512x512.png" alt="" width="auto" height="90">
+        <img class="mb-4" id="formimg" src="favicon/android-chrome-512x512.png" alt="" width="auto" height="90">
         <?php if (isset($_GET['request']) and $_GET['request'] == 'true') { ?>
             <div class="alert alert-success fade show">
                 Success! Password reset sent!
