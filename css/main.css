@@ -54,6 +54,12 @@
     background: white;
      border-radius: 10px;
 } 
+
+#formimg{
+    padding-left: 7vh;
+    padding-right: 7vh;
+    background: #003e7e;
+}
 @media (max-width: 1270px){
     .progressB {
         width: 100%; 

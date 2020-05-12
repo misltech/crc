@@ -295,7 +295,7 @@ if (isset($_POST['modify'])) {
     $query = mysqli_query($db_conn, $sql);
     $result = mysqli_fetch_assoc($query);
 
-    if ($result['progress'] == 0 and $result['assigned_to'] == "student") {  //start of a new app
+    if ($result['progress'] == 0 and strtolower($result['assigned_to']) == "student") {  //start of a new app
         $update = "UPDATE s20_application_util SET rejected='0', progress ='1' WHERE fw_id ='$fwid'";
         $up = mysqli_query($db_conn, $update);
         if ($up) {

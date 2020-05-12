@@ -51,7 +51,7 @@ if (isset($_SESSION['user_type'])) {
 
 <body>
   <form class="form-signin text-center" action="index" method="POST">
-    <img class="mb-4" src="favicon/android-chrome-512x512.png" alt="" width="auto" height="90">
+    <img class="mb-4" src="favicon/android-chrome-512x512.png" alt="" id="formimg" width="auto" height="90">
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
     <?php if (checkInvalidCredentials()) { ?>
       <div class="alert alert-warning fade show">

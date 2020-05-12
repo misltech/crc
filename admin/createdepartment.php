@@ -179,7 +179,7 @@ include_once('components/topnav.php');
         </div>
         <hr>
         <div class="form-group">
-          <button name="createdepartment" type="submit" class="btn btn-primary">Create Department</button>
+          <button name="createdepartment" type="submit" class="btn btn-primary float-right">Create Department</button>
         </div>
       </form>
     </div>
@@ -200,7 +200,6 @@ if (isset($_POST['createdepartment'])) {
   if (mysqli_errno($db_conn) === 1062) {
     exit(header('Location: ./createdepartment.php?success=false&exist=true'));
   } else if (mysqli_errno($db_conn) == 0) {
-    alert(2);
     $defaultworkflow = array(0 => 'Student', 1 => 'Instructor', 2 => 'Employer', 3 => 'Chair', 4 => 'Dean', 5 => 'Records&Registration');
     $defaultworkflow = serialize($defaultworkflow);
     $insertworklowSQL = "INSERT INTO s20_workflow_order(dept_code, workflow) VALUES ('$deptcode','$defaultworkflow')";

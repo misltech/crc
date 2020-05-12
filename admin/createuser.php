@@ -43,7 +43,7 @@ include_once('components/topnav.php');
       </div>
       <div class="form-group row">
         <div class="offset-4 col-8">
-          <button name="submit" type="submit" class="btn btn-primary">Create</button>
+          <button name="submit" type="submit" class="btn btn-primary float-right">Create</button>
         </div>
       </div>
     </form>
