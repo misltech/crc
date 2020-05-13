@@ -19,7 +19,6 @@ global $rejected;
 global $comments;
 global $stage;
 global $banner;
-global $appbanner;
 global $title;
 global $semester;
 global $classnumber;
@@ -29,34 +28,31 @@ global $hours;
 global $showedits;
 if (isset($_GET['fwid'])) {  //check for rejected application
     $fwid = $_GET['fwid'];
-    $banner = $_SESSION['banner'];
-    $sql  = "SELECT * FROM s20_application_info WHERE fw_id = '$fwid' AND banner_id = '$banner'"; //checks if they are allowed to view page
+    $stuemail = $_SESSION['user_email'];
+    $sql  = "SELECT * FROM s20_application_info WHERE fw_id = '$fwid' AND student_email = '$stuemail'"; //checks if they are allowed to view page
     $qsql  = mysqli_query($db_conn, $sql);
     $r = mysqli_num_rows($qsql);
     if ($r == 1) {  //if application is found
         $result = mysqli_fetch_assoc($qsql);
-        $appbanner = $result['banner_id'];
         $title = $result['project_name'];
         $semester = $result['semester'] . " " . $result['year'];
-        $classnumber = $result['dept_code'] . " " . $result['class_number'];
+        $classnumber = $result['dept_code'] . " " . $result['course_number'];
         $grademode = $result['grade_mode'];
         $credits = $result['academic_credits'];
         $hours = $result['hours_per_wk'];
-        //get course info from here since it was called already.
-        $utilsql = "SELECT * FROM s20_application_util WHERE fw_id = '$fwid'";
-        console_log($utilsql);
+
+        $utilsql = "SELECT * FROM s20_application_util WHERE fw_id = '$fwid'";         //get course info from here since it was called already.
         $query = mysqli_query($db_conn, $utilsql);
         $result = mysqli_fetch_assoc($query);
         $rejected = $result['rejected'];
         $comments = $result['comments'];
-        $stage = $result['assigned_to']; 
+        $stage = $result['assigned_to'];
         $progress = $result['progress'];
         console_log($stage);
         console_log($progress);
-        if($rejected == 1 or $stage == "student" or $progress == -1){
+        if ($rejected == 1 or $stage == "student" or $progress == -1) {
             $showedits = true;
         }
-
     } else {
         exit(header('Location: ./application.php'));
     }
@@ -68,7 +64,7 @@ if (isset($_GET['fwid'])) {  //check for rejected application
 
 <div class="container">
     <div class="jumbotron">
-         <h1 class="display-4">Review Application</h1> 
+        <h1 class="display-4">Review Application</h1>
         <p class="lead">You can review your application here.</p>
 
         <?php if ($rejected) { ?>
@@ -107,30 +103,24 @@ if (isset($_GET['fwid'])) {  //check for rejected application
                     <div class="col-md-10 order-md-1 mx-auto review-sections">
                         <h5>Student Information <?php if ($showedits) { ?><span><a href="./stu.php?fwid=<?php echo $fwid; ?>&edit=true" class="btn btn-xs p-1"><span class="fa fa-edit"></span> Edit</a></span></h5><?php } else { ?> </h5> <?php } ?>
                     <table class="table table-striped">
-                        
-                    <?php 
+
+                        <?php
                         $sql  = "SELECT * FROM s20_student_info WHERE fw_id = '$fwid'"; //checks if they are allowed to view page
 
                         $stusql  = mysqli_query($db_conn, $sql);
                         $result = mysqli_fetch_assoc($stusql);
-                        
-                        $name = $result['student_first_name'] . " " . $result['student_last_name'] ;
-                        if($result['student_apt_num'] == null){
-                            $address = $result['student_address']. " " . $result['student_city']. ", ". $result['student_state']. ", ".$result['student_zip'];
+
+                        $name = $result['student_first_name'] . " " . $result['student_last_name'];
+                        if ($result['student_apt_num'] == null) {
+                            $address = $result['student_address'] . " " . $result['student_city'] . ", " . $result['student_state'] . ", " . $result['student_zip'];
+                        } else {
+                            $address = $result['student_address'] . " " . $result['student_apt_num'] . ", " . $result['student_city'] . ", " . $result['student_state'] . ", " . $result['student_zip'];
                         }
-                        else{
-                            $address = $result['student_address']. " " . $result['student_apt_num']. ", ". $result['student_city']. ", ". $result['student_state']. ", ".$result['student_zip']; 
-                        }
-                        $email = $result['student_email'];
                         $phone = $result['student_phone'];
                         $creditreg = $result['credits_registered'];
-                    
-                    ?>
-                    <tbody>
-                            <tr>
-                                <td scope="row">N#</td>
-                                <td><?php echo $appbanner; ?></td>
-                            </tr>
+
+                        ?>
+                        <tbody>
                             <tr>
                                 <td scope="row">Name</td>
                                 <td><?php echo $name; ?></td>
@@ -138,11 +128,6 @@ if (isset($_GET['fwid'])) {  //check for rejected application
                             <tr>
                                 <td scope="row">Local Address: Street</td>
                                 <td><?php echo $address; ?></td>
-                            </tr>
-
-                            <tr>
-                                <td scope="row">E-mail</td>
-                                <td><?php echo $email; ?></td>
                             </tr>
                             <tr>
                                 <td scope="row">Telephone number</td>
@@ -166,23 +151,23 @@ if (isset($_GET['fwid'])) {  //check for rejected application
                         <tbody>
                             <tr>
                                 <td scope="row">Course Number</td>
-                                <td><?php echo $classnumber;?></td>
+                                <td><?php echo $classnumber; ?></td>
                             </tr>
                             <tr>
                                 <td scope="row">Academic Semester</td>
-                                <td><?php echo $semester;?></td>
+                                <td><?php echo $semester; ?></td>
                             </tr>
                             <tr>
                                 <td scope="row">Grading Type</td>
-                                <td><?php echo $grademode;?></td>
+                                <td><?php echo $grademode; ?></td>
                             </tr>
                             <tr>
                                 <td scope="row">Credit Hours</td>
-                                <td><?php echo $credits;?></td>
+                                <td><?php echo $credits; ?></td>
                             </tr>
                             <tr>
                                 <td scope="row">Number of Hours/Week</td>
-                                <td><?php echo $hours;?></td>
+                                <td><?php echo $hours; ?></td>
                             </tr>
                         </tbody>
                     </table>
@@ -195,8 +180,8 @@ if (isset($_GET['fwid'])) {  //check for rejected application
                     <div class="col-md-10 order-md-1 mx-auto review-sections">
                         <h5>Employer Information <?php if ($showedits) { ?><span><a href="./emp.php?fwid=<?php echo $fwid; ?>&edit=true" class="btn btn-xs  p-1"><span class="fa fa-edit"></span> Edit</a></span></h5><?php } else { ?> </h5> <?php } ?>
                     <table class="table table-striped">
-                        
-                    <?php    
+
+                        <?php
                         $sql = "SELECT * FROM s20_company_info WHERE fw_id = '$fwid'";
                         $empsql = mysqli_query($db_conn, $sql);
                         $r         = mysqli_num_rows($empsql);
@@ -205,37 +190,36 @@ if (isset($_GET['fwid'])) {  //check for rejected application
                         $company   = $result['company_name'];
                         $email     = $result['supervisor_email'];
                         $phone     = $result['supervisor_phone'];
-                        if($result['company_address2'] == null){
-                            $address = $result['company_address'] . " " . $result['company_city']. " ". $result['company_state'] ." " . $result['company_zip'];
-                        }
-                        else{
-                            $address = $result['company_address'] . ", " .$result['company_address2'].", ". $result['company_city']. ", ". $result['company_state'] .", " . $result['company_zip'];
+                        if ($result['company_address2'] == null) {
+                            $address = $result['company_address'] . " " . $result['company_city'] . " " . $result['company_state'] . " " . $result['company_zip'];
+                        } else {
+                            $address = $result['company_address'] . ", " . $result['company_address2'] . ", " . $result['company_city'] . ", " . $result['company_state'] . ", " . $result['company_zip'];
                         }
 
-                    ?>
-                    
-                    
-                    <tbody>
+                        ?>
+
+
+                        <tbody>
                             <tr>
                                 <td scope="row">Name</td>
-                                <td><?php echo $name;?></td>
+                                <td><?php echo $name; ?></td>
                             </tr>
 
                             <tr>
                                 <td scope="row">Company</td>
-                                <td><?php echo $company;?></td>
+                                <td><?php echo $company; ?></td>
                             </tr>
                             <tr>
                                 <td scope="row">Email</td>
-                                <td><?php echo $email;?></td>
+                                <td><?php echo $email; ?></td>
                             </tr>
                             <tr>
                                 <td scope="row">Phone number</td>
-                                <td><?php echo $phone;?></td>
+                                <td><?php echo $phone; ?></td>
                             </tr>
                             <tr>
                                 <td scope="row">Site Address</td>
-                                <td><?php echo $address;?></td>
+                                <td><?php echo $address; ?></td>
                             </tr>
                         </tbody>
                     </table>
@@ -245,40 +229,40 @@ if (isset($_GET['fwid'])) {  //check for rejected application
             <div class="tab-pane  show " id="learning-body" role="tabpanel" aria-labelledby="learning-tab">
                 <div class="row mt-3">
                     <div class="col-md-10 order-md-1 mx-auto review-sections">
-                        <h5>Learning Expectations <?php if ($showedits) { ?><span><a href="./lo.php?fwid=<?php echo $fwid;?>&edit=true" class="btn btn-xs  p-1"><span class="fa fa-edit"></span> Edit</a></span></h5><?php } else { ?> </h5> <?php } ?>
+                        <h5>Learning Expectations <?php if ($showedits) { ?><span><a href="./lo.php?fwid=<?php echo $fwid; ?>&edit=true" class="btn btn-xs  p-1"><span class="fa fa-edit"></span> Edit</a></span></h5><?php } else { ?> </h5> <?php } ?>
 
                     <table class="table table-striped">
-                        
-                    <?php 
-                    
-                    $losql = "SELECT * FROM s20_project_info WHERE fw_id = '$fwid'";
-                    $loquery  = mysqli_query($db_conn, $losql);
-                    $r = mysqli_num_rows($loquery);
-                    $result = mysqli_fetch_assoc($loquery);
-                    $firstresponse = $result['project_response1'];
-                    $secondresponse = $result['project_response2'];
-                    $thirdresponse = $result['project_response3'];
-                    
-                    
-                    ?>
-                    <tbody>
+
+                        <?php
+
+                        $losql = "SELECT * FROM s20_project_info WHERE fw_id = '$fwid'";
+                        $loquery  = mysqli_query($db_conn, $losql);
+                        $r = mysqli_num_rows($loquery);
+                        $result = mysqli_fetch_assoc($loquery);
+                        $firstresponse = $result['project_response1'];
+                        $secondresponse = $result['project_response2'];
+                        $thirdresponse = $result['project_response3'];
+
+
+                        ?>
+                        <tbody>
                             <tr>
                                 <th scope="row">What are your responsibilities on the site? What special project will you be working on? What do you expect to learn? </th>
                             </tr>
                             <tr>
-                                <td><?php echo $firstresponse;?></td>
+                                <td><?php echo $firstresponse; ?></td>
                             </tr>
                             <tr>
                                 <th scope="row">How is the proposal related to your major areas of interest? Describe the course work you have completed which provides appropriate background to the project.</th>
                             </tr>
                             <tr>
-                                <td><?php echo $secondresponse;?></td>
+                                <td><?php echo $secondresponse; ?></td>
                             </tr>
                             <tr>
                                 <th scope="row">What is the proposed method of study? Where appropriate, cite readings and practical experience.</th>
                             </tr>
                             <tr>
-                                <td><?php echo $thirdresponse;?></td>
+                                <td><?php echo $thirdresponse; ?></td>
                             </tr>
                         </tbody>
                     </table>
@@ -286,10 +270,17 @@ if (isset($_GET['fwid'])) {  //check for rejected application
                 </div>
             </div>
         </div>
+        <?php if (isset($_GET['success']) and $_GET['success'] == 'true' and isset($_GET['redirect']) and $_GET['redirect'] == 'true') { ?>
+            <div class="col-6 mx-auto alert alert-success fade show">
+                Application submited. Redirecting you to your applications.
+            </div>
+            <?php exit(header("refresh:5;url=./application.php")); ?>
+        <?php } ?>
+
         <?php if ($showedits) { ?>
             <div class="mt-5 mt-5 col-8 mx-auto">
                 <form method="post">
-                    <button class="btn btn-block btn-secondary" value="<?php echo $fwid; ?>" name="modify" type="submit">Submit Revised Application</button>
+                    <button class="btn btn-block btn-secondary" value="<?php echo $fwid; ?>" name="modify" type="submit">Submit Application</button>
                 </form>
             </div>
         <?php } ?>
@@ -300,35 +291,48 @@ if (isset($_GET['fwid'])) {  //check for rejected application
 <?php
 if (isset($_POST['modify'])) {
     $fwidsubmit = mysqli_real_escape_string($db_conn, $_POST['modify']);
-    console_log($_POST['modify']);
-    //check if all sections are completed. then move application to next stage.
-    $sql = "SELECT * FROM s20_application_util WHERE fw_id = '$fwid'";
-        $query = mysqli_query($db_conn, $sql);
-        $result = mysqli_fetch_assoc($qsql);
+    $sql = "SELECT * FROM s20_application_util WHERE fw_id = '$fwid'";  //check the status of the current application at time of submit
+    $query = mysqli_query($db_conn, $sql);
+    $result = mysqli_fetch_assoc($query);
 
-        if($result['progress'] == 0 or $result['assigned_to'] == "student" ){
-            $update = "UPDATE s20_application_util SET rejected='0' WHERE fw_id ='$fwid'";
-            $up = mysqli_query($db_conn, $update);
-            if($up){
-                //confirm then redirect
-                header('Location: ./application.php'); 
+    if ($result['progress'] == 0 and strtolower($result['assigned_to']) == "student") {  //start of a new app
+        $update = "UPDATE s20_application_util SET rejected='0', progress ='1' WHERE fw_id ='$fwid'";
+        $up = mysqli_query($db_conn, $update);
+        if ($up) {
+            //get workflow order
+            //get next person in workflow 
+            //set assigned to who in the position 1
+            $getworkflowsql = "SELECT s20_application_info.dept_code, workflow FROM s20_workflow_order, s20_application_info WHERE fw_id='$fwid' AND s20_workflow_order.dept_code = s20_application_info.dept_code";
+            $getworkflowquery = mysqli_query($db_conn, $getworkflowsql);
+            if (mysqli_errno($db_conn) == 0) {
+                $getworkflowresult = mysqli_fetch_assoc($getworkflowquery);
+                $order = unserialize($getworkflowresult['workflow']);
+                
+                if (count($order) >= 1) {
+                    $neworder = $order[1];
+                }
+
+                $updateAssignedToSQL = "UPDATE s20_application_util SET assigned_to = '$neworder' WHERE fw_id='$fwid'";
+                $updateAssignedToquery = mysqli_query($db_conn, $updateAssignedToSQL);
+
+                if (mysqli_errno($db_conn) == 0) {
+                    header('Location: ./review.php?fwid=' . $fwid.'&success=true&redirect=true');  
+                }
+            } else {
+                alert("appsubmit error :" . mysqli_errno($db_conn));
             }
-            else{
-                alert("appsubmit error :". mysqli_errno($db_conn));
-            }
-        }
-        else if($result['rejected'] == 1){
+        } else if ($result['rejected'] == 1) {
             $update = "UPDATE s20_application_util SET rejected='0' WHERE fw_id ='$fwid'";
-            $in = mysqli_query($db_conn,$update);
-            if($in){
+            $in = mysqli_query($db_conn, $update);
+            if ($in) {
                 // confirmation then redirect
-                header('Location: ./application.php'); 
-            }
-            else{
-                alert("appsubmit error :". mysqli_errno($db_conn));
+                header('Location: ./application.php');
+            } else {
+                alert("appsubmit error :" . mysqli_errno($db_conn));
             }
         }
-    //remove reject and comments
+        //remove reject and comments
+    }
 }
 include_once('components/footer.php');
 //semester form to input into database

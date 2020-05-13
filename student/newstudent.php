@@ -21,12 +21,15 @@ if(isset($_GET['token']) && $_GET['token'] != null){
         $getuserresult = mysqli_fetch_assoc($getuserquery);
         
         if($getuserresult){
+
+        session_unset();
+        session_destroy();
+        session_start();     
         $_SESSION['user_type'] = $getuserresult["profile_type"];
         $_SESSION['user_email'] = $getuserresult['email'];
-        $_SESSION['banner'] = $getuserresult['banner_id'];
         $_SESSION['timestamp'] = time();
         $_SESSION['token'] = bin2hex(random_bytes(32));
-        
+
         $deletetoken = "DELETE FROM s20_user_validation WHERE token='$token'";
         $deletequery = mysqli_query($db_conn,$deletetoken);
         if($deletequery){

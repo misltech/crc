@@ -1,4 +1,11 @@
 <?php
+
+
+
+
+/**
+ * This page stores all necessary data. It works in hand with util.php
+ */
    if(!isset($_SESSION)) 
     { 
         session_start(); 
@@ -45,12 +52,12 @@ $GLOBALS['recreg_type'] = 'recreg';
 /**
  * Use API_URL (without the dollar sign) instead.
  */
-$API_URL = "https://cs.newpaltz.edu/p/f18-02/s20-v2/";
+$API_URL = "https://cs.newpaltz.edu/~mitchelt6/crc/";
 
 /**
  * The root of the web server (as an absolute URL).
  */
-define("API_URL", "https://cs.newpaltz.edu/p/f18-02/s20-v2/");
+define("API_URL", "https://cs.newpaltz.edu/~mitchelt6/crc/");
 
 /**
  * Use DEBUG (without the dollar sign) instead.

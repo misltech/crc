@@ -24,7 +24,10 @@ if (isset($_SESSION['user_type'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel="icon" href="https://newpaltz.edu/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+  <link rel="manifest" href="favicon/site.webmanifest">
 
   <title>Internship Fieldwork Sign In</title>
 
@@ -38,7 +41,7 @@ if (isset($_SESSION['user_type'])) {
 
   <style>
     body {
-      background-image: url(https://login.newpaltz.edu/cas/themes/newpaltz/images/background.jpg);
+      background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Crater_Lake_winter_pano2.jpg/1920px-Crater_Lake_winter_pano2.jpg);
       background-size: cover;
       background-attachment: fixed;
       background-position: center top;
@@ -46,9 +49,9 @@ if (isset($_SESSION['user_type'])) {
   </style>
 </head>
 
-<body class="text-center">
-  <form class="form-signin" action="index" method="POST">
-    <img class="mb-4" src="images/newpaltzlogo.png" alt="" width="250" height="auto">
+<body>
+  <form class="form-signin text-center" action="index" method="POST">
+    <img class="mb-4" src="favicon/android-chrome-512x512.png" alt="" id="formimg" width="auto" height="90">
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
     <?php if (checkInvalidCredentials()) { ?>
       <div class="alert alert-warning fade show">
@@ -63,6 +66,11 @@ if (isset($_SESSION['user_type'])) {
     <?php if (checkInactivity()) { ?>
       <div class="alert alert-warning fade show">
         Signed out due to inactivity. Please sign in again.
+      </div>
+    <?php } ?>
+    <?php if (checkUnauthorizedRedirect()) { ?>
+      <div class="alert alert-danger fade show">
+        You are not allowed to view this page.
       </div>
     <?php } ?>
     <label for="inputEmail" class="sr-only">Email address</label>
@@ -94,13 +102,12 @@ if (isset($_POST['submit'])) {
   $sql = "SELECT * FROM " . $GLOBALS['accounts'] . " WHERE email = '$email' AND passcode = '$password'"; //substitute table to global
   $result = mysqli_query($db_conn, $sql);
   $row = mysqli_fetch_assoc($result);
-  
+
   // mysqli_fetch_array($result, MYSQLI_ASSOC);
   $count = mysqli_num_rows($result);
   if ($count == 1) {
     $_SESSION['user_type'] = $row["profile_type"];
     $_SESSION['user_email'] = $row['email'];
-    $_SESSION['banner'] = $row['banner_id'];
     $_SESSION['timestamp'] = time();
     $_SESSION['token'] = bin2hex(random_bytes(32));
 
@@ -128,10 +135,18 @@ function checkInternalError()
     }
   }
 }
-function checkInactivity(){
+function checkInactivity()
+{
   if (isset($_GET['inactive'])) {
     $id = $_GET['inactive'];
     if ($id == $GLOBALS['Inactivity']) {
+      return true;
+    }
+  }
+}
+function checkUnauthorizedRedirect(){
+  if(isset($_GET['unauthorized']) and isset($_GET['redirect'])){
+    if($_GET['unauthorized'] and $_GET['redirect']){
       return true;
     }
   }

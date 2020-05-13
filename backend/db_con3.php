@@ -1,4 +1,7 @@
 <?php
+/**
+ * The most used php file I would say. This iniates the core of all database transaction
+ */
 
 include_once('config.php');
 

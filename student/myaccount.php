@@ -1,4 +1,5 @@
 <?php
+ob_start();
 if (!isset($_SESSION)) {
   session_start();
 }
@@ -7,7 +8,7 @@ error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
 include_once('../backend/util.php');
-validate($GLOBALS['student_type']);
+//validate($GLOBALS['student_type']);
 include_once('components/header.php');
 include_once('components/sidebar.php');
 include_once('components/topnav.php');
@@ -48,39 +49,48 @@ function filter()
     <nav class="mb-5 ">
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
-          <a class="nav-link active text-dark" id="student-tab" data-toggle="tab"  data-target="#email">Change Email</a>
+          <a class="nav-link active text-dark" id="student-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Change Email</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark" id="password-tab" data-toggle="tab" data-target="#password" >Change Password</a>
+          <a class="nav-link text-dark" id="password-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Change Password</a>
         </li>
       </ul>
     </nav>
+    <?php if (isset($_GET['success']) and $_GET['success'] == 'true') { ?>
+      <div class="alert alert-success fade show">
+        Account updated!
+      </div>
+    <?php } else if(isset($_GET['success']) and $_GET['success'] == 'false')  { ?>
+      <div class="alert alert-danger fade show">
+        Update failed. Try again later.
+      </div>
+    <?php } ?>
     <div class="tab-content" id="myTabContent">
-      <div class="tab-pane fade show active" id="email" >
+      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
         <div class="row">
           <div class="col-md-8 order-md-1 mx-auto">
-            <form method="post">
+            <form method="POST">
               <div class="form-group row">
-                <label for="oem" class="col-4 col-form-label">Old Email address</label>
+                <label for="oem" class="col-4 col-form-label">Current email address</label>
                 <div class="col-8">
                   <input id="oem" name="oldemail" value="<?php echo $email;?>"type="email" class="form-control" disabled>
                 </div>
               </div>
               <div class="form-group row">
-                <label for="em" class="col-4 col-form-label">New Email address</label>
+                <label for="em" class="col-4 col-form-label">New email address</label>
                 <div class="col-8">
                   <input id="em" name="newemail" type="email" class="form-control" required="required">
                 </div>
               </div>
               <div class="form-group row">
-                <label for="nem" class="col-4 col-form-label">Confirm Email address</label>
+                <label for="nem" class="col-4 col-form-label">Confirm email address</label>
                 <div class="col-8">
                   <input id="nem" name="confirmemail" type="email" class="form-control" required="required">
                 </div>
               </div>
               <div class="form-group row">
                 <div class="offset-4 col-8">
-                  <button name="SubmitEmail" type="submit" class="btn btn-primary float-right mt-5">Save</button>
+                  <button name="changeemail" type="submit" class="btn btn-primary float-right mt-5">Save</button>
                 </div>
               </div>
             </form>
@@ -88,23 +98,11 @@ function filter()
 
         </div>
       </div>
-      <div class="tab-pane fade" id="password">
+      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="password-tab">
         <div class="row">
           <div class="col-md-8 order-md-1 mx-auto">
-            <form method="post">
-              <div class="form-group row">
-                <label for="oldpass" class="col-4 col-form-label">Old Password</label>
-                <div class="col-8">
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">
-                        <i class="fa fa-lock"></i>
-                      </div>
-                    </div>
-                    <input id="oldpass" name="oldpass" type="password" required="required" class="form-control">
-                  </div>
-                </div>
-              </div>
+            <form method="POST">
+              
               <div class="form-group row">
                 <label for="newpass" class="col-4 col-form-label">New Password</label>
                 <div class="col-8">
@@ -133,14 +131,13 @@ function filter()
               </div>
               <div class="form-group row">
                 <div class="offset-4 col-8">
-                  <button name="SubmitPass" type="submit" class="btn btn-primary float-right mt-5">Save</button>
+                  <button name="changepassword" type="submit" class="btn btn-primary float-right mt-5">Save</button>
                 </div>
               </div>
             </form>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </div>
@@ -148,8 +145,7 @@ function filter()
 
 include_once('./components/footer.php');
 
-if (isset($_POST['SubmitPass']) ) {
-  $oldpass = mysqli_real_escape_string($db_conn, $_POST['oldpass']);
+if (isset($_POST['changepassword']) ) {
   $newpass = mysqli_real_escape_string($db_conn, $_POST['newpass']);
   $confirmpass = mysqli_real_escape_string($db_conn, $_POST['confirmpass']);
   
@@ -161,14 +157,14 @@ if (isset($_POST['SubmitPass']) ) {
       $update = "UPDATE s20_UserPass SET passcode='$confirmpass' WHERE email = '$email'";
       $uquery = mysqli_query($db_conn, $update);
       if($uquery){
-        alert("Changed password");
+        header('Location: ./myaccount.php?success=true');
       }
       else{
-        alert("Update failed " . mysqli_errno($db_conn));
+        header('Location: ./myaccount.php?success=false');
       }
   }
 }
-else if(isset($_POST['SubmitEmail'])){
+else if(isset($_POST['changeemail'])){
   $newemail = mysqli_real_escape_string($db_conn, $_POST['newemail']);
   $confirmemail = mysqli_real_escape_string($db_conn, $_POST['confirmemail']);
 
@@ -180,10 +176,10 @@ else if(isset($_POST['SubmitEmail'])){
     $uquery = mysqli_query($db_conn, $update);
 
     if($uquery){
-      alert("Changed email");
+      header('Location: ./myaccount.php?success=true');
     }
     else{
-      alert("Update failed " . mysqli_errno($db_conn));
+      header('Location: ./myaccount.php?success=false');
     }
   }
   

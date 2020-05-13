@@ -22,8 +22,8 @@ global $thirdresponse;
 global $existing_app;
 if (isset($_GET['fwid'])) {  //check for exising fwid
     $fwid = $_GET['fwid'];
-    $banner = $_SESSION['banner'];
-    $sql  = "SELECT * FROM s20_application_info WHERE fw_id = '$fwid' AND banner_id = '$banner'"; //checks if they are allowed to view page
+    $stuemail = $_SESSION['user_email'];
+    $sql  = "SELECT * FROM s20_application_info WHERE fw_id = '$fwid' AND student_email = '$stuemail'"; //checks if they are allowed to view page
     $qsql  = mysqli_query($db_conn, $sql);
     $r = mysqli_num_rows($qsql);
     if ($r == 1) { //if application is found
@@ -74,11 +74,11 @@ if (isset($_GET['fwid'])) {  //check for exising fwid
                     </div>
 
                     <div class="form-group mt-5">
-                        <?php if (!$existing_app) { ?>
-                            <button name="proceed" type="submit" class="btn btn-primary float-right">Proceed</button>
-
-                        <?php } else { ?>
+                        <?php if ($isset($_GET['edit']) and $_GET['edit'] == 'true') { ?>
                             <button name="save" type="submit" class="btn btn-primary float-right">Save</button>
+
+                        <?php } else if(!$existing_app){ ?>
+                            <button name="proceed" type="submit" class="btn btn-primary float-right">Proceed</button>
                         <?php } ?>
                     </div>
                 </form>
@@ -100,18 +100,24 @@ if (isset($_POST['proceed']) or isset($_POST['save'])) {
     if ($existing_app) {
         $update    = "UPDATE s20_project_info SET project_response1 = '$firstprompt', project_response2 = '$secondprompt', project_response3 = '$thirdprompt';";
         $updatesql = mysqli_query($db_conn, $update);
-        if ($updatesql) {
-            exit(header('Location: ./review.php?fwid=' . $fwid . "&rej=1"));
+
+        if (mysqli_errno($db_conn) == 0) {   //redirect based on edit flagged from student review.
+            if(isset($_GET['edit']) and $_GET['edit'] == 'true'){
+                exit(header('Location: ./review.php?fwid=' . $fwid));
+              }
+            exit(header('Location: ./review.php?fwid=' . $fwid));
         } else {
             alert("Update failed: " . mysqli_errno($db_conn));
         }
     } else {
-        $insert = "INSERT INTO s20_project_info(fw_id, project_response1, project_response2, project_response3) VALUES('$fwid','$firstprompt', '$secondprompt', '$thirdprompt');";
-        $insert .= "UPDATE s20_application_util SET progress='0' WHERE fw_id ='$fwid';";
-        $insertsql = mysqli_query($db_conn, $insert);
-
-        if ($insertsql) {
-            exit(header('Location: ./review.php?fwid=' . $fwid . "&rej=1"));
+        $insertsql = "INSERT INTO s20_project_info(fw_id, project_response1, project_response2, project_response3) VALUES('$fwid','$firstprompt', '$secondprompt', '$thirdprompt')";
+        $updateUtilsql = "UPDATE s20_application_util SET progress='0' WHERE fw_id ='$fwid'";
+        $insertquery = mysqli_query($db_conn, $insertsql);
+        if (mysqli_errno($db_conn) == 0) {
+            $updateUtilquery = mysqli_query($db_conn, $updateUtilsql);
+            if(mysqli_errno($db_conn) == 0){
+                exit(header('Location: ./review.php?fwid=' . $fwid));
+            }
         } else {
             alert("Insert failed " . mysqli_errno($db_conn));
         }

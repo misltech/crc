@@ -29,8 +29,37 @@
     padding: 11px;
     border-radius: 10px;
 }
+.sidebar-heading{
+    margin: 5px;
+    padding-right: 20px;
+    border-right-width: 5px;
+    border-radius: 14px;
+}
+#sidebar-wrapper > img{
+    display: none;
+}
+.partipants_drag_drop{
+    background: white;
+    border-radius: 20px;
+    margin: 12px;
+    padding: 10px;
+}
+.assigned_fac_head{
+    background: white;
+    border-radius: 20px;
+    margin: 12px;
+    padding: 10px; 
+}
+.wflowstyle{
+    background: white;
+     border-radius: 10px;
+} 
 
-  
+#formimg{
+    padding-left: 7vh;
+    padding-right: 7vh;
+    background: #003e7e;
+}
 @media (max-width: 1270px){
     .progressB {
         width: 100%; 

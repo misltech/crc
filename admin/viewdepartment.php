@@ -13,13 +13,7 @@ include_once('components/topnav.php');
     <div class="jumbotron">
         <h1 class="display-4">View Departments <span class="d-inline">
                 <div class="d-inline float-right dropdown">
-                    <button class="btn btn-secondary dropdown-toggle ml-auto" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Department Settings
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="./createdepartment.php">Add Department</a>
-                        
-                    </div>
+                    <button class="btn btn-secondary  ml-auto" type="button" onclick="window.location.href='./createdepartment.php'">Add Department</button>       
                 </div>
             </span></h1>
         <p class="lead">You can view and modify assigned users for each department.</p>
@@ -34,7 +28,7 @@ include_once('components/topnav.php');
                     <th>Chair Email</th>
                     <th>Dean Email</th>
                     <th>Secretary Email</th>
-                    <th>Edit </th>
+                    <th>Actions</th>
 
                 </tr>
             </thead>
@@ -66,7 +60,7 @@ include_once('components/topnav.php');
                             <td><?php echo $chair; ?></td>
                             <td><?php echo $dean; ?></td>
                             <td><?php echo $secretary; ?></td>
-                            <td><a class="btn btn-primary btn-block" href="#">View</a></button></td>
+                            <td><a class="btn btn-primary btn-block" href="./editdepartment.php?department=<?php echo $code; ?>">Edit</a></button></td>
 
                         </tr>
 
@@ -82,6 +76,9 @@ include_once('components/topnav.php');
 
 
 <?php
+
+
+
 include_once('components/footer.php');
 
 ?>
