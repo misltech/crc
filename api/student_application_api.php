@@ -1,19 +1,25 @@
 <?php 
-
+/**
+ * This page gets all student application from database and send it as a JSON. This was required because the progress bar we used
+ * needed javascript. This was kinda the easiest way. This page also handles Cross Site Request Forgery tokens. Although a token
+ * a token is generated for each user. Its only applied to admin pages. This is used by student.js. However in the future
+ * it can be used to get application for other users as well.
+ * 
+ */
 include_once '../backend/db_con3.php';
 if (!isset($_SESSION)) {
     session_start();
   }
 
-if (isset($_SESSION['csrf_token'])) {
-    $_SESSION['token'] = bin2hex(random_bytes(32));
+if (!isset($_SESSION['token'])) {
+    exit(json_encode('failed'));
 }
 
 header('Content-Type: application/json');
 
 $headers = apache_request_headers();
-if (true  or isset($headers['token'])) {
-    if (false and $headers['token'] !== $_SESSION['csrf_token']) {
+if (isset($headers['token'])) {
+    if ($headers['token'] !== $_SESSION['token']) {
         exit(json_encode(['error' => 'Wrong CSRF token.']));
     }
     if(!(isset($_SESSION['user_email']))){
@@ -25,7 +31,7 @@ if (true  or isset($headers['token'])) {
         //$email = 'student@email.com';
         if($req == "all"){
             
-            $sql = "SELECT s20_application_info.dept_code,`semester`,`year`,`class_number`,`progress`,`comments`,`rejected`,s20_application_info.fw_id, workflow
+            $sql = "SELECT s20_application_info.dept_code,semester,year,course_number,progress,comments,rejected,s20_application_info.fw_id, workflow
             FROM s20_application_info LEFT JOIN s20_application_util ON s20_application_info.fw_id = s20_application_util.fw_id LEFT JOIN s20_workflow_order ON s20_application_info.dept_code = s20_workflow_order.dept_code
             WHERE student_email = '$email' ORDER BY s20_application_info.year DESC, s20_application_info.semester";
             
@@ -43,7 +49,7 @@ if (true  or isset($headers['token'])) {
                     $sub_arr = [];
                     $order = unserialize($row['workflow']);
                     array_push($sub_arr, $order);
-                    array_push($sub_arr, ['fwid' => $row['fw_id'], 'dept' => $row['dept_code'], 'classnumber' => $row['class_number'], 'progress' => $row['progress'] ,'semester' => $row['semester'], 'year' => $row['year'], 'rejected' => $row['rejected'], 'comments' => $row['comments']]);
+                    array_push($sub_arr, ['fwid' => $row['fw_id'], 'dept' => $row['dept_code'], 'classnumber' => $row['course_number'], 'progress' => $row['progress'] ,'semester' => $row['semester'], 'year' => $row['year'], 'rejected' => $row['rejected'], 'comments' => $row['comments']]);
                     //validate inputs here
                     array_push($main_arr, $sub_arr);
                 }

@@ -7,6 +7,7 @@
   <div class="sidebar-heading"> <h4>Internship Fieldwork</h4>
   </div>
   <div class="list-group list-group-flush">
+    <a href="./chair.php" class="list-group-item list-group-item-action bg-light">Home</a>
     <a href="./myaccount.php" class="list-group-item list-group-item-action bg-light">My Account</a>
     <a href="./applications.php" class="list-group-item list-group-item-action bg-light">Review Applications</a>
   </div>

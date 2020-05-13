@@ -14,14 +14,14 @@ include_once('components/topnav.php');
 
 include_once('../backend/db_con3.php');
 
-$user_email = $_SESSION['user_email'];
-$sql = "SELECT fw_id, assigned_to, dept_code FROM application_info WHERE student_email = '$user_email'";
-$query = mysqli_query($db_conn, $sql);
+// $user_email = $_SESSION['user_email'];
+// $sql = "SELECT fw_id, assigned_to, dept_code FROM application_info WHERE student_email = '$user_email'";
+// $query = mysqli_query($db_conn, $sql);
 
-if ($query) {
-    while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
-    }
-}
+// if ($query) {
+//     while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
+//     }
+// }
 
 ?>
 

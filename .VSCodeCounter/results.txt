@@ -1,0 +1,224 @@
+Date : 2020-05-08 16:20:40
+Directory : c:\Users\tahir\Documents\GitHub\crc
+Total : 165 files,  10312 codes, 1056 comments, 2020 blanks, all 13388 lines
+
+Languages
++--------------+------------+------------+------------+------------+------------+
+| language     | files      | code       | comment    | blank      | total      |
++--------------+------------+------------+------------+------------+------------+
+| PHP          |        147 |      8,811 |        951 |      1,796 |     11,558 |
+| CSS          |          5 |        533 |         51 |        102 |        686 |
+| HTML         |          3 |        477 |          0 |         32 |        509 |
+| JavaScript   |          6 |        379 |         39 |         61 |        479 |
+| Markdown     |          1 |        109 |          0 |         28 |        137 |
+| Properties   |          1 |          1 |          1 |          1 |          3 |
+| JSON         |          1 |          1 |          0 |          0 |          1 |
+| Shell Script |          1 |          1 |         14 |          0 |         15 |
++--------------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                       | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                          |        165 |     10,312 |      1,056 |      2,020 |     13,388 |
+| admin                                                                                      |         19 |      1,474 |         15 |        245 |      1,734 |
+| admin\components                                                                           |          4 |         88 |          0 |         27 |        115 |
+| api                                                                                        |          2 |         87 |         20 |         36 |        143 |
+| backend                                                                                    |          6 |        551 |        145 |         65 |        761 |
+| backend\email-template                                                                     |          2 |        361 |          0 |         10 |        371 |
+| chair                                                                                      |          8 |        259 |         14 |         54 |        327 |
+| chair\components                                                                           |          4 |         56 |          5 |         19 |         80 |
+| css                                                                                        |          3 |        114 |          6 |         19 |        139 |
+| dean                                                                                       |          8 |        244 |          7 |         42 |        293 |
+| dean\components                                                                            |          4 |         56 |          5 |         18 |         79 |
+| employer                                                                                   |          7 |        254 |          8 |         47 |        309 |
+| employer\components                                                                        |          4 |         56 |          5 |         19 |         80 |
+| favicon                                                                                    |          1 |          1 |          0 |          0 |          1 |
+| instructor                                                                                 |         10 |        327 |          6 |         68 |        401 |
+| instructor\components                                                                      |          4 |         90 |          0 |         22 |        112 |
+| js                                                                                         |          2 |        132 |          2 |         34 |        168 |
+| old stuff                                                                                  |         65 |      4,450 |        767 |        995 |      6,212 |
+| old stuff\components                                                                       |         27 |      1,620 |        328 |        299 |      2,247 |
+| old stuff\components\admin                                                                 |         17 |      1,222 |        191 |        199 |      1,612 |
+| old stuff\js                                                                               |          4 |        247 |         37 |         27 |        311 |
+| old stuff\stylesheets                                                                      |          2 |        419 |         45 |         83 |        547 |
+| old stuff\syllabi                                                                          |          1 |          3 |          3 |          0 |          6 |
+| recreg                                                                                     |          8 |        266 |          9 |         53 |        328 |
+| recreg\components                                                                          |          4 |         55 |          5 |         19 |         79 |
+| secretary                                                                                  |          9 |        541 |         18 |         99 |        658 |
+| secretary\components                                                                       |          4 |         62 |          5 |         18 |         85 |
+| student                                                                                    |         13 |      1,328 |         32 |        204 |      1,564 |
+| student\components                                                                         |          4 |         87 |          0 |         15 |        102 |
++--------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------------------------------------+--------------+------------+------------+------------+------------+
+| filename                                                                                   | language     | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------+--------------+------------+------------+------------+------------+
+| c:\Users\tahir\Documents\GitHub\crc\.gitattributes                                         | Properties   |          1 |          1 |          1 |          3 |
+| c:\Users\tahir\Documents\GitHub\crc\README.md                                              | Markdown     |        109 |          0 |         28 |        137 |
+| c:\Users\tahir\Documents\GitHub\crc\admin\admin.php                                        | PHP          |         20 |          7 |         13 |         40 |
+| c:\Users\tahir\Documents\GitHub\crc\admin\assignaccounts.php                               | PHP          |         25 |          0 |          3 |         28 |
+| c:\Users\tahir\Documents\GitHub\crc\admin\components\footer.php                            | PHP          |         28 |          0 |         10 |         38 |
+| c:\Users\tahir\Documents\GitHub\crc\admin\components\header.php                            | PHP          |         30 |          0 |          8 |         38 |
+| c:\Users\tahir\Documents\GitHub\crc\admin\components\sidebar.php                           | PHP          |         17 |          0 |          4 |         21 |
+| c:\Users\tahir\Documents\GitHub\crc\admin\components\topnav.php                            | PHP          |         13 |          0 |          5 |         18 |
+| c:\Users\tahir\Documents\GitHub\crc\admin\createapplication.php                            | PHP          |         20 |          0 |          2 |         22 |
+| c:\Users\tahir\Documents\GitHub\crc\admin\createcourse.php                                 | PHP          |         69 |          0 |         29 |         98 |
+| c:\Users\tahir\Documents\GitHub\crc\admin\createdepartment.php                             | PHP          |        212 |          0 |          8 |        220 |
+| c:\Users\tahir\Documents\GitHub\crc\admin\createuser.php                                   | PHP          |         53 |          0 |          2 |         55 |
+| c:\Users\tahir\Documents\GitHub\crc\admin\editcourse.php                                   | PHP          |        130 |          0 |         25 |        155 |
+| c:\Users\tahir\Documents\GitHub\crc\admin\editdepartment.php                               | PHP          |        153 |          0 |         29 |        182 |
+| c:\Users\tahir\Documents\GitHub\crc\admin\editworkflow.php                                 | PHP          |        113 |          0 |         18 |        131 |
+| c:\Users\tahir\Documents\GitHub\crc\admin\myaccount.php                                    | PHP          |        172 |          1 |         16 |        189 |
+| c:\Users\tahir\Documents\GitHub\crc\admin\searchuser.php                                   | PHP          |         31 |          1 |          2 |         34 |
+| c:\Users\tahir\Documents\GitHub\crc\admin\viewapplicationdetail.php                        | PHP          |        193 |          0 |         25 |        218 |
+| c:\Users\tahir\Documents\GitHub\crc\admin\viewapplications.php                             | PHP          |         64 |          2 |         13 |         79 |
+| c:\Users\tahir\Documents\GitHub\crc\admin\viewcourse.php                                   | PHP          |         68 |          2 |         14 |         84 |
+| c:\Users\tahir\Documents\GitHub\crc\admin\viewdepartment.php                               | PHP          |         63 |          2 |         19 |         84 |
+| c:\Users\tahir\Documents\GitHub\crc\api\setworkflow_api.php                                | PHP          |         29 |          0 |         10 |         39 |
+| c:\Users\tahir\Documents\GitHub\crc\api\student_appplication_api.php                       | PHP          |         58 |         20 |         26 |        104 |
+| c:\Users\tahir\Documents\GitHub\crc\backend\config.php                                     | PHP          |         35 |         61 |         17 |        113 |
+| c:\Users\tahir\Documents\GitHub\crc\backend\db_con3.php                                    | PHP          |          7 |          2 |          2 |         11 |
+| c:\Users\tahir\Documents\GitHub\crc\backend\email-template\email-bottom.html               | HTML         |        150 |          0 |          4 |        154 |
+| c:\Users\tahir\Documents\GitHub\crc\backend\email-template\email-top.html                  | HTML         |        211 |          0 |          6 |        217 |
+| c:\Users\tahir\Documents\GitHub\crc\backend\logout.php                                     | PHP          |         18 |          2 |          7 |         27 |
+| c:\Users\tahir\Documents\GitHub\crc\backend\util.php                                       | PHP          |        130 |         80 |         29 |        239 |
+| c:\Users\tahir\Documents\GitHub\crc\chair\applications.php                                 | PHP          |         13 |          1 |          6 |         20 |
+| c:\Users\tahir\Documents\GitHub\crc\chair\chair.php                                        | PHP          |         18 |          7 |         12 |         37 |
+| c:\Users\tahir\Documents\GitHub\crc\chair\components\footer.php                            | PHP          |          7 |          0 |          3 |         10 |
+| c:\Users\tahir\Documents\GitHub\crc\chair\components\header.php                            | PHP          |         24 |          5 |          8 |         37 |
+| c:\Users\tahir\Documents\GitHub\crc\chair\components\sidebar.php                           | PHP          |         12 |          0 |          3 |         15 |
+| c:\Users\tahir\Documents\GitHub\crc\chair\components\topnav.php                            | PHP          |         13 |          0 |          5 |         18 |
+| c:\Users\tahir\Documents\GitHub\crc\chair\myaccount.php                                    | PHP          |        172 |          1 |         16 |        189 |
+| c:\Users\tahir\Documents\GitHub\crc\chair\review.php                                       | PHP          |          0 |          0 |          1 |          1 |
+| c:\Users\tahir\Documents\GitHub\crc\css\dark-mode.css                                      | CSS          |         13 |          0 |          3 |         16 |
+| c:\Users\tahir\Documents\GitHub\crc\css\main.css                                           | CSS          |         60 |          0 |          7 |         67 |
+| c:\Users\tahir\Documents\GitHub\crc\css\simple-sidebar.css                                 | CSS          |         41 |          6 |          9 |         56 |
+| c:\Users\tahir\Documents\GitHub\crc\dean\applications.php                                  | PHP          |         13 |          1 |          6 |         20 |
+| c:\Users\tahir\Documents\GitHub\crc\dean\components\footer.php                             | PHP          |          7 |          0 |          3 |         10 |
+| c:\Users\tahir\Documents\GitHub\crc\dean\components\header.php                             | PHP          |         24 |          5 |          7 |         36 |
+| c:\Users\tahir\Documents\GitHub\crc\dean\components\sidebar.php                            | PHP          |         12 |          0 |          3 |         15 |
+| c:\Users\tahir\Documents\GitHub\crc\dean\components\topnav.php                             | PHP          |         13 |          0 |          5 |         18 |
+| c:\Users\tahir\Documents\GitHub\crc\dean\dean.php                                          | PHP          |          3 |          0 |          1 |          4 |
+| c:\Users\tahir\Documents\GitHub\crc\dean\myaccount.php                                     | PHP          |        172 |          1 |         16 |        189 |
+| c:\Users\tahir\Documents\GitHub\crc\dean\review.php                                        | PHP          |          0 |          0 |          1 |          1 |
+| c:\Users\tahir\Documents\GitHub\crc\employer\components\footer.php                         | PHP          |          7 |          0 |          3 |         10 |
+| c:\Users\tahir\Documents\GitHub\crc\employer\components\header.php                         | PHP          |         24 |          5 |          8 |         37 |
+| c:\Users\tahir\Documents\GitHub\crc\employer\components\sidebar.php                        | PHP          |         12 |          0 |          3 |         15 |
+| c:\Users\tahir\Documents\GitHub\crc\employer\components\topnav.php                         | PHP          |         13 |          0 |          5 |         18 |
+| c:\Users\tahir\Documents\GitHub\crc\employer\employer.php                                  | PHP          |         13 |          1 |          6 |         20 |
+| c:\Users\tahir\Documents\GitHub\crc\employer\learningobj.php                               | PHP          |         13 |          1 |          6 |         20 |
+| c:\Users\tahir\Documents\GitHub\crc\employer\myaccount.php                                 | PHP          |        172 |          1 |         16 |        189 |
+| c:\Users\tahir\Documents\GitHub\crc\favicon\site.webmanifest                               | JSON         |          1 |          0 |          0 |          1 |
+| c:\Users\tahir\Documents\GitHub\crc\forgot.php                                             | PHP          |         55 |          0 |         12 |         67 |
+| c:\Users\tahir\Documents\GitHub\crc\index.php                                              | PHP          |        119 |          6 |         18 |        143 |
+| c:\Users\tahir\Documents\GitHub\crc\instructor\components\footer.php                       | PHP          |         16 |          0 |          3 |         19 |
+| c:\Users\tahir\Documents\GitHub\crc\instructor\components\header.php                       | PHP          |         43 |          0 |         11 |         54 |
+| c:\Users\tahir\Documents\GitHub\crc\instructor\components\sidebar.php                      | PHP          |         15 |          0 |          3 |         18 |
+| c:\Users\tahir\Documents\GitHub\crc\instructor\components\topnav.php                       | PHP          |         16 |          0 |          5 |         21 |
+| c:\Users\tahir\Documents\GitHub\crc\instructor\emprev.php                                  | PHP          |         13 |          1 |          6 |         20 |
+| c:\Users\tahir\Documents\GitHub\crc\instructor\instructor.php                              | PHP          |         13 |          1 |          6 |         20 |
+| c:\Users\tahir\Documents\GitHub\crc\instructor\learningobj.php                             | PHP          |         13 |          1 |          6 |         20 |
+| c:\Users\tahir\Documents\GitHub\crc\instructor\myaccount.php                               | PHP          |        172 |          1 |         16 |        189 |
+| c:\Users\tahir\Documents\GitHub\crc\instructor\sturev.php                                  | PHP          |         13 |          1 |          6 |         20 |
+| c:\Users\tahir\Documents\GitHub\crc\instructor\usyllabus.php                               | PHP          |         13 |          1 |          6 |         20 |
+| c:\Users\tahir\Documents\GitHub\crc\js\admin.js                                            | JavaScript   |         21 |          1 |          8 |         30 |
+| c:\Users\tahir\Documents\GitHub\crc\js\student.js                                          | JavaScript   |        111 |          1 |         26 |        138 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\admin.php                                    | PHP          |         78 |        122 |         18 |        218 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\autorun-autoreminders.sh                     | Shell Script |          1 |         14 |          0 |         15 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\chair-review1.php                            | PHP          |        186 |          9 |         53 |        248 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\components\accept_reject.php                 | PHP          |         23 |          7 |          2 |         32 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\components\admin\component_template.foot.php | PHP          |          3 |          0 |          1 |          4 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\components\admin\component_template.head.php | PHP          |         13 |          5 |          0 |         18 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\components\admin\create_department.php       | PHP          |         69 |          2 |          1 |         72 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\components\admin\create_page_sequence.php    | PHP          |         22 |          0 |          4 |         26 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\components\admin\create_user.php             | PHP          |         44 |          0 |          0 |         44 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\components\admin\dept_lookup.php             | PHP          |        137 |          0 |          1 |        138 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\components\admin\display_wf_test.php         | PHP          |         40 |         14 |         16 |         70 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\components\admin\display_workflow.php        | PHP          |         79 |          6 |         25 |        110 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\components\admin\load-order.php              | PHP          |         18 |          1 |          4 |         23 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\components\admin\load-page-sequence.php      | PHP          |        144 |         33 |         27 |        204 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\components\admin\lookup_workflow.php         | PHP          |         53 |         30 |         14 |         97 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\components\admin\lookup_workflow_old.php     | PHP          |         53 |         30 |         14 |         97 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\components\admin\new-load-page-sequence.php  | PHP          |        168 |         37 |         37 |        242 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\components\admin\new_set_page_sequence.php   | PHP          |         39 |          2 |          4 |         45 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\components\admin\search_user.php             | PHP          |         86 |          1 |          2 |         89 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\components\admin\set_page_sequence.php       | PHP          |        120 |         12 |         23 |        155 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\components\admin\set_user_sequence.php       | PHP          |        134 |         18 |         26 |        178 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\components\autofill_box.php                  | PHP          |         41 |         24 |         13 |         78 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\components\blame.php                         | PHP          |         37 |          5 |         13 |         55 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\components\createnewuser.php                 | PHP          |          0 |          0 |          1 |          1 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\components\drop_down.php                     | PHP          |         58 |         18 |         15 |         91 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\components\linkArray.php                     | PHP          |         59 |         50 |         28 |        137 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\components\message.php                       | PHP          |         26 |          1 |          7 |         34 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\components\nav.php                           | PHP          |         53 |         16 |          7 |         76 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\components\progress-bar.php                  | PHP          |         60 |         15 |         14 |         89 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\components\session_debug.php                 | PHP          |         41 |          1 |          0 |         42 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\crc.php                                      | PHP          |          9 |          0 |          6 |         15 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\create_user_sequence.php                     | PHP          |         70 |         11 |         10 |         91 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\dean-review1.php                             | PHP          |        192 |          6 |         56 |        254 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\edit_user_sequence.php                       | PHP          |         71 |         11 |         10 |         92 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\employer-review1.php                         | PHP          |         93 |         41 |         35 |        169 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\employer-review2.php                         | PHP          |        108 |          4 |         22 |        134 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\faculty.php                                  | PHP          |         41 |          0 |         13 |         54 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\home.php                                     | PHP          |         57 |         16 |         10 |         83 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\instructor-review1.php                       | PHP          |        123 |          6 |         37 |        166 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\instructor-review2.php                       | PHP          |         70 |          4 |         23 |         97 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\instructor-review3.php                       | PHP          |        108 |          4 |         22 |        134 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\instructor-review4.php                       | PHP          |         19 |          3 |          3 |         25 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\instructor-review5.php                       | PHP          |        157 |          1 |         48 |        206 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\js\accept_reject.js                          | JavaScript   |         36 |          5 |          7 |         48 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\js\autofill.js                               | JavaScript   |         69 |         31 |          4 |        104 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\js\password_checker.js                       | JavaScript   |         18 |          0 |          1 |         19 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\js\shared.js                                 | JavaScript   |        124 |          1 |         15 |        140 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\new_password.php                             | PHP          |         27 |          0 |         13 |         40 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\original_secretary.php                       | PHP          |         52 |          3 |         17 |         72 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\professor.php                                | PHP          |         55 |          0 |         21 |         76 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\recreg.php                                   | PHP          |          7 |          0 |          6 |         13 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\register.php                                 | PHP          |         27 |          1 |          2 |         30 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\secretary.php                                | PHP          |         65 |         48 |         16 |        129 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\secretary_copy.php                           | PHP          |         53 |         23 |         21 |         97 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\skeleton-fluid.head.php                      | PHP          |         30 |          5 |          7 |         42 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\student-application1.php                     | PHP          |         38 |          7 |         18 |         63 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\student-application2.php                     | PHP          |        120 |          5 |         30 |        155 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\student-application3.php                     | PHP          |         22 |          1 |          9 |         32 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\student-application4.php                     | PHP          |        128 |          8 |         24 |        160 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\student.php                                  | PHP          |         21 |          1 |          5 |         27 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\stylesheets\styles.css                       | CSS          |         20 |          0 |          9 |         29 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\stylesheets\styles2.css                      | CSS          |        399 |         45 |         74 |        518 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\supervisor.php                               | PHP          |         17 |          0 |          9 |         26 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\syllabi\index.php                            | PHP          |          3 |          3 |          0 |          6 |
+| c:\Users\tahir\Documents\GitHub\crc\old stuff\tes.html                                     | HTML         |        116 |          0 |         22 |        138 |
+| c:\Users\tahir\Documents\GitHub\crc\recreg\applications.php                                | PHP          |         13 |          1 |          6 |         20 |
+| c:\Users\tahir\Documents\GitHub\crc\recreg\components\footer.php                           | PHP          |          7 |          0 |          3 |         10 |
+| c:\Users\tahir\Documents\GitHub\crc\recreg\components\header.php                           | PHP          |         24 |          5 |          8 |         37 |
+| c:\Users\tahir\Documents\GitHub\crc\recreg\components\sidebar.php                          | PHP          |         11 |          0 |          3 |         14 |
+| c:\Users\tahir\Documents\GitHub\crc\recreg\components\topnav.php                           | PHP          |         13 |          0 |          5 |         18 |
+| c:\Users\tahir\Documents\GitHub\crc\recreg\myaccount.php                                   | PHP          |        172 |          1 |         16 |        189 |
+| c:\Users\tahir\Documents\GitHub\crc\recreg\recreg.php                                      | PHP          |         13 |          1 |          6 |         20 |
+| c:\Users\tahir\Documents\GitHub\crc\recreg\review.php                                      | PHP          |         13 |          1 |          6 |         20 |
+| c:\Users\tahir\Documents\GitHub\crc\secretary\components\footer.php                        | PHP          |          8 |          0 |          2 |         10 |
+| c:\Users\tahir\Documents\GitHub\crc\secretary\components\header.php                        | PHP          |         24 |          5 |          8 |         37 |
+| c:\Users\tahir\Documents\GitHub\crc\secretary\components\sidebar.php                       | PHP          |         17 |          0 |          3 |         20 |
+| c:\Users\tahir\Documents\GitHub\crc\secretary\components\topnav.php                        | PHP          |         13 |          0 |          5 |         18 |
+| c:\Users\tahir\Documents\GitHub\crc\secretary\createaccount.php                            | PHP          |        143 |         10 |         33 |        186 |
+| c:\Users\tahir\Documents\GitHub\crc\secretary\createapplication.php                        | PHP          |        148 |          1 |         22 |        171 |
+| c:\Users\tahir\Documents\GitHub\crc\secretary\myaccount.php                                | PHP          |        172 |          1 |         16 |        189 |
+| c:\Users\tahir\Documents\GitHub\crc\secretary\secretary.php                                | PHP          |         13 |          1 |          6 |         20 |
+| c:\Users\tahir\Documents\GitHub\crc\secretary\test.php                                     | PHP          |          3 |          0 |          4 |          7 |
+| c:\Users\tahir\Documents\GitHub\crc\student\application.php                                | PHP          |         35 |          9 |         13 |         57 |
+| c:\Users\tahir\Documents\GitHub\crc\student\components\footer.php                          | PHP          |         16 |          0 |          3 |         19 |
+| c:\Users\tahir\Documents\GitHub\crc\student\components\header.php                          | PHP          |         42 |          0 |          5 |         47 |
+| c:\Users\tahir\Documents\GitHub\crc\student\components\sidebar.php                         | PHP          |         13 |          0 |          3 |         16 |
+| c:\Users\tahir\Documents\GitHub\crc\student\components\topnav.php                          | PHP          |         16 |          0 |          4 |         20 |
+| c:\Users\tahir\Documents\GitHub\crc\student\emp.php                                        | PHP          |        209 |          1 |         24 |        234 |
+| c:\Users\tahir\Documents\GitHub\crc\student\lo.php                                         | PHP          |        104 |          5 |         22 |        131 |
+| c:\Users\tahir\Documents\GitHub\crc\student\myaccount.php                                  | PHP          |        172 |          1 |         16 |        189 |
+| c:\Users\tahir\Documents\GitHub\crc\student\newstudent.php                                 | PHP          |         41 |          4 |          9 |         54 |
+| c:\Users\tahir\Documents\GitHub\crc\student\review.php                                     | PHP          |        295 |         10 |         34 |        339 |
+| c:\Users\tahir\Documents\GitHub\crc\student\sem.php                                        | PHP          |        153 |          1 |         21 |        175 |
+| c:\Users\tahir\Documents\GitHub\crc\student\stu.php                                        | PHP          |        209 |          0 |         38 |        247 |
+| c:\Users\tahir\Documents\GitHub\crc\student\student.php                                    | PHP          |         23 |          1 |         12 |         36 |
+| Total                                                                                      |              |     10,312 |      1,056 |      2,020 |     13,388 |
++--------------------------------------------------------------------------------------------+--------------+------------+------------+------------+------------+

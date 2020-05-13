@@ -4,20 +4,27 @@
         session_start(); 
     } 
 
-include_once('config.php');
+include_once 'config.php';
 
 /**
-* A function to do a javascript alert 
+* A function that does a javascript alert 
 */
 function alert($msg) {
     echo "<script type='text/javascript'>alert('$msg');</script>";
 }
 
 /**
+ * Gets api url from config
+ */
+
+function getAPI(){
+    return API_URL;
+}
+/**
  * redirects based on account type. 
  * This mehtod can also force a redirect to login page.
  *
- * @param string       accounttype
+ * @param string       account type to check for
  * @return void              
  */
 function redirect($atype){
@@ -58,38 +65,33 @@ function redirect($atype){
     
   }
   
-
-  function showifnotnull($data)
-  {
-    if ($data != null) {
-      echo ($data);
-    }
-
-  }
   
-function validateState($checktype){
-    if(isset($_SESSION['user_type']) and $_SESSION['user_type'] == $checktype){
-        return true;
-    }
-    else{
-       // header('Location: ../backend/logout.php');
-        return false;
-    }
-}
+/** A validating function that prevents unauthorized users from viewing other pages. ex: student cant 
+ * view instructor pages. This is log you out and show you an unauthorized notice.
+ * @param string the type to check for
+ * @return void returns nothing.
+*/
 function validate($checktype){
     if(!(isset($_SESSION['user_type']) and $_SESSION['user_type'] == $checktype)){
-        header('Location: ../backend/logout.php');
+        exit(header('Location: ../backend/logout.php?authorized=false'));
     }
 }
-
-function getDBconn(){
-    return null;
+/***
+ * A validating function that prevents unauthorized users form viewing other pages. 
+ * @param array array of multiple user type to validate.
+ */
+function multivalidate(array $multipletype){
+    for ($i=0; $i < count($multipletype); $i++) { 
+        if(!(isset($_SESSION['user_type']) and $_SESSION['user_type'] == $multipletype[$i])){
+            exit(header('Location: ../backend/logout.php?authorized=false'));
+        }
+    }
 }
-
 
 
 /**
-* A function for logging a message to the console
+* A function for logging a message to the console under web browser inspect
+* @param string message to output. This pretty much can take anything displayable
 */
 function console_log( $data ){
     echo '<script>';
@@ -211,22 +213,3 @@ function generateSecretaryID()
 {
     return "S" . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9);
 }
-
-
-/**
- * Returns the item at a specified index of an associative array.
- * 
- * For example: Say you have an associative array:
- * array("Peter"=>"35", "Ben"=>"37", "Joe"=>"43");
- * 
- * Getting index "0" will yield "35."
- * 
- * @param array $array       The associative array to search.
- * @param integer $index     The index to get.
- * @return object            The object at the specified index.
- */
-function get_index_of_assoc($array, $index)
-{
-    return $array[array_keys($array)[$index]];
-}
-?>
